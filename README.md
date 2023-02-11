@@ -5,7 +5,9 @@ moss是一个简单轻量的内容管理系统
 
 ------
 
-+ [English document](https://github.com/deep-project/moss/blob/main/doc/README_EN.md)
++ [English document](https://github.com/deep-project/moss/blob/main/docs/README_EN.md)
++ [主题制作](https://github.com/deep-project/moss/blob/main/docs/theme/README.md)
++ [模板文档](https://github.com/deep-project/moss/blob/main/docs/template/README.md)
 
 ## 开始使用
 + [下载程序文件](https://github.com/deep-project/moss/releases)
