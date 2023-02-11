@@ -1,4 +1,4 @@
-# moss
+# Moss
 moss is a simple and lightweight web content management system
 
 moss是一个简单轻量的内容管理系统
@@ -10,10 +10,12 @@ moss是一个简单轻量的内容管理系统
 ## 开始使用
 + [下载程序文件](https://github.com/deep-project/moss/releases)
 + 运行
-> ./moss
+
+      ./moss
+
 + 启动成功
-> 默认启动后使用sqlite<br>
-> 默认后台地址 /admin
+> ##### 默认启动后使用sqlite<br>
+> ##### 默认后台地址 /admin
 
 ------
 

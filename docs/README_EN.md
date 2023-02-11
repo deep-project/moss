@@ -1,4 +1,4 @@
-# moss
+# Moss
 moss is a simple and lightweight web content management system
 
 ------
@@ -7,7 +7,9 @@ moss is a simple and lightweight web content management system
 ## Get started
 + [Download program file](https://github.com/deep-project/moss/releases)
 + Run
-> ./moss
+
+      ./moss
+
 + Start successfully
 > Use sqlite by default<br>
 > Default management path /admin
