@@ -29,7 +29,7 @@ func init() {
 
 	// get by file
 	p.SetConfigFile(command.ConfFilePath)
-	p.SetDefault(fieldAddr, "")
+	p.SetDefault(fieldAddr, command.Addr)
 	p.SetDefault(fieldDB, "sqlite")
 	p.SetDefault(fieldDSN, "./moss.db?_pragma=journal_mode(WAL)") // sqlite 默认使用 WAL模式
 
@@ -41,6 +41,10 @@ func init() {
 	_ = p.BindEnv(fieldAddr)
 	_ = p.BindEnv(fieldDB)
 	_ = p.BindEnv(fieldDSN)
+
+	if command.Addr != "" {
+		p.Set(fieldAddr, command.Addr)
+	}
 
 	Addr = p.GetString(fieldAddr)
 	DB = FormatDbDriver(p.GetString(fieldDB))
