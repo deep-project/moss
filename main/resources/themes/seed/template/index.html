@@ -1,0 +1,7 @@
+{{extends "./layout/layout.html"}}
+{{import "./component/article_list.html"}}
+
+{{block main()}}
+    {{ include "./widget/carousel.html" }}
+    {{yield article_list(list=Widget.IndexList())}}
+{{end}}

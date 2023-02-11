@@ -1,0 +1,64 @@
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+}
+
+html,body{
+  height: 100%;
+}
+#app{
+  height: 100%;
+}
+
+.arco-dropdown-list{
+  padding: 0 4px !important;
+}
+.arco-scrollbar-track-direction-vertical .arco-scrollbar-thumb-bar{
+  width: 5px !important;
+}
+
+.arco-scrollbar-track-direction-horizontal .arco-scrollbar-thumb-bar{
+  height: 5px !important;
+}
+
+body[arco-theme="dark"] .arco-table-td{
+  border-color: #3f4554 !important;
+}
+body[arco-theme="dark"] .arco-table-header,
+body[arco-theme="dark"] .arco-table-th{
+  background-color: transparent;
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar-track-piece {
+  background-color:transparent;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(123, 123, 124, 0.28);
+  background-clip:padding-box;
+  min-height:28px;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color:rgb(163, 163, 163);
+}
+body[arco-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(28, 30, 33);
+}
+
+@media (max-width:576px) {
+  ::-webkit-scrollbar {
+    width:4px;
+    height:4px;
+  }
+}

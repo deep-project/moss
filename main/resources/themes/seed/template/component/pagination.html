@@ -1,0 +1,26 @@
+{{ block pagination(pageTotal, existNextPage=false, disableCount=false, count=0) }}
+    {{ if pageTotal != 0 || disableCount }}
+    <div class="flex gap-4 items-center justify-center m-10">
+
+        {{ if Page.PageNumber > 1}}
+            <a class="px-2" href="{{ Data.PageURL(Page.PageNumber - 1) }}">Prev</a>
+        {{ end }}
+
+        {{ if pageTotal > 1}}
+            {{ page := Utils.Pagination(Page.PageNumber, pageTotal, 10) }}
+            {{ range i,v := ints(page.Begin, page.End+1) }}
+                <a href="{{ Data.PageURL(v) }}" class="px-2 hidden md:block{{ if v == Page.PageNumber }} font-bold text-primary{{end}}">{{ v }}</a>
+            {{ end }}
+            {{ if page.End != pageTotal && pageTotal != Page.PageNumber }}
+                <span class="text-gray-400">...</span>
+                <a href="{{ Data.PageURL(pageTotal) }}" class="px-2 hidden md:block">{{ pageTotal }}</a>
+            {{end}}
+        {{ end }}
+
+        {{ if existNextPage }}
+            <a href="{{ Data.PageURL(Page.PageNumber + 1) }}">Next</a>
+        {{ end }}
+
+    </div>
+    {{ end }}
+{{ end }}

@@ -1,0 +1,28 @@
+<header class="container h-16 md:h-24 lg:h-28 flex justify-between items-center">
+    <div class="font-bold text-3xl md:text-4xl text-black dark:text-neutral-200">
+        {{ if Page.Name == "index" }}
+        <h1>{{ Config.Site.Name }}</h1>
+        {{ else }}
+        <a href="/" title="{{ Config.Site.Name }}">{{ Config.Site.Name }}</a>
+        {{ end }}
+    </div>
+    <div class="flex items-center">
+        <div x-ref="nav" class="hidden lg:grid grid-flow-col content-center justify-end gap-3">
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/custom.html">Custom</a>
+        </div>
+        <div class="cursor-pointer flex items-center" x-on:click="dark = !dark; localStorage.setItem('dark',dark ?'dark':'')">
+            <i class="icon icon-moon ml-3" x-show="!dark"></i>
+            <i class="icon icon-sun ml-3" x-show="dark"></i>
+        </div>
+        <div class="lg:hidden cursor-pointer icon icon-menu ml-3" x-on:click="showDrawer = true"></div>
+    </div>
+</header>
+
+<div x-show="showDrawer" x-on:click="showDrawer = false" class="fixed inset-0 w-full h-full bg-black bg-opacity-60" x-cloak>
+    <div class="absolute right-0 w-8/12 h-full p-5 overflow-auto bg-white dark:bg-black">
+        <div x-html="nav.innerHTML" class="flex flex-col gap-3 border-b pb-3 mb-3 border-gray-900"></div>
+        <div x-html="menu.innerHTML"></div>
+    </div>
+</div>

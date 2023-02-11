@@ -1,0 +1,22 @@
+<div class="widget hidden lg:block">
+    <div class="widget-title">Categories</div>
+    {{ include "../widget/menu.html" }}
+</div>
+
+<div class="widget">
+    <div class="widget-title">Tags</div>
+    {{ include "../widget/tag_cloud.html" }}
+</div>
+
+<div class="widget">
+    <div class="widget-title">Hot</div>
+    {{ include "../widget/global_list.html" }}
+</div>
+
+{{ if Page.Name == "index"}}
+<div class="widget sr-only md:not-sr-only">
+    <div class="widget-title">Links</div>
+    {{ include "../widget/link.html" }}
+</div>
+{{ end }}
+

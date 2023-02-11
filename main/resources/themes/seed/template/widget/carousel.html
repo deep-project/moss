@@ -1,0 +1,39 @@
+
+{{carousel := Widget.Carousel()}}
+
+{{ if len(carousel) > 0}}
+
+<link rel="stylesheet" href="/swiper-bundle.min.css">
+<div class="swiper w-full bg-white mb-2 md:mb-3 lg:mb-5">
+    <div class="swiper-wrapper">
+        {{ range i, v :=  carousel}}
+            {{ if v.Image != ""}}
+            <div class="swiper-slide">
+                <a class="block relative w-full h-full" href="{{v.Link}}" target="_blank">
+                    <img class="w-full h-full" src="{{v.Image}}" />
+                    {{ if v.Title != ""}}
+                    <div class="w-full h-14 lg:h-18 absolute md:bottom-0 left-0 overflow-hidden bg-gray-800 bg-opacity-70 text-2xl text-white font-bold flex items-center px-10">{{v.Title}}</div>
+                    {{end}}
+                </a>
+            </div>
+            {{end}}
+        {{end}}
+    </div>
+    <div class="swiper-button-prev scale-75 md:scale-100"></div>
+    <div class="swiper-button-next scale-75 md:scale-100"></div>
+</div>
+
+<script src="/swiper-bundle.min.js"></script>
+<script>
+    new Swiper ('.swiper', {
+        loop: true,
+        autoplay:true,
+        autoHeight: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    })
+</script>
+
+{{end}}

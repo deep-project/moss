@@ -1,0 +1,23 @@
+
+{{ menu := Widget.Menu()}}
+{{ menuLen := len(menu) }}
+
+{{ if menuLen > 0}}
+    <nav x-ref="menu">
+        {{ range i, v := menu }}
+            <h2 class="leading-7"><a href="{{v.URL()}}">{{v.Name}}</a></h2>
+            {{ yield renderChildren(data=v.Children) }}
+        {{ end }}
+    </nav>
+{{ end }}
+
+{{ block renderChildren(data=map(), level=1) }}
+    {{ if len(data) > 0}}
+    <div class="sub-nav" style="margin-left:{{level*3}}px">
+        {{ range i, v := data }}
+            <h4><a href="{{v.URL()}}">{{v.Name}}</a></h4>
+            {{ yield renderChildren(data=v.Children, level=level+1) }}
+        {{ end }}
+    </div>
+    {{ end }}
+{{ end }}

@@ -1,0 +1,1 @@
+import{j as t,k as l,l as m,m as r,v as s}from"./@vue.1832462a.js";const p={__name:"memcached",props:{data:Object},setup(a){return(c,e)=>{const o=t("a-input"),n=t("a-form-item");return l(),m(n,{label:"addr"},{default:r(()=>[s(o,{class:"w-64",modelValue:a.data.addr,"onUpdate:modelValue":e[0]||(e[0]=d=>a.data.addr=d)},null,8,["modelValue"])]),_:1})}}};export{p as default};

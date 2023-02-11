@@ -1,0 +1,6 @@
+/Taskfile.yaml
+.idea
+.empty
+/bin/
+/dist/
+/main/tmp/
