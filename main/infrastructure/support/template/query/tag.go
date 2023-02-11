@@ -32,18 +32,18 @@ func (t *Tag) Comment(val string) *Tag {
 	return t
 }
 
-// Get by id
-func (t *Tag) Get(id int) *entity.Tag {
-	res, err := service.Tag.Get(id)
-	log.ErrorShortcut("template query error", err)
-	return res
-}
-
 func (t *Tag) context() *context.Context {
 	if t.limit == 0 {
 		t.limit = 20 // 强制限制数量
 	}
 	return context.NewContextWithComment(t.limit, t.order, t.comment)
+}
+
+// Get by id
+func (t *Tag) Get(id int) *entity.Tag {
+	res, err := service.Tag.Get(id)
+	log.ErrorShortcut("template query error", err)
+	return res
 }
 
 func (t *Tag) List() (res []entity.Tag) {
