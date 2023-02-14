@@ -5,15 +5,8 @@ import (
 	"moss/domain/core/repository/context"
 	"moss/domain/core/repository/gormx"
 	"moss/infrastructure/persistent/db"
-	"moss/infrastructure/support/log"
 	"time"
 )
-
-func init() {
-	if err := Link.MigrateTable(); err != nil {
-		log.Error("migrate link table error", log.Err(err))
-	}
-}
 
 var Link = new(LinkRepo)
 

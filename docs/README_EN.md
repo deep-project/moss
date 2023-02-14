@@ -28,7 +28,7 @@ moss is a simple and lightweight web content management system
 
 | Type       | dsn Example                                                                        |
 |------------|------------------------------------------------------------------------------------|
-| sqlite     | ./data.db?_pragma=journal_mode(WAL)                                                |
+| sqlite     | ./data.db                                                                          |
 | mysql      | user:password@tcp(127.0.0.1:3306)/moss?charset=utf8mb4&parseTime=True              |
 | postgresql | host=127.0.0.1 port=5432 user=postgres password=123456 dbname=moss sslmode=disable |
 

@@ -5,13 +5,10 @@ import (
 	"moss/domain/core/repository/context"
 	"moss/domain/core/repository/gormx"
 	"moss/infrastructure/persistent/db"
-	"moss/infrastructure/support/log"
 )
 
 func init() {
-	if err := Tag.MigrateTable(); err != nil {
-		log.Error("migrate tag table error", log.Err(err))
-	}
+
 }
 
 var Tag = new(TagRepo)
@@ -25,6 +22,10 @@ func (r *TagRepo) MigrateTable() error {
 
 func (r *TagRepo) Create(item *entity.Tag) error {
 	return db.DB.Create(item).Error
+}
+
+func (r *TagRepo) CreateInBatches(items []entity.Tag, batchSize int) error {
+	return db.DB.CreateInBatches(items, batchSize).Error
 }
 
 func (r *TagRepo) Update(item *entity.Tag) error {

@@ -19,14 +19,21 @@
           <template #extra>
             <icon-delete class="cursor-pointer" @click="record.thumbnail=''" />
           </template>
-          <div class="text-center"><a-image :src="record.thumbnail" height="170" /></div>
+          <div class="text-center"><a-image :src="record.thumbnail" height="170" width="100%" referrerpolicy="no-referrer" /></div>
         </a-card>
       </div>
     </a-form-item>
 
     <a-form-item field="category_id" :label="$t('category')">
-      <a-cascader :options="treeData" v-model="record.category_id" :loading="loadingTreeData" :fallback="(val)=>val !== 0"
-                  :field-names="{value: 'id', label: 'name'}" check-strictly allow-clear style="background-color: var(--color-bg-5);" />
+      <a-input-group class="w-full overflow-hidden">
+        <a-input-number class="input" v-model="record.category_id" hide-button allow-clear :style="{width:'80px'}" placeholder="id" />
+        <a-cascader :options="treeData"
+                    v-model="record.category_id"
+                    :loading="loadingTreeData"
+                    :field-names="{value: 'id', label: 'name'}"
+                    check-strictly expand-child :placeholder="$t('select')"
+                    :style="{width:'calc(100% - 80px)',backgroundColor:'var(--color-bg-5)'}"></a-cascader>
+        </a-input-group>
     </a-form-item>
 
     <a-form-item :label="$t('tag')">
@@ -100,6 +107,11 @@
     return store.config.site.url + path
   })
 
+  function formatLabel(val){
+    console.log(val)
+    return "aaa"
+  }
+
 </script>
 
 
@@ -109,5 +121,8 @@
   }
   .input_extends{
     border-color: var(--color-border-3);
+  }
+  :deep(.arco-select-view-value){
+    font-size:12px !important;;
   }
 </style>

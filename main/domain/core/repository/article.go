@@ -7,15 +7,8 @@ import (
 	"moss/domain/core/repository/gormx"
 	"moss/domain/core/utils"
 	"moss/infrastructure/persistent/db"
-	"moss/infrastructure/support/log"
 	"moss/infrastructure/utils/errorx"
 )
-
-func init() {
-	if err := Article.MigrateTable(); err != nil {
-		log.Error("migrate article table error", log.Err(err))
-	}
-}
 
 var Article = new(ArticleRepo)
 
@@ -33,6 +26,21 @@ func (r *ArticleRepo) Create(item *entity.Article) error {
 		}
 		item.ArticleDetail.ArticleID = item.ArticleBase.ID
 		return tx.Create(&item.ArticleDetail).Error
+	})
+}
+
+func (r *ArticleRepo) CreateInBatches(items []entity.Article) (err error) {
+	return db.DB.Transaction(func(tx *gorm.DB) error {
+		for k := range items {
+			if err := tx.Create(&items[k].ArticleBase).Error; err != nil {
+				return err
+			}
+			items[k].ArticleDetail.ArticleID = items[k].ArticleBase.ID
+			if e := tx.Create(&items[k].ArticleDetail).Error; err != nil {
+				return e
+			}
+		}
+		return nil
 	})
 }
 

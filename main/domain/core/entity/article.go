@@ -51,5 +51,5 @@ type ArticleDetail struct {
 	Keywords  string     `gorm:"type:varchar(250);default:''"  json:"keywords"`
 	Content   string     `gorm:"type:string"                   json:"content"`
 	Source    string     `gorm:"type:varchar(250)"             json:"source"`
-	Extends   vo.Extends `gorm:"type:string"                   json:"extends"`
+	Extends   vo.Extends `gorm:"type:string;default:''"        json:"extends"`
 }

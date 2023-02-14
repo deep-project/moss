@@ -31,7 +31,7 @@ func init() {
 	p.SetConfigFile(command.ConfFilePath)
 	p.SetDefault(fieldAddr, command.Addr)
 	p.SetDefault(fieldDB, "sqlite")
-	p.SetDefault(fieldDSN, "./moss.db?_pragma=journal_mode(WAL)") // sqlite 默认使用 WAL模式
+	p.SetDefault(fieldDSN, "./moss.db")
 
 	_ = p.ReadInConfig()
 	_ = p.WriteConfig()

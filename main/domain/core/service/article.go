@@ -118,6 +118,32 @@ func (s *ArticleService) Create(item *entity.Article) (err error) {
 	return
 }
 
+// CreateInBatches 批量创建
+func (s *ArticleService) CreateInBatches(items []entity.Article) (err error) {
+	for k := range items {
+		for _, e := range s.CreateBeforeEvents {
+			if err = e.ArticleCreateBefore(&items[k]); err != nil {
+				return
+			}
+		}
+		if err = s.postCheck(&items[k]); err != nil {
+			return
+		}
+		if items[k].CreateTime == 0 {
+			items[k].CreateTime = time.Now().Unix()
+		}
+	}
+	if err = repository.Article.CreateInBatches(items); err != nil {
+		return
+	}
+	for _, item := range items {
+		for _, e := range s.CreateAfterEvents {
+			e.ArticleCreateAfter(&item)
+		}
+	}
+	return
+}
+
 func (s *ArticleService) Update(item *entity.Article) (err error) {
 	if item.ID == 0 {
 		return message.ErrIdRequired

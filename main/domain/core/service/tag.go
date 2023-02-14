@@ -90,6 +90,32 @@ func (s *TagService) Create(item *entity.Tag) (err error) {
 	return
 }
 
+// CreateInBatches 批量创建
+func (s *TagService) CreateInBatches(items []entity.Tag, batchSize int) (err error) {
+	for k := range items {
+		for _, e := range s.CreateBeforeEvents {
+			if err = e.TagCreateBefore(&items[k]); err != nil {
+				return
+			}
+		}
+		if err = s.postCheck(&items[k]); err != nil {
+			return
+		}
+		if items[k].CreateTime == 0 {
+			items[k].CreateTime = time.Now().Unix()
+		}
+	}
+	if err = repository.Tag.CreateInBatches(items, batchSize); err != nil {
+		return
+	}
+	for _, item := range items {
+		for _, e := range s.CreateAfterEvents {
+			e.TagCreateAfter(&item)
+		}
+	}
+	return
+}
+
 func (s *TagService) Update(item *entity.Tag) (err error) {
 	if item.ID == 0 {
 		return message.ErrIdRequired

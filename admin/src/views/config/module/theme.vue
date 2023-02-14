@@ -12,10 +12,10 @@
           </div>
         </template>
         <template #cover>
-            <div class="overflow-hidden bg-gray-100 image" :style="{'backgroundColor':store.dark ? '#282c34':''}">
+            <div class="overflow-hidden image" :style="{'backgroundColor':store.dark ? '#282c34':''}">
               <div v-if="theme.has_screenshot" class="w-full h-full">
                 <a-spin :loading="!theme.screenshot" class="w-full h-full" :size="32">
-                  <img v-if="theme.screenshot" class="w-full h-full" :src="theme.screenshot" :alt="theme.name"  />
+                  <img v-if="theme.screenshot" class="w-full h-full p-1" :src="theme.screenshot" :alt="theme.name"  />
                 </a-spin>
               </div>
               <div v-else class="w-full h-full grid justify-items-center items-center">
@@ -66,21 +66,11 @@
     onSuccess:(data)=>{
       themeListData.value = data
       for(let i=0;i<data.length;i++) {
-        getThemeScreenshot(themeListData.value[i].id, i)
+        useRequest(themeScreenshot,{ defaultParams:[data[i].id], onSuccess:(resp,params)=>{ themeListData.value[i].screenshot = resp } })
       }
     }
   })
 
-  const {run} = useRequest(themeScreenshot,{
-    manual:true,
-    onSuccess:(resp,params)=>{
-      themeListData.value[params[1]].screenshot = resp
-    }
-  })
-
-  function getThemeScreenshot(id, index){
-    run(id,index)
-  }
 
   const useSaveSuccess = inject('useSaveSuccess')
   useSaveSuccess.value.push(()=>{ initTheme() })

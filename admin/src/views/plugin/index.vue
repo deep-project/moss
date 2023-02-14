@@ -5,6 +5,7 @@
         <icon-info-circle class="ml-2 opacity-60" />
         <template #content>{{record.about}}</template>
       </a-tooltip>
+      <icon-info-circle v-else class="ml-2 opacity-20" />
       {{$t(record.id)}}
     </template>
 
@@ -30,7 +31,9 @@
 
     <template #runDuration="{ record,rowIndex,column }">
       <template v-if="record.run_enable">
-        <a-tag v-if="record.run_duration > 500" color="purple">{{record.run_duration}} ms</a-tag>
+        <a-tag v-if="record.run_duration > 1000*60" color="purple">{{(record.run_duration/1000/60).toFixed(0)}} minutes</a-tag>
+        <a-tag v-else-if="record.run_duration > 1000" color="purple">{{(record.run_duration/1000).toFixed(2)}} s</a-tag>
+        <a-tag v-else-if="record.run_duration > 500" color="purple">{{record.run_duration}} ms</a-tag>
         <a-tag v-else-if="record.run_duration > 100" color="orangered">{{record.run_duration}} ms</a-tag>
         <a-tag v-else color="green">{{record.run_duration}} ms</a-tag>
       </template>

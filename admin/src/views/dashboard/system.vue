@@ -50,7 +50,7 @@
 
   function dec(val){
     if(!val) return 0
-    return (val/100).toFixed(2)
+    return Number((val/100).toFixed(2))
   }
 </script>
 

@@ -85,6 +85,32 @@ func (s *CategoryService) Create(item *entity.Category) (err error) {
 	return
 }
 
+// CreateInBatches 批量创建
+func (s *CategoryService) CreateInBatches(items []entity.Category, batchSize int) (err error) {
+	for k := range items {
+		for _, e := range s.CreateBeforeEvents {
+			if err = e.CategoryCreateBefore(&items[k]); err != nil {
+				return
+			}
+		}
+		if err = s.postCheck(&items[k]); err != nil {
+			return
+		}
+		if items[k].CreateTime == 0 {
+			items[k].CreateTime = time.Now().Unix()
+		}
+	}
+	if err = repository.Category.CreateInBatches(items, batchSize); err != nil {
+		return
+	}
+	for _, item := range items {
+		for _, e := range s.CreateAfterEvents {
+			e.CategoryCreateAfter(&item)
+		}
+	}
+	return
+}
+
 func (s *CategoryService) Update(item *entity.Category) (err error) {
 	if item.ID == 0 {
 		return message.ErrIdRequired

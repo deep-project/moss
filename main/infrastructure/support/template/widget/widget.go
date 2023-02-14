@@ -41,11 +41,11 @@ func (w *Widget) Menu() []aggregate.CategoryTree {
 	var err error
 	if len(config.Config.Template.Menu.Select) > 0 {
 		// 根据选择调用的导航数据
-		items, err = service.Category.ListByIds(context.NewContextWithComment(0, "", "Menu"), config.Config.Template.Menu.Select)
+		items, err = service.Category.ListByIds(context.NewContextWithComment(config.Config.Template.Menu.Limit, "", "Menu"), config.Config.Template.Menu.Select)
 		items = coreUtils.SortByIds[coreEntity.Category](items, config.Config.Template.Menu.Select) // 根据选择的ids排序
 	} else {
 		// 默认调用全部导航数据
-		items, err = service.Category.List(context.NewContextWithComment(config.Config.More.ViewAllCategoryLimit, "", "Menu"))
+		items, err = service.Category.List(context.NewContextWithComment(config.Config.Template.Menu.Limit, "", "Menu"))
 	}
 	if err != nil {
 		log.Error("template widget error", zap.Error(err))

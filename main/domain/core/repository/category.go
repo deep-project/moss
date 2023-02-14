@@ -5,14 +5,7 @@ import (
 	"moss/domain/core/repository/context"
 	"moss/domain/core/repository/gormx"
 	"moss/infrastructure/persistent/db"
-	"moss/infrastructure/support/log"
 )
-
-func init() {
-	if err := Category.MigrateTable(); err != nil {
-		log.Error("migrate category table error", log.Err(err))
-	}
-}
 
 var Category = new(CategoryRepo)
 
@@ -25,6 +18,10 @@ func (r *CategoryRepo) MigrateTable() error {
 
 func (r *CategoryRepo) Create(item *entity.Category) error {
 	return db.DB.Create(item).Error
+}
+
+func (r *CategoryRepo) CreateInBatches(items []entity.Category, batchSize int) error {
+	return db.DB.CreateInBatches(items, batchSize).Error
 }
 
 func (r *CategoryRepo) Update(item *entity.Category) error {

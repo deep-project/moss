@@ -14,8 +14,10 @@
   </a-form-item>
 
   <a-form-item field="parent_id" :label="$t('parentCategory')">
-    <a-cascader :options="treeData" v-model="record.parent_id" :loading="loadingTreeData" :fallback="(val)=>val !== 0"
-                :field-names="{value: 'id', label: 'name'}" check-strictly allow-clear />
+    <a-input-group class="w-full">
+      <a-input-number v-model="record.parent_id" hide-button allow-clear style="width: 130px;" placeholder="id" />
+      <a-cascader :options="treeData" v-model="record.parent_id" :loading="loadingTreeData" :field-names="{value: 'id', label: 'name'}" check-strictly :placeholder="$t('select')" />
+    </a-input-group>
   </a-form-item>
 
   <a-form-item field="title" :label="$t('title')">
@@ -80,3 +82,10 @@
   // }
 
 </script>
+
+
+<style scoped>
+:deep(.arco-select-view-value){
+  font-size:12px !important;;
+}
+</style>

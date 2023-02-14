@@ -29,7 +29,7 @@ func (ext *Extends) Scan(value interface{}) error {
 
 func (ext Extends) Value() (driver.Value, error) {
 	b, err := json.Marshal(&ext)
-	if err != nil {
+	if err != nil || len(b) == 0 {
 		return "", err
 	}
 	return string(b), nil

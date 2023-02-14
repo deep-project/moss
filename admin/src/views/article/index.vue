@@ -23,8 +23,10 @@
       title: t('title'),
       dataIndex: 'title',
       filterable: searchFilter,
-      minWidth: 300,
+      width: 300,
       slotName:'title',
+      ellipsis:true,
+      tooltip:true,
     },
     {
       title:  t('slug'),

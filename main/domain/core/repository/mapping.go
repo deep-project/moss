@@ -5,14 +5,7 @@ import (
 	"moss/domain/core/repository/context"
 	"moss/domain/core/repository/gormx"
 	"moss/infrastructure/persistent/db"
-	"moss/infrastructure/support/log"
 )
-
-func init() {
-	if err := Mapping.MigrateTable(); err != nil {
-		log.Error("migrate mapping table error", log.Err(err))
-	}
-}
 
 var Mapping = new(MappingRepo)
 

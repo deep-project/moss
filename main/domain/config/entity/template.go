@@ -28,6 +28,7 @@ type TemplateCarousel struct {
 
 type TemplateMenu struct {
 	Select []int  `json:"select"`
+	Limit  int    `json:"limit"`
 	Order  string `json:"order"`
 }
 
@@ -49,12 +50,12 @@ func NewTemplate() *Template {
 	return &Template{
 		Carousel:         []TemplateCarousel{},
 		RobotsTxt:        "User-agent: *\nDisallow:",
-		Menu:             &TemplateMenu{Select: []int{}},
+		Menu:             &TemplateMenu{Select: []int{}, Limit: 40},
 		IndexList:        &TemplateList{Limit: 20, Order: "id desc", CategoryIds: []int{}},
 		GlobalList:       &TemplateList{Limit: 20, Order: "views desc", CategoryIds: []int{}},
 		CategoryPageList: &TemplateList{Limit: 20, Order: "id desc"},
 		TagPageList:      &TemplateList{Limit: 20},
 		TagCloud:         &TemplateTagCloud{Limit: 15, Order: "id asc", Select: []int{}},
-		Footer:           `©2023 Powered by <a href="https://github.com/deep-project/moss"><strong>Moss</strong></a>. Theme by <b style="color:#7C3AED">Seed</b>`,
+		Footer:           `©2023 Powered by <a href="https://github.com/deep-project/moss"><strong>Moss</strong></a>.`,
 	}
 }
