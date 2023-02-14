@@ -150,7 +150,11 @@ func (w *Widget) CategoryPageList(categoryID, pageNumber int) (res PageListResul
 func (w *Widget) TagPageList(tagID, pageNumber int) (res PageListResult) {
 	// 查询数据函数
 	var listFun = func() (any, int) {
-		list, err := service.Article.ListByTagID(&context.Context{Limit: config.Config.Template.TagPageList.Limit, Page: pageNumber}, tagID)
+		list, err := service.Article.ListByTagID(&context.Context{
+			Limit: config.Config.Template.TagPageList.Limit,
+			Order: "id desc",
+			Page:  pageNumber,
+		}, tagID)
 		log.ErrorShortcut("template widget error", err)
 		return list, len(list)
 	}

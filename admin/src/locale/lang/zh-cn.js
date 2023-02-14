@@ -144,6 +144,7 @@ export default {
     GenerateSlug:'自动生成别名',
     SaveArticleImages:'保存文章图片',
     DetectLinks:'检查链接',
+    GenerateDescription:'自动生成描述',
 }
 
 

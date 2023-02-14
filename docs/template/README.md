@@ -268,6 +268,8 @@
     Category().ListByID(id1,id2,id3...)
 #### 调用分类所有子分类列表
     Category().Children(parentID) // parentID为父分类ID
+#### 根据ID获取分类以及其父分类
+    Category().GetWithParent(id)
 
 > 以下一些标签为了性能考虑只查询了一次分类列表，可以导致分类太多不显示的情况。<br>
 > 可以调大更多配置里面的‘Categories limit’选项（默认调用前200个）

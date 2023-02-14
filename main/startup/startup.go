@@ -43,6 +43,7 @@ func initPlugins() {
 		plugins.NewGenerateSlug(),
 		plugins.NewSaveArticleImages(),
 		plugins.NewDetectLinks(),
+		plugins.NewGenerateDescription(),
 		inner.NewAddWater(),
 	)
 }

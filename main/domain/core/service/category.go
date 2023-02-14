@@ -191,9 +191,36 @@ func (s *CategoryService) Get(id int) (res *entity.Category, err error) {
 	return
 }
 
+// GetOrCreate 不存在则创建
+func (s *CategoryService) GetOrCreate(name string) (*entity.Category, error) {
+	res, err := s.GetByName(name)
+	if err == nil && res.ID > 0 {
+		return res, err
+	}
+	var createRes = entity.Category{Name: name}
+	err = s.Create(&createRes)
+	return &createRes, err
+}
+
+func (s *CategoryService) GetByName(name string) (res *entity.Category, err error) {
+	if name == "" {
+		return nil, message.ErrNameRequired
+	}
+	if res, err = repository.Category.GetByName(name); err != nil {
+		return
+	}
+	if res.ID == 0 {
+		return nil, message.ErrRecordNotFound
+	}
+	for _, e := range s.GetAfterEvents {
+		e.CategoryGetAfter(res)
+	}
+	return
+}
+
 func (s *CategoryService) GetBySlug(slug string) (res *entity.Category, err error) {
 	if slug == "" {
-		return nil, message.ErrIdRequired
+		return nil, message.ErrSlugRequired
 	}
 	if res, err = repository.Category.GetBySlug(slug); err != nil {
 		return
@@ -283,6 +310,16 @@ func (s *CategoryService) GetWithAncestors(ctx *context.Context, id int) (_ []en
 	}
 	all, err := s.List(ctx)
 	return utils.FindCategoryWithAncestors(id, all), err
+}
+
+// GetWithParent 获取分类和其夫分类
+func (s *CategoryService) GetWithParent(id int) (res []entity.Category, err error) {
+	if id <= 0 {
+		return
+	}
+	res, err = repository.Category.GetWithParent(id)
+	s.listAfterEvents(res)
+	return
 }
 
 // GetWithAncestorsReverse 获取分类和其祖先(祖先在前)

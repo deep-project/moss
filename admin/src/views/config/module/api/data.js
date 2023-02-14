@@ -32,7 +32,10 @@ function articlePayload(t){
         {field:'description',type:'string',description:$t('description')},
     ]
     if(t==='update') res.unshift({field:'id',type:'int',required:true,description:$t('id')})
-    if(t==='create') res.push({field:'tags',type: '[]string',description: $t('tags')})
+    if(t==='create') res.push(
+        {field:'tags',type: '[]string',description: $t('tags')},
+        {field:'category_name',type: 'string',description: $t('category')}
+        )
     return res
 }
 

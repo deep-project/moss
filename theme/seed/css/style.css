@@ -36,6 +36,9 @@ a:hover{
 .widget-title{
     @apply font-bold mb-2 text-lg text-black dark:text-neutral-200;
 }
+main>.widget>.widget-title{
+    @apply text-2xl
+}
 
 aside ::-webkit-scrollbar{
     width: 5px;
@@ -53,7 +56,7 @@ article img{
 }
 
 .tags li{
-    @apply leading-7 inline-block mr-1 mb-1 rounded-sm overflow-hidden;
+    @apply leading-7 inline-block mr-2 mb-1 rounded-sm overflow-hidden;
 }
 .tags li>a{
     @apply block px-2 bg-slate-200 dark:bg-stone-800;
@@ -87,6 +90,7 @@ article img{
 .list-item .meta{
     @apply mt-1 flex text-sm text-gray-400 dark:text-neutral-500;
 }
+
 
 .icon{
     display: inline-block;

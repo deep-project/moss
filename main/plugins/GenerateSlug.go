@@ -39,9 +39,9 @@ func (a *GenerateSlug) Info() *pluginEntity.PluginInfo {
 }
 
 func (a *GenerateSlug) Load(ctx *pluginEntity.Plugin) error {
-	service.Article.AddCreateBeforeEvents(&GenerateSlugVent{ctx: ctx, opt: a.Article})
-	service.Category.AddCreateBeforeEvents(&GenerateSlugVent{ctx: ctx, opt: a.Category})
-	service.Tag.AddCreateBeforeEvents(&GenerateSlugVent{ctx: ctx, opt: a.Tag})
+	service.Article.AddCreateBeforeEvents(&GenerateSlugEvent{ctx: ctx, opt: a.Article})
+	service.Category.AddCreateBeforeEvents(&GenerateSlugEvent{ctx: ctx, opt: a.Category})
+	service.Tag.AddCreateBeforeEvents(&GenerateSlugEvent{ctx: ctx, opt: a.Tag})
 	return nil
 }
 
@@ -49,32 +49,32 @@ func (a *GenerateSlug) Run(ctx *pluginEntity.Plugin) error {
 	return nil
 }
 
-type GenerateSlugVent struct {
+type GenerateSlugEvent struct {
 	ctx *pluginEntity.Plugin
 	opt *GenerateSlugOption
 }
 
-func (e *GenerateSlugVent) ArticleCreateBefore(item *entity.Article) (err error) {
+func (e *GenerateSlugEvent) ArticleCreateBefore(item *entity.Article) (err error) {
 	if item.Slug == "" {
 		item.Slug, err = e.makeSlug()
 	}
 	return
 }
-func (e *GenerateSlugVent) CategoryCreateBefore(item *entity.Category) (err error) {
-	if item.Slug == "" {
-		item.Slug, err = e.makeSlug()
-	}
-	return
-}
-
-func (e *GenerateSlugVent) TagCreateBefore(item *entity.Tag) (err error) {
+func (e *GenerateSlugEvent) CategoryCreateBefore(item *entity.Category) (err error) {
 	if item.Slug == "" {
 		item.Slug, err = e.makeSlug()
 	}
 	return
 }
 
-func (e *GenerateSlugVent) makeSlug() (res string, err error) {
+func (e *GenerateSlugEvent) TagCreateBefore(item *entity.Tag) (err error) {
+	if item.Slug == "" {
+		item.Slug, err = e.makeSlug()
+	}
+	return
+}
+
+func (e *GenerateSlugEvent) makeSlug() (res string, err error) {
 	switch e.opt.Style {
 	case "uuid":
 		res, err = random.UUIdV4()
@@ -97,15 +97,15 @@ func (e *GenerateSlugVent) makeSlug() (res string, err error) {
 
 var generateIdEventHashIdsHandle, _ = hashids.NewWithData(&hashids.HashIDData{Salt: "moss", Alphabet: hashids.DefaultAlphabet})
 
-func (e *GenerateSlugVent) hashids(id int64) (string, error) {
+func (e *GenerateSlugEvent) hashids(id int64) (string, error) {
 	return generateIdEventHashIdsHandle.EncodeInt64([]int64{id})
 }
 
-func (e *GenerateSlugVent) snowflake() (uint64, error) {
+func (e *GenerateSlugEvent) snowflake() (uint64, error) {
 	return sonyflake.NewSonyflake(sonyflake.Settings{}).NextID()
 }
 
-func (e *GenerateSlugVent) snowflakeStr() (string, error) {
+func (e *GenerateSlugEvent) snowflakeStr() (string, error) {
 	id, err := e.snowflake()
 	if err != nil {
 		return "", err
@@ -113,7 +113,7 @@ func (e *GenerateSlugVent) snowflakeStr() (string, error) {
 	return strconv.FormatInt(int64(id), 10), nil
 }
 
-func (e *GenerateSlugVent) hashSnowflake() (string, error) {
+func (e *GenerateSlugEvent) hashSnowflake() (string, error) {
 	id, err := e.snowflake()
 	if err != nil {
 		return "", err
@@ -125,10 +125,10 @@ func init() {
 	idgen.SetIdGenerator(idgen.NewIdGeneratorOptions(1))
 }
 
-func (e *GenerateSlugVent) idgeneratorStr() (string, error) {
+func (e *GenerateSlugEvent) idgeneratorStr() (string, error) {
 	return strconv.FormatInt(idgen.NextId(), 10), nil
 }
 
-func (e *GenerateSlugVent) hashIdgenerator() (string, error) {
+func (e *GenerateSlugEvent) hashIdgenerator() (string, error) {
 	return e.hashids(idgen.NextId())
 }

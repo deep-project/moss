@@ -7,6 +7,13 @@ import (
 
 // CreateArticle 创建文章
 func CreateArticle(item *dto.ArticleCreate) error {
+	if item.Article.CategoryID == 0 && item.CategoryName != "" {
+		cate, err := CategoryGetOrCreate(item.CategoryName)
+		if err != nil {
+			return err
+		}
+		item.Article.CategoryID = cate.ID
+	}
 	if err := service.Article.Create(&item.Article); err != nil {
 		return err
 	}

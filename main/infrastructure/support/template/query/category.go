@@ -1,6 +1,7 @@
 package query
 
 import (
+	"github.com/duke-git/lancet/v2/slice"
 	"moss/domain/config"
 	"moss/domain/core/aggregate"
 	"moss/domain/core/entity"
@@ -72,6 +73,14 @@ func (c *Category) PseudorandomList() (res []entity.Category) {
 // GetWithAncestors 获取分类和其祖先
 func (c *Category) GetWithAncestors(id int) (res []entity.Category) {
 	res, err := service.Category.GetWithAncestors(context.NewContextWithComment(config.Config.More.ViewAllCategoryLimit, c.order, c.comment), id)
+	log.ErrorShortcut("template query error", err)
+	return
+}
+
+// GetWithParent 获取分类和其夫分类
+func (c *Category) GetWithParent(id int) (res []entity.Category) {
+	res, err := service.Category.GetWithParent(id)
+	slice.Reverse(res)
 	log.ErrorShortcut("template query error", err)
 	return
 }

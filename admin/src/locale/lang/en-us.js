@@ -141,7 +141,8 @@ export default {
     database:'Database',
     system:'System',
 
-    GenerateSlug:'Auto generate slug',
+    GenerateSlug:'Auto Generate Slug',
     SaveArticleImages:'Save Article Images',
     DetectLinks:'Detect Links',
+    GenerateDescription:'Auto Generate Description',
 }

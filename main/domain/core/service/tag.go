@@ -173,7 +173,7 @@ func (s *TagService) Delete(id int) (err error) {
 
 func (s *TagService) Get(id int) (res *entity.Tag, err error) {
 	if id == 0 {
-		return nil, message.ErrIdRequired
+		return nil, message.ErrSlugRequired
 	}
 	if res, err = repository.Tag.Get(id); err != nil {
 		return

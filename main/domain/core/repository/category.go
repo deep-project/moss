@@ -38,6 +38,12 @@ func (r *CategoryRepo) Get(id int) (*entity.Category, error) {
 	return &res, err
 }
 
+func (r *CategoryRepo) GetByName(name string) (*entity.Category, error) {
+	var res entity.Category
+	err := db.DB.Where("name = ?", name).Find(&res).Error
+	return &res, err
+}
+
 func (r *CategoryRepo) GetBySlug(slug string) (*entity.Category, error) {
 	var res entity.Category
 	err := db.DB.Where("slug = ?", slug).Find(&res).Error
@@ -101,5 +107,23 @@ func (r *CategoryRepo) ListAfterCreateTime(ctx *context.Context, t int64) (res [
 // ListBeforeCreateTime 根据创建时间调用列表
 func (r *CategoryRepo) ListBeforeCreateTime(ctx *context.Context, t int64) (res []entity.Category, err error) {
 	err = db.DB.Model(entity.Category{}).Scopes(gormx.WhereCreateTimeBefore(t), gormx.Context(ctx)).Find(&res).Error
+	return
+}
+
+// GetWithParent 获取分类和其夫分类
+func (r *CategoryRepo) GetWithParent(id int) (res []entity.Category, err error) {
+	var current entity.Category
+	if err = db.DB.Where("id = ?", id).Find(&current).Error; err != nil || current.ID == 0 {
+		return
+	}
+	res = append(res, current)
+	if current.ParentID == 0 {
+		return
+	}
+	var parent entity.Category
+	if err = db.DB.Where("id = ?", current.ParentID).Find(&parent).Error; err != nil || parent.ID == 0 {
+		return
+	}
+	res = append(res, parent)
 	return
 }
