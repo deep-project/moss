@@ -4,9 +4,10 @@ moss is a simple and lightweight web content management system
 moss是一个简单轻量的内容管理系统
 
 ------
-+ <a href="https://github.com/deep-project/moss/blob/main/docs/README_EN.md" target="_blank">English document</a>
-+ [主题制作](https://github.com/deep-project/moss/blob/main/docs/theme/README.md){target="_blank"}
-+ [模板文档](https://github.com/deep-project/moss/blob/main/docs/template/README.md){:target="_blank"}
+
++ [English document](https://github.com/deep-project/moss/blob/main/docs/README_EN.md)
++ [主题制作](https://github.com/deep-project/moss/blob/main/docs/theme/README.md)
++ [模板文档](https://github.com/deep-project/moss/blob/main/docs/template/README.md)
 
 ![中文](https://user-images.githubusercontent.com/24670171/218475482-75030079-c2e3-4eb9-9f17-1713b15ad360.jpg)
 ![english](https://user-images.githubusercontent.com/24670171/218475496-4b2523b2-6bb6-43ac-a620-24f5ea0a5e3e.jpg)
