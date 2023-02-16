@@ -2,7 +2,7 @@
 {{ block article_list(list,titleTag="h2") }}
     <div class="divide-y divide-gray-300 dark:divide-neutral-800 divide-opacity-70">
         {{ range i, v := list }}
-        <div class="list-item">
+        <div class="list-item"{{if i==0}} style="padding-top:5px;{{end}}">
             {{ if v.Thumbnail !="" }}
             <div class="thumbnail">
                 <a href="{{ v.URL() }}" target="_blank">

@@ -5,7 +5,6 @@ import (
 	appService "moss/application/service"
 	"moss/infrastructure/general/command"
 	"moss/plugins"
-	"moss/plugins/inner"
 	"os"
 )
 
@@ -44,6 +43,8 @@ func initPlugins() {
 		plugins.NewSaveArticleImages(),
 		plugins.NewDetectLinks(),
 		plugins.NewGenerateDescription(),
-		inner.NewAddWater(),
+
+		//inner.NewAddWater(),
+		//inner.NewTransferData(),
 	)
 }

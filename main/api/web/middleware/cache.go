@@ -33,11 +33,9 @@ func Cache(ctx *fiber.Ctx) error {
 	next := ctx.Next()
 
 	if ctx.Response().StatusCode() == 200 {
-		go func() {
-			if err := cache.Set(name, key, ctx.Response().Body(), option.TTL.Duration()); err != nil {
-				log.Warn("set cache error", log.Err(err))
-			}
-		}()
+		if err := cache.Set(name, key, ctx.Response().Body(), option.TTL.Duration()); err != nil {
+			log.Warn("set cache error", log.Err(err))
+		}
 	}
 
 	return next

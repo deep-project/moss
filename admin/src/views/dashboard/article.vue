@@ -30,11 +30,11 @@
 <script setup>
 
   import {useRequest} from "vue-request";
-  import {dashboard} from "@/api/index.js";
+  import {dashboardData} from "@/api/index.js";
 
-  const { data:total, loading:loadingTotal } = useRequest(dashboard, {defaultParams:['articleTotal']})
-  const { data:today, loading:loadingToday } = useRequest(dashboard, {defaultParams:['articleToday']})
-  const { data:yesterday, loading:loadingYesterday } = useRequest(dashboard, {defaultParams:['articleYesterday']})
+  const { data:total, loading:loadingTotal } = useRequest(dashboardData, {defaultParams:['articleTotal']})
+  const { data:today, loading:loadingToday } = useRequest(dashboardData, {defaultParams:['articleToday']})
+  const { data:yesterday, loading:loadingYesterday } = useRequest(dashboardData, {defaultParams:['articleYesterday']})
 
 
 </script>

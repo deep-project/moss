@@ -295,12 +295,12 @@ func (s *CategoryService) ListAfterCreateTime(ctx *context.Context, t int64) (re
 }
 
 // PseudorandomList 伪随机列表
-func (s *CategoryService) PseudorandomList(limit int) (res []entity.Category, err error) {
+func (s *CategoryService) PseudorandomList(ctx *context.Context) (res []entity.Category, err error) {
 	maxID, err := repository.Category.MaxID()
 	if err != nil {
 		return
 	}
-	return s.ListByIds(nil, pseudorandomIds(maxID, limit))
+	return s.ListByIds(ctx, pseudorandomIds(maxID, ctx.Limit))
 }
 
 // GetWithAncestors 获取分类和其祖先

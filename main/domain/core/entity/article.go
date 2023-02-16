@@ -50,6 +50,6 @@ type ArticleDetail struct {
 	ArticleID int        `gorm:"type:int;size:32;primaryKey"   json:"article_id"`
 	Keywords  string     `gorm:"type:varchar(250);default:''"  json:"keywords"`
 	Content   string     `gorm:"type:string"                   json:"content"`
-	Source    string     `gorm:"type:varchar(250)"             json:"source"`
+	Source    string     `gorm:"type:varchar(250);default:''"  json:"source"`
 	Extends   vo.Extends `gorm:"type:string;default:''"        json:"extends"`
 }

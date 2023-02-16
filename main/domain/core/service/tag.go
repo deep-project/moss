@@ -301,10 +301,10 @@ func (s *TagService) ListAfterCreateTime(ctx *context.Context, t int64) (res []e
 }
 
 // PseudorandomList 伪随机列表
-func (s *TagService) PseudorandomList(limit int) (res []entity.Tag, err error) {
+func (s *TagService) PseudorandomList(ctx *context.Context) (res []entity.Tag, err error) {
 	maxID, err := repository.Tag.MaxID()
 	if err != nil {
 		return
 	}
-	return s.ListByIds(nil, pseudorandomIds(maxID, limit))
+	return s.ListByIds(ctx, pseudorandomIds(maxID, ctx.Limit))
 }

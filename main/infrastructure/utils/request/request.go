@@ -6,12 +6,14 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 )
 
 type Request struct {
 	Retry      int
 	Header     map[string]string
 	Proxy      func(*http.Request) (*url.URL, error)
+	Timeout    time.Duration
 	retryCount int
 }
 
@@ -69,6 +71,18 @@ func (r *Request) SetUserAgentMust(ua string) *Request {
 
 func (r *Request) SetReferer(val string) *Request {
 	r.AddHeader("Referer", val)
+	return r
+}
+
+func (r *Request) SetTimeout(val time.Duration) *Request {
+	r.Timeout = val
+	return r
+}
+
+func (r *Request) SetTimeoutSeconds(val int) *Request {
+	if val > 0 {
+		r.Timeout = time.Duration(val) * time.Second
+	}
 	return r
 }
 
@@ -141,5 +155,8 @@ func (r *Request) client() *http.Client {
 		transport.Proxy = r.Proxy
 	}
 	c.Transport = transport
+	if r.Timeout > 0 {
+		c.Timeout = r.Timeout
+	}
 	return c
 }

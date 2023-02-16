@@ -140,6 +140,12 @@ export default {
     about:'关于',
     database:'数据库',
     system:'系统',
+    retry:'重试',
+    timeout:'超时',
+    proxy:'代理',
+    load:'负载',
+    memory:'内存',
+    disk:'磁盘',
 
     GenerateSlug:'自动生成别名',
     SaveArticleImages:'保存文章图片',

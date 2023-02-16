@@ -69,7 +69,7 @@ func (t *Tag) PseudorandomList() (res []entity.Tag) {
 	if t.limit == 0 {
 		t.limit = 20
 	}
-	res, err := service.Tag.PseudorandomList(t.limit)
+	res, err := service.Tag.PseudorandomList(t.context())
 	log.ErrorShortcut("template query error", err)
 	return
 }

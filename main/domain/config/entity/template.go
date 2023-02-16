@@ -56,6 +56,6 @@ func NewTemplate() *Template {
 		CategoryPageList: &TemplateList{Limit: 20, Order: "id desc"},
 		TagPageList:      &TemplateList{Limit: 20},
 		TagCloud:         &TemplateTagCloud{Limit: 15, Order: "id asc", Select: []int{}},
-		Footer:           `©2023 Powered by <a href="https://github.com/deep-project/moss"><strong>Moss</strong></a>.`,
+		Footer:           `©2023 Powered by <a href="https://github.com/deep-project/moss"><strong>Moss</strong></a>`,
 	}
 }

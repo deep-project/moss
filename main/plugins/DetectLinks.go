@@ -18,6 +18,7 @@ type DetectLinks struct {
 	Proxy     string `json:"proxy"`
 	Retry     int    `json:"retry"`
 	UserAgent string `json:"user_agent"` // ua头
+	Timeout   int    `json:"timeout"`    // 超时，秒
 
 	ctx       *pluginEntity.Plugin
 	mySiteURL string
@@ -25,7 +26,8 @@ type DetectLinks struct {
 
 func NewDetectLinks() *DetectLinks {
 	return &DetectLinks{
-		Retry: 2,
+		Retry:   2,
+		Timeout: 30,
 	}
 }
 
@@ -84,15 +86,21 @@ func (d *DetectLinks) run(item *entity.Link) {
 		d.ctx.Log.Warn("url is wrong", d.log(item, nil)...)
 		return
 	}
-	body, err := request.New().SetRetry(d.Retry).SetProxyURLStr(d.Proxy).SetReferer(d.Referer).SetUserAgentMust(d.UserAgent).GetBody(item.URL)
+	// 抓取html
+	body, err := request.New().SetRetry(d.Retry).SetProxyURLStr(d.Proxy).SetTimeoutSeconds(d.Timeout).SetReferer(d.Referer).SetUserAgentMust(d.UserAgent).GetBody(item.URL)
 	if err != nil {
+		d.disableLink(item) // 访问出错，直接下链
 		d.ctx.Log.Warn("get url error", d.log(item, err)...)
+		return
 	}
+	// 格式化
 	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(body))
 	if err != nil {
+		d.disableLink(item) // 格式化出错，直接下链
 		d.ctx.Log.Error("format html document error", d.log(item, err)...)
 		return
 	}
+	// 查找link
 	var isFound bool
 	doc.Find("a").EachWithBreak(func(i int, s *goquery.Selection) bool {
 		href, _ := s.Attr("href")

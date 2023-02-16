@@ -78,7 +78,7 @@
     loadingDelay: 200,
     onSuccess:(resp)=>{
       if(!resp.success){
-        if(resp.msg !== "captcha is wrong") onGetCaptcha()
+        if(resp.message !== "captcha is wrong") onGetCaptcha()
         return
       }
       visible.value = false

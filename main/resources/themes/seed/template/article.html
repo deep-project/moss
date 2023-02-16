@@ -7,7 +7,7 @@
     {{ tags := Tag().Limit(10).ListByArticleID(Data.ID) }}
     {{ listByCategory :=Article().Limit(10).ListByCategoryID(Data.CategoryID) }}
 
-    <article class="leading-8">
+    <article class="leading-8 mb-5">
         <div class="py-3 md:py-4">
             {{yield breadcrumb(id=Data.CategoryID)}}
         </div>
@@ -21,7 +21,7 @@
         {{ Data.Content | raw}}
 
         {{ if len(tags) > 0}}
-        <ul class="tags py-4">
+        <ul class="tags py-6">
             {{ range i, v := tags }}
             <li><a href="{{v.URL()}}" target="_blank"><i class="icon icon-tag mr-1"></i>{{v.Name}}</a></li>
             {{ end }}
@@ -30,12 +30,18 @@
     </article>
 
     {{ if len(tags) > 0}}
-        {{listByTag := Article().Limit(15).ListByTags(tags)}}
-        <div class="widget">{{yield article_list(list=listByTag, titleTag="h3")}}</div>
+        <div class="widget">
+            <div class="widget-title">Relevant</div>
+            {{listByTag := Article().Limit(15).ListByTags(tags)}}
+            {{yield article_list(list=listByTag, titleTag="h3")}}
+        </div>
     {{ end }}
 
     {{ if len(listByCategory) > 0}}
-        <div class="widget">{{yield article_list(list=listByCategory,titleTag="h3")}}</div>
+        <div class="widget">
+            <div class="widget-title">Relevant</div>
+            {{yield article_list(list=listByCategory,titleTag="h3")}}
+        </div>
     {{ end }}
 
     <script type="text/javascript">

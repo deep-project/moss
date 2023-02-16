@@ -140,6 +140,12 @@ export default {
     about:'About',
     database:'Database',
     system:'System',
+    retry:'Retry',
+    timeout:'Timeout',
+    proxy:'Proxy',
+    load:'Load',
+    memory:'Memory',
+    disk:'Disk',
 
     GenerateSlug:'Auto Generate Slug',
     SaveArticleImages:'Save Article Images',

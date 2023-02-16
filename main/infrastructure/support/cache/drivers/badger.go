@@ -142,6 +142,6 @@ func (b *Badger) undefined() error {
 }
 
 func (b *Badger) Size() (int64, error) {
-	size, err := utils.DirSize(b.Path)
-	return int64(size), err
+	size, _ := utils.DirSize(b.Path)
+	return int64(size), nil
 }

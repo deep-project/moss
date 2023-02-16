@@ -5,7 +5,7 @@
   </a-form-item>
 
   <a-form-item label="length">
-    <a-slider v-model="data.length" :style="{ width: '200px' }" :min="1" :max="250" />
+    <a-input-number v-model="data.length" :style="{ width: '200px' }" :min="1" :max="250" />
   </a-form-item>
 </template>
 

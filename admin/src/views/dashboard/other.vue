@@ -30,11 +30,11 @@
 <script setup>
 
   import {useRequest} from "vue-request";
-  import {dashboard} from "@/api/index.js";
+  import {dashboardData} from "@/api/index.js";
 
-  const { data:categoryTotal, loading:loadingCategoryTotal } = useRequest(dashboard, {defaultParams:['categoryTotal']})
-  const { data:tagTotal, loading:loadingTagTotal } = useRequest(dashboard, {defaultParams:['tagTotal']})
-  const { data:linkTotal, loading:loadingLinkTotal } = useRequest(dashboard, {defaultParams:['linkTotal']})
+  const { data:categoryTotal, loading:loadingCategoryTotal } = useRequest(dashboardData, {defaultParams:['categoryTotal']})
+  const { data:tagTotal, loading:loadingTagTotal } = useRequest(dashboardData, {defaultParams:['tagTotal']})
+  const { data:linkTotal, loading:loadingLinkTotal } = useRequest(dashboardData, {defaultParams:['linkTotal']})
 
 
 </script>

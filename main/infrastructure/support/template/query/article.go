@@ -84,7 +84,7 @@ func (a *Article) ListByTagID(ids ...int) (res []entity.ArticleBase) {
 
 // PseudorandomList 伪随机列表
 func (a *Article) PseudorandomList() (res []entity.ArticleBase) {
-	res, err := service.Article.PseudorandomList(a.context().Limit)
+	res, err := service.Article.PseudorandomList(a.context())
 	log.WarnShortcut("template query error", err)
 	return
 }

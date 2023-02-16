@@ -274,12 +274,12 @@ func (s *ArticleService) ListByTagIds(ctx *context.Context, tagIds []int) (res [
 }
 
 // PseudorandomList 伪随机列表
-func (s *ArticleService) PseudorandomList(limit int) (res []entity.ArticleBase, err error) {
+func (s *ArticleService) PseudorandomList(ctx *context.Context) (res []entity.ArticleBase, err error) {
 	maxID, err := repository.Article.MaxID()
 	if err != nil {
 		return
 	}
-	return s.ListByIds(nil, pseudorandomIds(maxID, limit))
+	return s.ListByIds(ctx, pseudorandomIds(maxID, ctx.Limit))
 }
 
 // CountByCategoryID 根据分类ID统计文章数

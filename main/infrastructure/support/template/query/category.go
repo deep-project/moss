@@ -65,7 +65,7 @@ func (c *Category) ListByID(ids ...int) (res []entity.Category) {
 
 // PseudorandomList 伪随机列表
 func (c *Category) PseudorandomList() (res []entity.Category) {
-	res, err := service.Category.PseudorandomList(c.context().Limit)
+	res, err := service.Category.PseudorandomList(c.context())
 	log.WarnShortcut("template query error", err)
 	return
 }

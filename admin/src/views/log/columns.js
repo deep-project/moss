@@ -105,16 +105,15 @@ export const columnHTTP = [
     {
         title: 'ip',
         dataIndex: 'ip',
-        width: 110,
+        width: 140,
         ellipsis:true,
     },
-    {
-        title: 'region',
-        dataIndex: 'region',
-        width: 130,
-        ellipsis:true,
-    },
-
+    // {
+    //     title: 'region',
+    //     dataIndex: 'region',
+    //     width: 130,
+    //     ellipsis:true,
+    // },
     {
         title: 'method',
         dataIndex: 'method',

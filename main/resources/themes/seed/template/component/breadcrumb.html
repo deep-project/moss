@@ -2,6 +2,9 @@
 
 {{ block breadcrumb(id) }}
     {{ list := Widget.Breadcrumb(id) }}
+    {{ if len(list) == 0}}
+        {{ list = Category().GetWithParent(id)}}
+    {{end}}
     {{ listLen := len(list)}}
     <div class="flex truncate items-center align-middle text-sm">
         <a class="flex items-center" href="/"><i class="mr-1 icon icon-home"></i>Home</a>

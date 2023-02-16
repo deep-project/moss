@@ -55,4 +55,4 @@ export const pluginCronExp = (id,data) => usePost(`/plugin/cron/exp/${id}`, data
 export const pluginLogList = (id,params) => useGetData(`/plugin/log/list/${id}`,params);
 
 
-export const dashboard = (id) => useGetData(`/dashboard/${id}`);
+export const dashboardData = (id) => useGetData(`/dashboard/${id}`);

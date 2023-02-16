@@ -40,7 +40,10 @@
       </template>
 
       <template #status="{ record,rowIndex,column }">
-        <span :class="{'text-yellow-500':record.status >=400 && record.status <500, 'text-red-500':record.status >=500 }">{{record.status}}</span>
+        <a-tag size="mini" v-if="record.status >=500" color="red">{{record.status}}</a-tag>
+        <a-tag size="mini" v-else-if="record.status >=400" color="orange">{{record.status}}</a-tag>
+        <a-tag size="mini" v-else-if="record.status >=300" color="blue">{{record.status}}</a-tag>
+        <a-tag size="mini" v-else color="green">{{record.status}}</a-tag>
       </template>
 
       <template #url="{ record,rowIndex,column }">

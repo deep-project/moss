@@ -11,6 +11,7 @@ import (
 	appService "moss/application/service"
 	"moss/domain/core/service"
 	"moss/infrastructure/persistent/db"
+	"runtime"
 	"time"
 )
 
@@ -23,8 +24,12 @@ func (d *dashboard) Controller(ctx *fiber.Ctx) (err error) {
 	var data any
 	switch ctx.Params("id") {
 	case "systemLoad":
-		info, _ := load.Avg()
-		data = info.Load5
+		if runtime.GOOS == "linux" {
+			info, _ := load.Avg()
+			data = (info.Load1 + info.Load5 + info.Load15) / 3
+		} else {
+			data = -1
+		}
 	case "systemCPU":
 		v, _ := cpu.Percent(time.Second, false)
 		data = v[0]
@@ -32,12 +37,8 @@ func (d *dashboard) Controller(ctx *fiber.Ctx) (err error) {
 		v, _ := mem.VirtualMemory()
 		data = v.UsedPercent
 	case "systemDisk":
-		parts, _ := disk.Partitions(true)
-		for _, part := range parts {
-			diskInfo, _ := disk.Usage(part.Mountpoint)
-			data = diskInfo.UsedPercent
-			break
-		}
+		diskInfo, _ := disk.Usage("./")
+		data = diskInfo.UsedPercent
 	case "database":
 		data = db.GetSize()
 	case "log":
