@@ -1,6 +1,7 @@
 package cache
 
 import (
+	"errors"
 	"moss/domain/config"
 	"moss/infrastructure/support/cache/core"
 	"moss/infrastructure/support/log"
@@ -28,8 +29,12 @@ func Init() error {
 	return d.Init()
 }
 
-func ActiveDriver() (core.Cache, error) {
-	return config.Config.Cache.Driver.Get(config.Config.Cache.ActiveDriver)
+func ActiveDriver() (res core.Cache, err error) {
+	res, err = config.Config.Cache.Driver.Get(config.Config.Cache.ActiveDriver)
+	if res == nil {
+		err = errors.New("active driver is nil")
+	}
+	return
 }
 
 func Get(bucket, key string) ([]byte, error) {

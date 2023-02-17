@@ -92,7 +92,7 @@
   import {logRead} from '@/api';
   import {useLoadMore} from 'vue-request';
   import {useDeepCopy,useOpenLink} from '@/hooks/utils'
-  import {columnAPP, columnSQL,columnHTTP} from './columns'
+  import {columnAPP, columnSQL, columnHTTP, columnSpider} from './columns'
   import { NTime } from 'naive-ui'
   import DescAPP from './descriptions/app.vue'
   import DescHTTP from './descriptions/http.vue'
@@ -113,7 +113,7 @@
       case "sql":return columnSQL;
       case "slow_sql":return columnSQL;
       case "visitor":return columnHTTP;
-      case "spider":return columnHTTP;
+      case "spider":return columnSpider();
     }
   })
 

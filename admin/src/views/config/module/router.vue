@@ -6,12 +6,19 @@
     <a-tab-pane key="options" :title="$t('options')">
       <Options />
     </a-tab-pane>
+
+    <a-tab-pane key="pprof" title="pprof">
+      <Pprof />
+    </a-tab-pane>
+
   </a-tabs>
 </template>
 
 <script setup>
   import Rules from './router/rules.vue'
   import Options from './router/options.vue'
+  import Pprof from './router/pprof.vue'
+  
   import {inject} from 'vue'
   import {routerReload} from "@/api";
   import {useRequest} from 'vue-request'

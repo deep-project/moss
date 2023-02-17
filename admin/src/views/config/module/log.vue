@@ -18,6 +18,9 @@
     <a-tab-pane key="plugin" :title="$t('plugin')">
       <Item :data="data.plugin" />
     </a-tab-pane>
+    <a-tab-pane key="more" :title="$t('more')">
+      <More />
+    </a-tab-pane>
   </a-tabs>
 </template>
 
@@ -29,6 +32,7 @@
   import {t} from "@/locale";
   import {Message} from '@arco-design/web-vue'
   import {inject} from 'vue'
+  import More from './log/more.vue'
 
   const data = inject('data')
   let messageReactive

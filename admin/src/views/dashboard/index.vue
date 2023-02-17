@@ -1,7 +1,7 @@
 <template>
   <a-space direction="vertical" size="medium" fill>
 
-    <a-grid :cols="{ xs: 1, sm: 1, md: 2 }" :colGap="12" :rowGap="12">
+    <a-grid :cols="{ xs: 1, sm: 1, md: 1, lg:2 }" :colGap="12" :rowGap="12">
       <a-grid-item><System /></a-grid-item>
       <a-grid-item><App /></a-grid-item>
     </a-grid>

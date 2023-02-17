@@ -6,11 +6,10 @@ import (
 )
 
 type Cache struct {
-	Enable          bool          `json:"enable"`
-	Options         *CacheOptions `json:"options"`
-	ActiveDriver    string        `json:"active_driver"`
-	Driver          *core.Driver  `json:"driver"`
-	PreBuildArticle bool          `json:"pre_build_article"` // TODO
+	Enable       bool          `json:"enable"`
+	Options      *CacheOptions `json:"options"`
+	ActiveDriver string        `json:"active_driver"`
+	Driver       *core.Driver  `json:"driver"`
 }
 
 func NewCache() *Cache {

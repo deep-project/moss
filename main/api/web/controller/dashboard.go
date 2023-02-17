@@ -37,8 +37,15 @@ func (d *dashboard) Controller(ctx *fiber.Ctx) (err error) {
 		v, _ := mem.VirtualMemory()
 		data = v.UsedPercent
 	case "systemDisk":
-		diskInfo, _ := disk.Usage("./")
-		data = diskInfo.UsedPercent
+		var res []float64
+		parts, _ := disk.Partitions(false)
+		for _, part := range parts {
+			diskInfo, _ := disk.Usage(part.Mountpoint)
+			res = append(res, diskInfo.UsedPercent)
+		}
+		data = res
+		//diskInfo, _ := disk.Usage("./")
+		//data = diskInfo.UsedPercent
 	case "database":
 		data = db.GetSize()
 	case "log":

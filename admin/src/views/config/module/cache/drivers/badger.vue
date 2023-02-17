@@ -41,13 +41,13 @@
 
      <a-form-item label="GcInterval" help="垃圾回收间隔">
        <Duration :data="data.gcInterval" />
+       <a-tag class="ml-2" color="orangered">need to restart the app</a-tag>
      </a-form-item>
 
-     <a-form-item label="GcDiscardRatio" help="垃圾回收比例">
+    <a-form-item label="GcDiscardRatio" help="垃圾回收比例">
        <a-input-number class="w-64" v-model="data.gcDiscardRatio" :step="0.1" :precision="1" :min="0" :max="1" />
+       <a-tag class="ml-2" color="orangered">need to restart the app</a-tag>
      </a-form-item>
-     <a-alert class="mt-2">垃圾回收设置需重启应用生效</a-alert>
-
 </template>
 
 <script setup>

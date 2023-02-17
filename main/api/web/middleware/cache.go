@@ -26,6 +26,7 @@ func Cache(ctx *fiber.Ctx) error {
 	}
 
 	// 默认不打印错误，否则找不到文件错误会爆满
+
 	if val, err := cache.Get(name, key); err == nil {
 		return ctx.Type("html").Send(val)
 	}

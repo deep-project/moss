@@ -1,23 +1,25 @@
 <template>
   <a-card class="w-full h-full" :title="$t('system')" :bordered="false">
 
-    <a-grid :cols="{ xs: 4, sm: 4, md: 4 }" class="text-center">
-      <a-grid-item v-if="loadDec > -1">
-        <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="loadDec" status='warning' :color="color" />
-        <div class="title">{{$t('load')}}</div>
-      </a-grid-item>
+    <a-grid :cols="{ xs: 3, sm: 4, md: 5, lg:4, xl:5 }" :rowGap="20" class="text-center">
+<!--      <a-grid-item v-if="loadDec > -1">-->
+<!--        <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="dec(load)" status='warning' :color="color" />-->
+<!--        <div class="title">{{$t('load')}}</div>-->
+<!--      </a-grid-item>-->
       <a-grid-item>
-          <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="cpuDec" status='warning' :color="color" />
+          <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="dec(cpu)" status='warning' :color="color" />
           <div class="title">cpu</div>
       </a-grid-item>
       <a-grid-item>
-          <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="memoryDec" status='warning' :color="color" />
+          <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="dec(memory)" status='warning' :color="color" />
           <div class="title">{{$t('memory')}}</div>
       </a-grid-item>
-      <a-grid-item>
-          <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="diskDec" status='warning' :color="color" />
-          <div class="title">{{$t('disk')}}</div>
+
+      <a-grid-item v-for="(item,index) in disks">
+          <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="dec(item)" status='warning' :color="color" />
+          <div class="title">{{$t('disk') + (disks.length > 1 ? (index+1):'')}}</div>
       </a-grid-item>
+
     </a-grid>
 
   </a-card>
@@ -35,20 +37,10 @@
   const store = useStore()
   const color = 'rgb(var(--primary-6))'
 
-
-  const { data:load } = useRequest(dashboardData, {defaultParams:['systemLoad'], pollingInterval: 1000, errorRetryCount: 1})
-  const loadDec = computed(()=>dec(load.value))
-
+  //const { data:load } = useRequest(dashboardData, {defaultParams:['systemLoad'], pollingInterval: 1000, errorRetryCount: 1})
   const { data:cpu } = useRequest(dashboardData, {defaultParams:['systemCPU'], pollingInterval: 1000, errorRetryCount: 1})
-  const cpuDec = computed(()=>dec(cpu.value))
-
   const { data:memory } = useRequest(dashboardData, {defaultParams:['systemMemory'], pollingInterval: 1000, errorRetryCount: 1})
-  const memoryDec = computed(()=>dec(memory.value))
-
-  const { data:disk } = useRequest(dashboardData, {defaultParams:['systemDisk']})
-  const diskDec =  computed(()=>dec(disk.value))
-
-
+  const { data:disks } = useRequest(dashboardData, {defaultParams:['systemDisk']})
 
   function dec(val){
     if(val === -1) return -1

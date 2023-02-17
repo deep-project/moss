@@ -70,7 +70,7 @@
     </a-alert>
 
     <a-alert style="max-width:500px" type="warning">
-      如果别名中可能包含分隔符，则路由中避免使用，否则无法匹配路由。建议使用<a-tag class="ml-2">/</a-tag>
+      如果别名中可能包含某个分隔符，则路由中避免使用此分隔符，否则无法匹配路由。建议使用<a-tag class="ml-2">/</a-tag>
     </a-alert>
   </div>
 

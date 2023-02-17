@@ -4,6 +4,7 @@ import (
 	"github.com/panjf2000/ants/v2"
 	"go.uber.org/zap"
 	"moss/domain/config"
+	"moss/infrastructure/support/ip2region"
 	"strconv"
 	"strings"
 	"time"
@@ -24,10 +25,10 @@ func newLog() *log {
 
 func (l *log) initPool() {
 	var err error
-	if l.httpPool, err = ants.NewPoolWithFunc(1000, l.poolWriteHTTP, ants.WithNonblocking(true)); err != nil {
+	if l.httpPool, err = ants.NewPoolWithFunc(config.Config.Log.HttpPoolSize, l.poolWriteHTTP, ants.WithNonblocking(true)); err != nil {
 		Warn("http log pool initialization error", Err(err))
 	}
-	if l.sqlPool, err = ants.NewPoolWithFunc(1000, l.poolWriteSQL, ants.WithNonblocking(true)); err != nil {
+	if l.sqlPool, err = ants.NewPoolWithFunc(config.Config.Log.SqlPoolSize, l.poolWriteSQL, ants.WithNonblocking(true)); err != nil {
 		Warn("sql log pool initialization error", Err(err))
 	}
 }
@@ -81,9 +82,13 @@ type HttpData struct {
 
 func (l *log) HTTP(entry HttpData) {
 	client := Visitor
-	if l.isSpider(entry.UserAgent) {
+	var spLog = zap.Skip()
+	feature := l.spiderFeature(entry.UserAgent)
+	if feature != "" {
 		client = Spider
+		spLog = zap.String("feature", feature)
 	}
+
 	if client.IsClosed() {
 		return
 	}
@@ -96,25 +101,26 @@ func (l *log) HTTP(entry HttpData) {
 		zap.Int("status", entry.Status),
 		zap.Uint64("depth", entry.Depth),
 		zap.String("ip", entry.IP),
+		zap.String("region", ip2region.Region(entry.IP)), // 访客位置
 		zap.String("method", entry.Method),
 		zap.String("url", entry.URL),
 		zap.String("referer", entry.Referer),
 		zap.String("userAgent", entry.UserAgent),
 		zap.String("headers", entry.Headers),
-		//zap.String("region", ip2region.Region(ip)), // 访客位置
+		spLog,
 	)
 }
 
-func (l *log) isSpider(ua string) bool {
+func (l *log) spiderFeature(ua string) string {
 	if len(ua) == 0 {
-		return true
+		return "unknown"
 	}
 	for _, v := range config.Config.Log.SpiderFeature {
-		if strings.Contains(ua, v) {
-			return true
+		if strings.Contains(strings.ToLower(ua), strings.ToLower(v)) {
+			return v
 		}
 	}
-	return false
+	return ""
 }
 
 type SqlData struct {

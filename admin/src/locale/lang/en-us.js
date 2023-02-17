@@ -151,4 +151,5 @@ export default {
     SaveArticleImages:'Save Article Images',
     DetectLinks:'Detect Links',
     GenerateDescription:'Auto Generate Description',
+    PreBuildArticleCache:'Pre Build Article Cache',
 }

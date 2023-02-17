@@ -26,10 +26,12 @@ func New() *Router {
 func (r *Router) newFiber() *fiber.App {
 	app := fiber.New(config.Config.Router.GetOptions())
 
-	// http://127.0.0.1:8989/debug/pprof
-	// go tool pprof -http=:9090 http://127.0.0.1:8989/debug/pprof/heap?auth=XPAwGQzAwo
-	// go tool pprof -http=:9090 http://127.0.0.1:8989/debug/pprof/goroutine
-	app.All("/debug/pprof/*", middleware.Pprof, pprof.New())
+	// pprof
+	var pprofPrefix = ""
+	if config.Config.Router.PprofSecret != "" {
+		pprofPrefix = "/" + config.Config.Router.PprofSecret
+	}
+	app.Use(pprof.New(pprof.Config{Prefix: pprofPrefix}))
 
 	// 捕捉堆栈错误
 	app.Use(recover.New())

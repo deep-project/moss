@@ -16,18 +16,33 @@ type Log struct {
 	Plugin           *LogItem `json:"plugin"`
 	SlowSQLThreshold int      `json:"slow_sql_threshold"`
 	SpiderFeature    []string `json:"spider_feature"`
+	HttpPoolSize     int      `json:"http_pool_size"`
+	SqlPoolSize      int      `json:"sql_pool_size"`
 }
 
 func NewLog() *Log {
 	l := &Log{
 		SlowSQLThreshold: 200,
-		SpiderFeature:    []string{"bot", "Bot", "spider", "Spider", "crawl", "slurp", "lycos", "robozilla", "google", "yandex"},
-		App:              NewLogItem("app", zapcore.EncoderConfig{MessageKey: "msg", LevelKey: "level", TimeKey: "time", NameKey: "logger", CallerKey: "file", StacktraceKey: "stacktrace"}),
-		SQL:              NewLogItem("sql", zapcore.EncoderConfig{MessageKey: "msg", LevelKey: "level", TimeKey: "time"}),
-		SlowSQL:          NewLogItem("slow_sql", zapcore.EncoderConfig{MessageKey: "msg", LevelKey: "level", TimeKey: "time"}),
-		Visitor:          NewLogItem("visitor", zapcore.EncoderConfig{TimeKey: "time"}),
-		Spider:           NewLogItem("spider", zapcore.EncoderConfig{TimeKey: "time"}),
-		Plugin:           &LogItem{ID: "plugin", Enable: true, MaxSize: 20, MaxAge: 5, MaxBackups: 1, Compress: true},
+		SpiderFeature: []string{
+			// 知名
+			"Googlebot", "bingBot", "Baiduspider", "msnbot", "YandexBot", "Yahoo! Slurp",
+			// 国内
+			"360Spider", "SogouSpider", "Sogou web spider", "Sogou Pic Spider", "DNSPod", "Bytespider",
+			"AspiegelBot", "YisouSpider", "DuckDuckGo", "JikeSpider", "YoudaoBot", "JianKongBao",
+			// 国外
+			"AhrefsBot", "MJ12bot", "SemrushBot", "lycos", "Twitterbot", "DotBot", "MauiBot", "Rogerbot",
+			"exabot", "Teoma", "DOCOMO", "Speedy Spider", "LinkpadBot",
+			// 通用特征
+			"slurp", "robozilla", "bot", "spider", "crawl",
+		},
+		App:          NewLogItem("app", zapcore.EncoderConfig{MessageKey: "msg", LevelKey: "level", TimeKey: "time", NameKey: "logger", CallerKey: "file", StacktraceKey: "stacktrace"}),
+		SQL:          NewLogItem("sql", zapcore.EncoderConfig{MessageKey: "msg", LevelKey: "level", TimeKey: "time"}),
+		SlowSQL:      NewLogItem("slow_sql", zapcore.EncoderConfig{MessageKey: "msg", LevelKey: "level", TimeKey: "time"}),
+		Visitor:      NewLogItem("visitor", zapcore.EncoderConfig{TimeKey: "time"}),
+		Spider:       NewLogItem("spider", zapcore.EncoderConfig{TimeKey: "time"}),
+		Plugin:       &LogItem{ID: "plugin", Enable: true, MaxSize: 20, MaxAge: 5, MaxBackups: 1, Compress: true},
+		HttpPoolSize: 1000,
+		SqlPoolSize:  1000,
 	}
 	return l
 }

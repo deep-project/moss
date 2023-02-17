@@ -1,3 +1,4 @@
+import {useDeepCopy} from "@/hooks/utils.js";
 
 export const columnAPP = [
     {
@@ -107,13 +108,15 @@ export const columnHTTP = [
         dataIndex: 'ip',
         width: 140,
         ellipsis:true,
+        tooltip:true,
     },
-    // {
-    //     title: 'region',
-    //     dataIndex: 'region',
-    //     width: 130,
-    //     ellipsis:true,
-    // },
+    {
+        title: 'region',
+        dataIndex: 'region',
+        width: 220,
+        ellipsis:true,
+        tooltip:true,
+    },
     {
         title: 'method',
         dataIndex: 'method',
@@ -122,8 +125,9 @@ export const columnHTTP = [
     {
         title: 'url',
         dataIndex: 'url',
-        width: 400,
+        width: 300,
         ellipsis:true,
+        tooltip:true,
         slotName:'url',
     },
     {
@@ -131,13 +135,27 @@ export const columnHTTP = [
         dataIndex: 'referer',
         width: 300,
         ellipsis:true,
+        tooltip:true,
         slotName:'url',
     },
     {
         title: 'userAgent',
         dataIndex: 'userAgent',
-        width: 600,
+        width: 1000,
         ellipsis:true,
+        tooltip:true,
     },
 
 ]
+
+export function columnSpider(){
+    let col = useDeepCopy(columnHTTP)
+    col.splice(2, 0, {
+        title: 'feature',
+        dataIndex: 'feature',
+        width: 130,
+        ellipsis:true,
+        tooltip:true,
+    });
+    return col
+}

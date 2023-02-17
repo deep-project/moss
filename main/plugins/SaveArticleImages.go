@@ -22,7 +22,7 @@ import (
 
 type SaveArticleImages struct {
 	EnableOnCreate bool `json:"enable_on_create"` // 创建时执行
-	EnableOnUpdate bool `json:"enable_on_update"` // 创建时执行
+	EnableOnUpdate bool `json:"enable_on_update"` // 更新时执行
 
 	MaxWidth          int    `json:"max_width"`           // 最大图片宽度(像素)，大于此宽度将被等比例缩放
 	MaxHeight         int    `json:"max_height"`          // 最大图片高度(像素)，大于此高度将被等比例缩放
@@ -158,7 +158,7 @@ func (s *SaveArticleImages) eachSave(item *entity.Article) func(i int, sn *goque
 			s.ctx.Log.Warn("upload image error", s.logInfo(item, src, err)...)
 			return
 		}
-
+		s.ctx.Log.Info("upload image success", append(s.logInfo(item, src, nil), zap.String("url", uploadResult.URL))...)
 		// 设置标签属性
 		sn.SetAttr("src", uploadResult.URL)
 		sn.SetAttr("width", strconv.Itoa(width))
@@ -196,6 +196,7 @@ func (s *SaveArticleImages) uploadThumbnail(item *entity.Article, file []byte, n
 	if err != nil {
 		return
 	}
+	s.ctx.Log.Info("upload thumbnail success", zap.String("title", item.Title), zap.String("url", thumbUploadResult.URL))
 	item.Thumbnail = thumbUploadResult.URL
 	return
 }

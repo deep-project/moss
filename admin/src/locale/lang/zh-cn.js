@@ -151,6 +151,7 @@ export default {
     SaveArticleImages:'保存文章图片',
     DetectLinks:'检查链接',
     GenerateDescription:'自动生成描述',
+    PreBuildArticleCache:'预生成文章缓存',
 }
 
 

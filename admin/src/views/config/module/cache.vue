@@ -11,9 +11,9 @@
       <a-tab-pane key="storage" :title="$t('storage')">
         <div class="p-3"><Storage /></div>
       </a-tab-pane>
-      <a-tab-pane key="more" :title="$t('more')">
-        <div class="p-3"><More /></div>
-      </a-tab-pane>
+<!--      <a-tab-pane key="more" :title="$t('more')">-->
+<!--        <div class="p-3"><More /></div>-->
+<!--      </a-tab-pane>-->
     </a-tabs>
 
 </template>
