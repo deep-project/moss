@@ -1,7 +1,7 @@
 <template>
   <a-card class="w-full h-full" :title="$t('app')" :bordered="false" :body-style="{height:'calc(100% - 46px)'}">
 
-    <a-grid :cols="{ xs: 3, sm: 4, md: 3, lg:4 }" class="h-full place-content-start">
+    <a-grid :cols="{ xs: 2, sm: 3, md: 3, lg:4 }" class="h-full place-content-start">
 
       <a-grid-item class="flex items-center" style="min-height: 104px">
         <a-statistic :title="$t('database')" :value="database[0]" :value-from="0" :precision="isInt(database[0]) ? 0:2" show-group-separator animation>

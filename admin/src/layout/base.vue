@@ -4,7 +4,7 @@
     height: store.windowSize.height + 'px',
     backgroundColor: store.dark ? store.darkBgColor: store.bgColor
   }">
-    <a-config-provider :size="store.isMobile ? 'mini':'medium'" :locale="localeList[store.locale].arcoLang">
+    <a-config-provider :locale="localeList[store.locale].arcoLang">
       <n-config-provider class="h-full" :locale="localeList[store.locale].naiveLang" :date-locale="localeList[store.locale].naiveDateLang">
         <router-view />
       </n-config-provider>
