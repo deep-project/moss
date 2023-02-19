@@ -41,11 +41,11 @@ func (w *Widget) Menu() []aggregate.CategoryTree {
 	var err error
 	if len(config.Config.Template.Menu.Select) > 0 {
 		// 根据选择调用的导航数据
-		items, err = service.Category.ListByIds(context.NewContextWithComment(config.Config.Template.Menu.Limit, "", "Menu"), config.Config.Template.Menu.Select)
+		items, err = service.Category.ListByIds(context.NewContextWithComment(config.Config.Template.Menu.Limit, "", "Widget.Menu"), config.Config.Template.Menu.Select)
 		items = coreUtils.SortByIds[coreEntity.Category](items, config.Config.Template.Menu.Select) // 根据选择的ids排序
 	} else {
 		// 默认调用全部导航数据
-		items, err = service.Category.List(context.NewContextWithComment(config.Config.Template.Menu.Limit, "", "Menu"))
+		items, err = service.Category.List(context.NewContextWithComment(config.Config.Template.Menu.Limit, "", "Widget.Menu"))
 	}
 	if err != nil {
 		log.Error("template widget error", zap.Error(err))
@@ -56,7 +56,7 @@ func (w *Widget) Menu() []aggregate.CategoryTree {
 
 // Link 链接列表
 func (w *Widget) Link() (res []coreEntity.Link) {
-	res, err := service.Link.ListPublic(nil)
+	res, err := service.Link.ListPublic(context.NewContextByComment("Widget.Link"))
 	log.ErrorShortcut("template widget error", err)
 	return
 }
@@ -77,7 +77,7 @@ func (w *Widget) simpleList(opt *entity.TemplateList) (res []coreEntity.ArticleB
 		return
 	}
 	var err error
-	var ctx = context.NewContext(opt.Limit, opt.Order)
+	var ctx = context.NewContextWithComment(opt.Limit, opt.Order, "Widget.simpleList")
 	if len(opt.CategoryIds) > 0 {
 		res, err = service.Article.ListByCategoryIds(ctx, opt.CategoryIds)
 	} else {
@@ -89,7 +89,7 @@ func (w *Widget) simpleList(opt *entity.TemplateList) (res []coreEntity.ArticleB
 
 // Breadcrumb 面包屑 通过分类ID调用
 func (w *Widget) Breadcrumb(categoryID int) (res []coreEntity.Category) {
-	res, err := service.Category.GetWithAncestorsReverse(context.NewContextWithComment(config.Config.More.ViewAllCategoryLimit, "", "Breadcrumb"), categoryID)
+	res, err := service.Category.GetWithAncestorsReverse(context.NewContextWithComment(config.Config.More.ViewAllCategoryLimit, "", "Widget.Breadcrumb"), categoryID)
 	log.ErrorShortcut("template widget error", err)
 	return
 }
@@ -100,7 +100,7 @@ func (w *Widget) TagCloud() (res []coreEntity.Tag) {
 		return
 	}
 	var err error
-	var ctx = context.NewContextWithComment(config.Config.Template.TagCloud.Limit, config.Config.Template.TagCloud.Order, "TagCloud")
+	var ctx = context.NewContextWithComment(config.Config.Template.TagCloud.Limit, config.Config.Template.TagCloud.Order, "Widget.TagCloud")
 	if len(config.Config.Template.TagCloud.Select) > 0 {
 		res, err = service.Tag.ListByIds(ctx, config.Config.Template.TagCloud.Select)
 	} else {
@@ -133,7 +133,8 @@ func (w *Widget) CategoryPageList(categoryID, pageNumber int) (res PageListResul
 	)
 	// 查询数据函数
 	var listFun = func() (any, int) {
-		list, err := service.Article.ListByCategoryID(&context.Context{Limit: opt.Limit, Order: opt.Order, Page: pageNumber, FastOffset: fastOffset}, categoryID)
+		ctx := &context.Context{Limit: opt.Limit, Order: opt.Order, Page: pageNumber, FastOffset: fastOffset, Comment: "Widget.CategoryPageList"}
+		list, err := service.Article.ListByCategoryID(ctx, categoryID)
 		log.ErrorShortcut("template widget error", err)
 		return list, len(list)
 	}
@@ -151,9 +152,10 @@ func (w *Widget) TagPageList(tagID, pageNumber int) (res PageListResult) {
 	// 查询数据函数
 	var listFun = func() (any, int) {
 		list, err := service.Article.ListByTagID(&context.Context{
-			Limit: config.Config.Template.TagPageList.Limit,
-			Order: "id desc",
-			Page:  pageNumber,
+			Limit:   config.Config.Template.TagPageList.Limit,
+			Order:   "id desc",
+			Page:    pageNumber,
+			Comment: "Widget.TagPageList",
 		}, tagID)
 		log.ErrorShortcut("template widget error", err)
 		return list, len(list)

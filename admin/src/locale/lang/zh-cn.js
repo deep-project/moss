@@ -146,12 +146,16 @@ export default {
     load:'负载',
     memory:'内存',
     disk:'磁盘',
+    onCreate:'创建时',
+    onUpdate:'更新时',
 
     GenerateSlug:'自动生成别名',
     SaveArticleImages:'保存文章图片',
     DetectLinks:'检查链接',
     GenerateDescription:'自动生成描述',
     PreBuildArticleCache:'预生成文章缓存',
+    PushToBaidu:'推送到百度',
+    MakeCarousel:'制作模板轮播',
 }
 
 

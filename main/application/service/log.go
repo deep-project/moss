@@ -26,7 +26,8 @@ func logRead(filePath string, page, limit int) (any, error) {
 	var res []map[string]any
 	list, err := utils.ReadFilePagination(filePath, page, limit)
 	if err != nil {
-		if strings.Contains(err.Error(), "cannot find") {
+		errStr := err.Error()
+		if strings.Contains(errStr, "cannot find") || strings.Contains(errStr, "no such file") {
 			return nil, nil
 		}
 		if errors.Is(err, io.EOF) {

@@ -4,6 +4,7 @@ import {useNavigatorLocale} from "@/locale";
 import {defineStore} from "pinia";
 import {useDefaultSiderCollapsed,useNavigatorDark} from "@/hooks/app";
 import {ref} from 'vue'
+import {useIsMobile} from "@/hooks/utils.js";
 
 export const useStore = defineStore('default', {
     state: () => ({
@@ -20,7 +21,7 @@ export const useStore = defineStore('default', {
         config: {},
     }),
     getters: {
-        isMobile: (state) => state.windowSize.width <= 640,
+        isMobile: (state) => state.windowSize.width < 750 || useIsMobile(),
         isTablet: (state) => state.windowSize.width > 640 && state.windowSize.width <= 1024,
         headerHeight() {
             if (this.isMobile) return 46

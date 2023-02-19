@@ -2,12 +2,12 @@
   <a-form-item :label="$t('enable')">
     <a-space>
       <a-switch v-model="data.enable_on_create" type="round">
-        <template #checked>{{ $t('create') }}</template>
-        <template #unchecked>{{ $t('create') }}</template>
+        <template #checked>{{ $t('onCreate') }}</template>
+        <template #unchecked>{{ $t('onCreate') }}</template>
       </a-switch>
       <a-switch v-model="data.enable_on_update" type="round">
-        <template #checked>{{ $t('update') }}</template>
-        <template #unchecked>{{ $t('update') }}</template>
+        <template #checked>{{ $t('onUpdate') }}</template>
+        <template #unchecked>{{ $t('onUpdate') }}</template>
       </a-switch>
     </a-space>
   </a-form-item>

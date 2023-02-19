@@ -18,6 +18,10 @@ func NewContextWithComment(limit int, order, comment string) *Context {
 	return &Context{Limit: limit, Order: order, Comment: comment}
 }
 
+func NewContextByComment(comment string) *Context {
+	return &Context{Comment: comment}
+}
+
 type Where struct {
 	Field    string        `json:"field"`
 	Operator WhereOperator `json:"operator"`

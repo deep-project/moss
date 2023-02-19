@@ -8,7 +8,7 @@
     <a-descriptions-item label="msg">{{data.msg}}</a-descriptions-item>
     <a-descriptions-item label="sql">
       <div class="py-2 my-2">
-        <code class="sql font-mono" v-html="prettify(data.sql)"></code>
+        <code class="sql font-mono whitespace-pre-line" v-html="prettify(data.sql)"></code>
       </div>
     </a-descriptions-item>
   </a-descriptions>

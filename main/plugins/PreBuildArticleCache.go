@@ -48,7 +48,7 @@ func (d *PreBuildArticleCache) ArticleUpdateAfter(item *entity.Article) {
 	}
 }
 
-func (d *PreBuildArticleCache) build(item *entity.Article, t string) {
+func (d *PreBuildArticleCache) build(item *entity.Article, action string) {
 	if !config.Config.Cache.Enable {
 		d.ctx.Log.Warn("cache config is disabled")
 		return
@@ -73,7 +73,7 @@ func (d *PreBuildArticleCache) build(item *entity.Article, t string) {
 	}
 
 	d.ctx.Log.Info(fmt.Sprintf("id:%d build success!", item.ID),
-		zap.String("type", t),
+		zap.String("action", action),
 		zap.String("title", item.Title),
 		zap.String("url", item.FullURL()))
 }

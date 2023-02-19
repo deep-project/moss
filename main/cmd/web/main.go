@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+
 	err := router.New().Run()
 	if err != nil {
 		panic(err)

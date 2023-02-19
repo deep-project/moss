@@ -95,16 +95,16 @@
       width: 120,
     },
     {
-      title: 'level',
-      dataIndex: 'level',
-      slotName:'level',
-      width: 100,
-    },
-    {
       title: 'file',
       dataIndex: 'file',
       ellipsis:true,
       width: 300,
+    },
+    {
+      title: 'level',
+      dataIndex: 'level',
+      slotName:'level',
+      width: 100,
     },
     {
       title: 'message',
@@ -116,6 +116,7 @@
       title: 'more',
       dataIndex: 'more',
       slotName:'more',
+      width: 400,
     },
   ]
 

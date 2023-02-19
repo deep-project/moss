@@ -69,3 +69,17 @@ export function useParseBytesSize(bytes){
     if(bytes < 1024*1024*1024*1024*1024) return [bytes / 1024 / 1024 / 1024 / 1024, "T"] // 不足1P
     return [bytes / 1024 / 1024 / 1024 / 1024 / 1024, "P"]
 }
+
+
+export function useIsMobile() {
+    if (window.screen.height < 750) {
+        return true
+    }
+    let mobileAgents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPod"];
+    for (let v = 0; v < mobileAgents.length; v++) {
+        if (navigator.userAgent.indexOf(mobileAgents[v]) > 0) {
+            return true
+        }
+    }
+    return false;
+}

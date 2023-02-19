@@ -58,7 +58,7 @@
     </a-space>
   </a-form-item>
 
-  <div style="max-width: 327px">
+  <div style="max-width: 527px">
     <a-alert class="mb-2">
       <a-space>
         <span>{{ $t('delimiter') }}:</span>
@@ -69,7 +69,7 @@
       </a-space>
     </a-alert>
 
-    <a-alert style="max-width:500px" type="warning">
+    <a-alert style="max-width:700px" type="warning">
       如果别名中可能包含某个分隔符，则路由中避免使用此分隔符，否则无法匹配路由。建议使用<a-tag class="ml-2">/</a-tag>
     </a-alert>
   </div>

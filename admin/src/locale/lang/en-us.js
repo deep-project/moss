@@ -146,10 +146,16 @@ export default {
     load:'Load',
     memory:'Memory',
     disk:'Disk',
+    onCreate:'On Create',
+    onUpdate:'On Update',
+
+
 
     GenerateSlug:'Auto Generate Slug',
     SaveArticleImages:'Save Article Images',
     DetectLinks:'Detect Links',
     GenerateDescription:'Auto Generate Description',
     PreBuildArticleCache:'Pre Build Article Cache',
+    PushToBaidu:'Push To Baidu',
+    MakeCarousel:'Make Carousel',
 }

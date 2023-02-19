@@ -2,9 +2,7 @@ package core
 
 import (
 	"errors"
-	"moss/infrastructure/general/constant"
 	"moss/infrastructure/support/cache/drivers"
-	"moss/infrastructure/utils/timex"
 	"time"
 )
 
@@ -32,18 +30,7 @@ type Driver struct {
 
 func NewDriver() *Driver {
 	return &Driver{
-		Badger: &drivers.Badger{
-			Path:                    constant.CacheDir,
-			MemTableSize:            128,
-			BaseTableSize:           4,
-			ValueLogFileSize:        512,
-			NumMemtables:            5,
-			NumLevelZeroTables:      5,
-			NumLevelZeroTablesStall: 10,
-			NumCompactors:           4,
-			GcInterval:              timex.Duration{Number: 1, Unit: timex.DurationHour},
-			GcDiscardRatio:          0.5,
-		},
+		Badger:    drivers.NewBadger(),
 		Redis:     &drivers.Redis{Addr: "127.0.0.1:6379"},
 		Memcached: &drivers.Memcached{Addr: "127.0.0.1:11211"},
 	}

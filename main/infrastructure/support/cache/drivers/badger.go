@@ -2,26 +2,52 @@ package drivers
 
 import (
 	"errors"
-	"github.com/dgraph-io/badger/v3"
+	"github.com/dgraph-io/badger/v2"
+	"github.com/dgraph-io/badger/v2/options"
+	"moss/infrastructure/general/constant"
 	"moss/infrastructure/utils"
 	"moss/infrastructure/utils/timex"
+	"path/filepath"
 	"sync"
 	"time"
 )
 
 type Badger struct {
-	Path                    string         `json:"path"`
-	MemTableSize            int64          `json:"memTableSize"`            // 内存表大小（兆）
-	BaseTableSize           int64          `json:"baseTableSize"`           // 数据表大小（兆）
-	ValueLogFileSize        int64          `json:"valueLogFileSize"`        // 日志文件大小（兆）
-	NumMemtables            int            `json:"numMemtables"`            // 内存表数量
-	NumLevelZeroTables      int            `json:"numLevelZeroTables"`      // 零级表数量
-	NumLevelZeroTablesStall int            `json:"numLevelZeroTablesStall"` // 零级表停滞数量
-	NumCompactors           int            `json:"numCompactors"`           // 压缩工数量
-	GcInterval              timex.Duration `json:"gcInterval"`              // 垃圾回收时间间隔
-	GcDiscardRatio          float64        `json:"gcDiscardRatio"`          // 垃圾回收丢弃比例
-	Handle                  *badger.DB     `json:"-"`
-	onceGC                  sync.Once
+	Path string `json:"path"`
+
+	// 值日志数据加载模式
+	// 0:FileIO 从文件加载
+	// 1:LoadToRAM 全部加载到内存
+	// 2:MemoryMap 映射加载到内存 (默认)
+	ValueLogLoadingMode options.FileLoadingMode `json:"valueLogLoadingMode"`
+	TableLoadingMode    options.FileLoadingMode `json:"tableLoadingMode"` // LSM树的加载模式
+	NumMemtables        int                     `json:"numMemtables"`     // 内存表数量
+	MaxTableSize        int64                   `json:"maxTableSize"`     // 内存表大小（兆）
+	ValueLogFileSize    int64                   `json:"valueLogFileSize"` // 日志文件大小（兆）
+	NumCompactors       int                     `json:"numCompactors"`    // 压缩工数量
+	Compression         options.CompressionType `json:"compression"`      // 压缩方式 0:none 1:snappy 2:zstd
+	SyncWrites          bool                    `json:"syncWrites"`       // 同步写 关闭可以提高性能
+	GcInterval          timex.Duration          `json:"gcInterval"`       // 垃圾回收时间间隔
+	GcDiscardRatio      float64                 `json:"gcDiscardRatio"`   // 垃圾回收丢弃比例
+
+	Handle *badger.DB `json:"-"`
+	onceGC sync.Once
+}
+
+func NewBadger() *Badger {
+	return &Badger{
+		Path:                filepath.Join(constant.CacheDir, "badger"),
+		ValueLogLoadingMode: options.MemoryMap,
+		TableLoadingMode:    options.MemoryMap,
+		NumMemtables:        2,
+		MaxTableSize:        16,
+		ValueLogFileSize:    256, // 设置512在1G内存下会占用过高
+		NumCompactors:       2,
+		Compression:         1,
+		SyncWrites:          false,
+		GcInterval:          timex.Duration{Number: 1, Unit: timex.DurationHour},
+		GcDiscardRatio:      0.7,
+	}
 }
 
 func (b *Badger) Init() (err error) {
@@ -29,18 +55,26 @@ func (b *Badger) Init() (err error) {
 	if b.Path == "" {
 		return errors.New("path undefined")
 	}
-	var opt = badger.DefaultOptions(b.Path)
 
-	opt.MemTableSize = (b.MemTableSize / 2) << 20
-	opt.BaseTableSize = (b.BaseTableSize / 2) << 20
-	opt.ValueLogFileSize = (b.ValueLogFileSize / 2) << 20
+	if b.NumCompactors <= 1 {
+		return errors.New("numCompactors must be > 1")
+	}
 
-	opt.NumMemtables = b.NumMemtables
-	opt.NumLevelZeroTables = b.NumLevelZeroTables
-	opt.NumLevelZeroTablesStall = b.NumLevelZeroTablesStall
-	opt.NumCompactors = b.NumCompactors
+	var opt = badger.DefaultOptions(b.Path).
+		WithTruncate(true).
+		WithLogger(nil).
+		WithLoadBloomsOnOpen(false). // 启动时延迟加载布隆过滤器
+		WithZSTDCompressionLevel(7). // zstd压缩等级
+		WithValueLogLoadingMode(b.ValueLogLoadingMode).
+		WithNumMemtables(b.NumMemtables).
+		WithNumLevelZeroTables(b.NumMemtables).
+		WithNumLevelZeroTablesStall(b.NumMemtables * 2).
+		WithMaxTableSize(b.MaxTableSize << 20).
+		WithValueLogFileSize((b.ValueLogFileSize / 2) << 20).
+		WithNumCompactors(b.NumCompactors).
+		WithCompression(b.Compression).
+		WithSyncWrites(b.SyncWrites)
 
-	opt.Logger = nil // 不打印日志
 	if b.Handle, err = badger.Open(opt); err != nil {
 		return err
 	}
@@ -135,7 +169,7 @@ func (b *Badger) prefix(bucket string) string {
 }
 
 func (b *Badger) undefined() error {
-	if b.Handle == nil || b.Handle.IsClosed() {
+	if b == nil || b.Handle == nil || b.Handle.IsClosed() {
 		return errors.New("client uninitialized or is closed")
 	}
 	return nil

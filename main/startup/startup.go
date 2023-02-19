@@ -44,6 +44,8 @@ func initPlugins() {
 		plugins.NewDetectLinks(),
 		plugins.NewGenerateDescription(),
 		plugins.NewPreBuildArticleCache(),
+		plugins.NewPushToBaidu(),
+		plugins.NewMakeCarousel(),
 
 		//inner.NewAddWater(),
 		//inner.NewTransferData(),

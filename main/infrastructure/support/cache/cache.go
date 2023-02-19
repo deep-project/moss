@@ -30,9 +30,12 @@ func Init() error {
 }
 
 func ActiveDriver() (res core.Cache, err error) {
+	if !config.Config.Cache.Enable {
+		return nil, errors.New("cache is disabled")
+	}
 	res, err = config.Config.Cache.Driver.Get(config.Config.Cache.ActiveDriver)
 	if res == nil {
-		err = errors.New("active driver is nil")
+		return nil, errors.New("active driver is nil")
 	}
 	return
 }
@@ -40,7 +43,7 @@ func ActiveDriver() (res core.Cache, err error) {
 func Get(bucket, key string) ([]byte, error) {
 	d, err := ActiveDriver()
 	if err != nil {
-		return nil, err
+		return []byte{}, err
 	}
 	return d.Get(bucket, key)
 }

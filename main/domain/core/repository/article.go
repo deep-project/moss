@@ -139,9 +139,15 @@ func (r *ArticleRepo) List(ctx *context.Context) (res []entity.ArticleBase, err 
 	return
 }
 
+// ListExistThumbnail 调用文章列表
+func (r *ArticleRepo) ListExistThumbnail(ctx *context.Context) (res []entity.ArticleBase, err error) {
+	err = db.DB.Model(&entity.ArticleBase{}).Where("thumbnail !=''").Scopes(gormx.Context(ctx)).Find(&res).Error
+	return
+}
+
 // ListByIds 根据id调用文章列表
 func (r *ArticleRepo) ListByIds(ctx *context.Context, ids []int) (res []entity.ArticleBase, err error) {
-	err = db.DB.Model(&entity.ArticleBase{}).Scopes(gormx.Context(ctx), gormx.WhereIds(ids)).Find(&res).Error
+	err = db.DB.Model(&entity.ArticleBase{}).Scopes(gormx.WhereIds(ids), gormx.Context(ctx)).Find(&res).Error
 	return
 }
 
@@ -160,6 +166,17 @@ func (r *ArticleRepo) ListAfterCreateTime(ctx *context.Context, t int64) (res []
 // ListBeforeCreateTime 根据创建时间调用列表
 func (r *ArticleRepo) ListBeforeCreateTime(ctx *context.Context, t int64) (res []entity.ArticleBase, err error) {
 	err = db.DB.Model(&entity.ArticleBase{}).Scopes(gormx.WhereCreateTimeBefore(t), gormx.Context(ctx)).Find(&res).Error
+	return
+}
+
+// ListDetail 调用详情表文章列表
+func (r *ArticleRepo) ListDetail(ctx *context.Context) (res []entity.ArticleDetail, err error) {
+	err = db.DB.Model(&entity.ArticleDetail{}).Scopes(gormx.Context(ctx)).Find(&res).Error
+	return
+}
+
+func (r *ArticleRepo) ListDetailByIds(ctx *context.Context, ids []int) (res []entity.ArticleDetail, err error) {
+	err = db.DB.Model(&entity.ArticleDetail{}).Where("article_id in ?", ids).Scopes(gormx.Context(ctx)).Find(&res).Error
 	return
 }
 

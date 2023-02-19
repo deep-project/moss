@@ -228,6 +228,13 @@ func (s *ArticleService) List(ctx *context.Context) (res []entity.ArticleBase, e
 	return
 }
 
+// ListExistThumbnail 调用有缩略图文章列表
+func (s *ArticleService) ListExistThumbnail(ctx *context.Context) (res []entity.ArticleBase, err error) {
+	res, err = repository.Article.ListExistThumbnail(ctx)
+	s.listAfterEvents(res)
+	return
+}
+
 // ListByIds 根据id调用文章列表
 func (s *ArticleService) ListByIds(ctx *context.Context, ids []int) (res []entity.ArticleBase, err error) {
 	if len(ids) == 0 {
@@ -282,6 +289,20 @@ func (s *ArticleService) PseudorandomList(ctx *context.Context) (res []entity.Ar
 	return s.ListByIds(ctx, pseudorandomIds(maxID, ctx.Limit))
 }
 
+// ListDetail 调用详情表文章列表
+func (s *ArticleService) ListDetail(ctx *context.Context) (res []entity.ArticleDetail, err error) {
+	res, err = repository.Article.ListDetail(ctx)
+	return
+}
+
+func (s *ArticleService) ListDetailByIds(ctx *context.Context, ids []int) (res []entity.ArticleDetail, err error) {
+	if len(ids) == 0 {
+		return
+	}
+	res, err = repository.Article.ListDetailByIds(ctx, ids)
+	return
+}
+
 // CountByCategoryID 根据分类ID统计文章数
 func (s *ArticleService) CountByCategoryID(categoryID int) (int64, error) {
 	return repository.Article.CountByCategoryID(categoryID)
@@ -304,4 +325,24 @@ func (s *ArticleService) CountToday() (int64, error) {
 // CountYesterday 统计昨日添加数量
 func (s *ArticleService) CountYesterday() (int64, error) {
 	return repository.Article.CountYesterday()
+}
+
+func (s *ArticleService) MergeBaseListAndDetailList(v1 []entity.ArticleBase, v2 []entity.ArticleDetail) (res []entity.Article) {
+	for _, v := range v1 {
+		detail, found := s.FindDetailListByID(v2, v.ID)
+		if !found {
+			continue
+		}
+		res = append(res, entity.Article{ArticleBase: v, ArticleDetail: detail})
+	}
+	return
+}
+
+func (s *ArticleService) FindDetailListByID(list []entity.ArticleDetail, id int) (res entity.ArticleDetail, found bool) {
+	for _, v := range list {
+		if v.ArticleID == id {
+			return v, true
+		}
+	}
+	return res, false
 }

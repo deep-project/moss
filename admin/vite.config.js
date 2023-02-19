@@ -45,7 +45,7 @@ export default defineConfig({
         name:"moss",
         short_name:"moss",
         description: 'Moss Administration',
-        theme_color: '#ffffff',
+        //theme_color: '#ffffff',
         icons: [
           {
             src: 'icon_192.png',

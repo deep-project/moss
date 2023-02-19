@@ -23,7 +23,7 @@ const columns = [
     title: t('name'),
     dataIndex: 'name',
     filterable: searchFilter,
-    minWidth: 300,
+    width: 300,
     slotName:'title',
   },
   {
