@@ -4,9 +4,11 @@ import (
 	"moss/domain/core/entity"
 )
 
-// ArticleCreate 文章创建模型，可直接创建tags
-type ArticleCreate struct {
+// ArticlePost 文章提交模型，可直接创建tags
+type ArticlePost struct {
 	entity.Article
 	Tags         []string `json:"tags"`
 	CategoryName string   `json:"category_name"`
+	UniqueTitle  bool     `json:"unique_title"`
+	UniqueSource bool     `json:"unique_source"`
 }

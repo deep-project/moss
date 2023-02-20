@@ -56,7 +56,7 @@ func BodyToWhere(body []byte) (res context.Where, err error) {
 }
 
 type curdModel interface {
-	entity2.Article | entity2.Category | entity2.Tag | entity2.Link | appDTO.ArticleCreate
+	entity2.Article | entity2.Category | entity2.Tag | entity2.Link | appDTO.ArticlePost
 }
 
 func BodyToCurdModel[M curdModel](body []byte) (_ *M, err error) {

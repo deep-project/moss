@@ -259,7 +259,9 @@
     else if(modelName === 'tag')rule = store.config.router.tag_rule
     let path = rule.replace('{slug}',slug)
     if(path.indexOf('/')!==0) path = "/" + path
-    return store.config.site.url + path
+    let siteURL = store.config.site.url
+    if (siteURL.endsWith('/'))  siteURL = siteURL.slice(0, -1);
+    return siteURL + path
   }
 
   const { run:runLinkStatus } = useRequest(linkStatus, {manual:true})

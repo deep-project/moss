@@ -5,7 +5,6 @@ import (
 	"moss/api/web/mapper"
 	appDTO "moss/application/dto"
 	appService "moss/application/service"
-	"moss/domain/core/entity"
 	"moss/domain/core/service"
 )
 
@@ -34,19 +33,19 @@ func ArticleGet(ctx *fiber.Ctx) error {
 }
 
 func ArticleCreate(ctx *fiber.Ctx) error {
-	obj, err := mapper.BodyToCurdModel[appDTO.ArticleCreate](ctx.Body())
+	obj, err := mapper.BodyToCurdModel[appDTO.ArticlePost](ctx.Body())
 	if err != nil {
 		return ctx.JSON(mapper.MessageResult(err))
 	}
-	return ctx.JSON(mapper.MessageResultData(obj, appService.CreateArticle(obj)))
+	return ctx.JSON(mapper.MessageResultData(obj, appService.CreatePost("create", obj)))
 }
 
 func ArticleUpdate(ctx *fiber.Ctx) error {
-	obj, err := mapper.BodyToCurdModel[entity.Article](ctx.Body())
+	obj, err := mapper.BodyToCurdModel[appDTO.ArticlePost](ctx.Body())
 	if err != nil {
 		return ctx.JSON(mapper.MessageResult(err))
 	}
-	return ctx.JSON(mapper.MessageResult(service.Article.Update(obj)))
+	return ctx.JSON(mapper.MessageResultData(obj, appService.CreatePost("update", obj)))
 }
 
 func ArticleDelete(ctx *fiber.Ctx) error {
@@ -71,6 +70,10 @@ func ArticleExistsSlug(ctx *fiber.Ctx) error {
 
 func ArticleExistsTitle(ctx *fiber.Ctx) error {
 	return ctx.JSON(mapper.MessageResultData(service.Article.ExistsTitle(string(ctx.Body()))))
+}
+
+func ArticleExistsSource(ctx *fiber.Ctx) error {
+	return ctx.JSON(mapper.MessageResultData(service.Article.ExistsSource(string(ctx.Body()))))
 }
 
 func ArticleGetTags(ctx *fiber.Ctx) error {

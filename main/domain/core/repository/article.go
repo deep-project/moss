@@ -6,6 +6,7 @@ import (
 	"moss/domain/core/repository/context"
 	"moss/domain/core/repository/gormx"
 	"moss/domain/core/utils"
+	"moss/infrastructure/general/message"
 	"moss/infrastructure/persistent/db"
 	"moss/infrastructure/utils/errorx"
 )
@@ -19,8 +20,11 @@ func (r *ArticleRepo) MigrateTable() error {
 	return db.DB.AutoMigrate(&entity.ArticleBase{}, &entity.ArticleDetail{})
 }
 
-func (r *ArticleRepo) Create(item *entity.Article) error {
+func (r *ArticleRepo) Create(ctx *context.ArticlePost, item *entity.Article) error {
 	return db.DB.Transaction(func(tx *gorm.DB) error {
+		if err := r.checkArticlePost(tx, ctx, item); err != nil {
+			return err
+		}
 		if err := tx.Create(&item.ArticleBase).Error; err != nil {
 			return err
 		}
@@ -29,9 +33,12 @@ func (r *ArticleRepo) Create(item *entity.Article) error {
 	})
 }
 
-func (r *ArticleRepo) CreateInBatches(items []entity.Article) (err error) {
+func (r *ArticleRepo) CreateInBatches(ctx *context.ArticlePost, items []entity.Article) (err error) {
 	return db.DB.Transaction(func(tx *gorm.DB) error {
 		for k := range items {
+			if err := r.checkArticlePost(tx, ctx, &items[k]); err != nil {
+				return err
+			}
 			if err := tx.Create(&items[k].ArticleBase).Error; err != nil {
 				return err
 			}
@@ -44,14 +51,39 @@ func (r *ArticleRepo) CreateInBatches(items []entity.Article) (err error) {
 	})
 }
 
-func (r *ArticleRepo) Update(item *entity.Article) error {
+func (r *ArticleRepo) Update(ctx *context.ArticlePost, item *entity.Article) error {
 	return db.DB.Transaction(func(tx *gorm.DB) error {
+		if err := r.checkArticlePost(tx, ctx, item); err != nil {
+			return err
+		}
 		if err := tx.Select("*").Omit("id").Where("id = ?", item.ArticleBase.ID).Updates(&item.ArticleBase).Error; err != nil {
 			return err
 		}
 		item.ArticleDetail.ArticleID = item.ArticleBase.ID
 		return tx.Select("*").Omit("article_id").Where("article_id = ?", item.ArticleDetail.ArticleID).Updates(&item.ArticleDetail).Error
 	})
+}
+
+// 提交时 根据articlePost中的设置判断是否返回错误
+func (r *ArticleRepo) checkArticlePost(tx *gorm.DB, ctx *context.ArticlePost, item *entity.Article) error {
+	var id int
+	if ctx.UniqueTitle && item.Title != "" {
+		if err := tx.Model(&entity.ArticleBase{}).Where("title = ?", item.Title).Limit(1).Pluck("id", &id).Error; err != nil {
+			return err
+		}
+		if id > 0 {
+			return message.ErrTitleAlreadyExists
+		}
+	}
+	if ctx.UniqueSource && item.Source != "" {
+		if err := tx.Model(&entity.ArticleDetail{}).Where("source = ?", item.Source).Limit(1).Pluck("article_id", &id).Error; err != nil {
+			return err
+		}
+		if id > 0 {
+			return message.ErrSourceAlreadyExists
+		}
+	}
+	return nil
 }
 
 func (r *ArticleRepo) Delete(id int) error {
@@ -119,6 +151,11 @@ func (r *ArticleRepo) CountYesterday() (res int64, err error) {
 
 func (r *ArticleRepo) GetIdByTitle(title string) (id int, err error) {
 	err = db.DB.Model(entity.ArticleBase{}).Where("title = ?", title).Limit(1).Pluck("id", &id).Error
+	return
+}
+
+func (r *ArticleRepo) GetIdBySource(source string) (id int, err error) {
+	err = db.DB.Model(entity.ArticleDetail{}).Where("source = ?", source).Limit(1).Pluck("article_id", &id).Error
 	return
 }
 

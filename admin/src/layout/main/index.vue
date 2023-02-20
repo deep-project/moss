@@ -22,9 +22,19 @@
   import {ref, computed, onMounted, watch} from "vue";
   import {configList} from "@/api/index.js";
   import {useRequest} from "vue-request";
+  import {useRoute, useRouter} from 'vue-router'
 
   const store = useStore()
-  const showLogin = computed(()=>!store.token)
+  const router = useRouter()
+  const route = useRoute()
+
+  const showLogin = computed(()=>{
+    if(!store.token && route.name === "dashboard"){
+      router.push({name:"login"}) // 如果在控制台失去权限，直接跳转到登录页，防止pwa授权后无法更新页面
+      return
+    }
+    return !store.token
+  })
   const layout = ref()
   const { height } = useElementSize(layout)
 

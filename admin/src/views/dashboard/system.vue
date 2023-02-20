@@ -1,7 +1,7 @@
 <template>
   <a-card class="w-full h-full" :title="$t('system')" :bordered="false">
 
-    <a-grid :cols="{ xs: 3, sm: 3, md: 5, lg:4, xl:5 }" :rowGap="20" class="text-center">
+    <a-grid :cols="{ xs: 3, sm: 3, md: 3, lg:3, xl:5 }" :rowGap="20" class="text-center">
 <!--      <a-grid-item v-if="loadDec > -1">-->
 <!--        <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="dec(load)" status='warning' :color="color" />-->
 <!--        <div class="title">{{$t('load')}}</div>-->

@@ -17,6 +17,7 @@ export const article = computed(()=>[
     { title: 'Delete', method: 'POST', url: '/article/delete/:id'},
     { title: 'Exists Slug', method: 'POST', url: '/article/existsSlug'},
     { title: 'Exists Title', method: 'POST', url: '/article/existsTitle'},
+    { title: 'Exists Source', method: 'POST', url: '/article/existsSource'},
 ])
 
 function articlePayload(t){
@@ -30,12 +31,12 @@ function articlePayload(t){
         {field:'thumbnail',type:'string',description:$t('thumbnail')},
         {field:'keywords',type:'string',description:$t('keywords')},
         {field:'description',type:'string',description:$t('description')},
+        {field:'tags',type: '[]string',description: $t('tags')},
+        {field:'category_name',type: 'string',description: $t('category')},
+        {field:'unique_title',type: 'bool',description: 'title must be unique'},
+        {field:'unique_source',type: 'bool',description: 'source must be unique'},
     ]
     if(t==='update') res.unshift({field:'id',type:'int',required:true,description:$t('id')})
-    if(t==='create') res.push(
-        {field:'tags',type: '[]string',description: $t('tags')},
-        {field:'category_name',type: 'string',description: $t('category')}
-        )
     return res
 }
 
