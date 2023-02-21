@@ -3,9 +3,9 @@ package mapper
 import (
 	"encoding/json"
 	"moss/api/web/dto"
-	appDTO "moss/application/dto"
 	"moss/domain/config"
-	entity2 "moss/domain/core/entity"
+	"moss/domain/core/aggregate"
+	"moss/domain/core/entity"
 	"moss/domain/core/repository/context"
 )
 
@@ -56,7 +56,7 @@ func BodyToWhere(body []byte) (res context.Where, err error) {
 }
 
 type curdModel interface {
-	entity2.Article | entity2.Category | entity2.Tag | entity2.Link | appDTO.ArticlePost
+	entity.Article | entity.Category | entity.Tag | entity.Link | aggregate.ArticlePost | entity.Store
 }
 
 func BodyToCurdModel[M curdModel](body []byte) (_ *M, err error) {

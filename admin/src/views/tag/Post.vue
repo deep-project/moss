@@ -36,14 +36,13 @@
   import {computed, inject} from "vue";
   import {useStore} from "@/store/index.js";
   import {useOpenLink} from '@/hooks/utils.js'
+  import {useAppendSiteURL} from "@/hooks/app/index.js";
 
   const record = inject('record')
   const createTime = computed(()=>record.value.create_time*1000)
   const store = useStore()
 
   const slugURL = computed(()=>{
-    let path =  store.config.router.tag_rule.replace('{slug}', record.value.slug)
-    if(path.indexOf('/')!==0) path = "/" + path
-    return store.config.site.url + path
+    return useAppendSiteURL(store, store.config.router.tag_rule.replace('{slug}', record.value.slug))
   })
 </script>

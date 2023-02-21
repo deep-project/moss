@@ -90,14 +90,14 @@ func (s *ArticleService) GetBySlug(slug string) (res *entity.Article, err error)
 	return
 }
 
-func (s *ArticleService) Save(ctx *context.ArticlePost, item *entity.Article) (err error) {
+func (s *ArticleService) Save(item *entity.Article) (err error) {
 	if item.ID == 0 {
-		return s.Create(ctx, item)
+		return s.Create(item)
 	}
-	return s.Update(ctx, item)
+	return s.Update(item)
 }
 
-func (s *ArticleService) Create(ctx *context.ArticlePost, item *entity.Article) (err error) {
+func (s *ArticleService) Create(item *entity.Article) (err error) {
 	for _, e := range s.CreateBeforeEvents {
 		if err = e.ArticleCreateBefore(item); err != nil {
 			return
@@ -109,7 +109,7 @@ func (s *ArticleService) Create(ctx *context.ArticlePost, item *entity.Article) 
 	if item.CreateTime == 0 {
 		item.CreateTime = time.Now().Unix()
 	}
-	if err = repository.Article.Create(ctx, item); err != nil {
+	if err = repository.Article.Create(item); err != nil {
 		return
 	}
 	for _, e := range s.CreateAfterEvents {
@@ -119,7 +119,7 @@ func (s *ArticleService) Create(ctx *context.ArticlePost, item *entity.Article) 
 }
 
 // CreateInBatches 批量创建
-func (s *ArticleService) CreateInBatches(ctx *context.ArticlePost, items []entity.Article) (err error) {
+func (s *ArticleService) CreateInBatches(items []entity.Article) (err error) {
 	for k := range items {
 		for _, e := range s.CreateBeforeEvents {
 			if err = e.ArticleCreateBefore(&items[k]); err != nil {
@@ -133,7 +133,7 @@ func (s *ArticleService) CreateInBatches(ctx *context.ArticlePost, items []entit
 			items[k].CreateTime = time.Now().Unix()
 		}
 	}
-	if err = repository.Article.CreateInBatches(ctx, items); err != nil {
+	if err = repository.Article.CreateInBatches(items); err != nil {
 		return
 	}
 	for _, item := range items {
@@ -144,7 +144,7 @@ func (s *ArticleService) CreateInBatches(ctx *context.ArticlePost, items []entit
 	return
 }
 
-func (s *ArticleService) Update(ctx *context.ArticlePost, item *entity.Article) (err error) {
+func (s *ArticleService) Update(item *entity.Article) (err error) {
 	if item.ID == 0 {
 		return message.ErrIdRequired
 	}
@@ -156,7 +156,7 @@ func (s *ArticleService) Update(ctx *context.ArticlePost, item *entity.Article) 
 	if err = s.postCheck(item); err != nil {
 		return
 	}
-	if err = repository.Article.Update(ctx, item); err != nil {
+	if err = repository.Article.Update(item); err != nil {
 		return
 	}
 	for _, e := range s.UpdateAfterEvents {
@@ -212,14 +212,6 @@ func (s *ArticleService) ExistsTitle(title string) (bool, error) {
 		return false, message.ErrTitleRequired
 	}
 	id, err := repository.Article.GetIdByTitle(title)
-	return id > 0, err
-}
-
-func (s *ArticleService) ExistsSource(source string) (bool, error) {
-	if source == "" {
-		return false, message.ErrSourceRequired
-	}
-	id, err := repository.Article.GetIdBySource(source)
 	return id > 0, err
 }
 
@@ -333,6 +325,11 @@ func (s *ArticleService) CountToday() (int64, error) {
 // CountYesterday 统计昨日添加数量
 func (s *ArticleService) CountYesterday() (int64, error) {
 	return repository.Article.CountYesterday()
+}
+
+// CountLastFewDays 统计最近几日的
+func (s *ArticleService) CountLastFewDays(n int) (int64, error) {
+	return repository.Article.CountLastFewDays(n)
 }
 
 func (s *ArticleService) MergeBaseListAndDetailList(v1 []entity.ArticleBase, v2 []entity.ArticleDetail) (res []entity.Article) {

@@ -21,6 +21,7 @@ export const categoryTree = ()=> useGetData('/category/tree')
 export const tagsByArticleID = (id) => useGetData(`/tag/list/article/${id}`);
 export const tagGetByIds = (ids) => usePostData(`/tag/getByIds`, ids);
 export const linkStatus = (id,status) => usePostData(`/link/status/${id}`, {status:status});
+export const storePost = (id) => usePost(`/store/post/${id}`);
 
 
 

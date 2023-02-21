@@ -30,4 +30,7 @@ func MigrateTable() {
 		log.Error("migrate link table error", log.Err(err))
 	}
 
+	if err := Store.MigrateTable(); err != nil {
+		log.Error("migrate store table error", log.Err(err))
+	}
 }

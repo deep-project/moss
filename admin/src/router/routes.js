@@ -2,7 +2,7 @@
 
 
 import layoutMain from '@/layout/main/index.vue'
-import { IconNav,IconDashboard,IconLayers,IconFile,IconTag,IconRelation,IconComputer,IconSettings } from '@arco-design/web-vue/es/icon';
+import { IconNav,IconDashboard,IconLayers,IconFile,IconTag,IconRelation,IconComputer,IconSettings,IconStorage } from '@arco-design/web-vue/es/icon';
 
 export default [
     {
@@ -50,6 +50,12 @@ export default [
                 name: 'links',
                 meta: {icon:IconRelation},
                 component: () => import('@/views/link/index.vue'),
+            },
+            {
+                path: '/storehouse',
+                name: 'storehouse',
+                meta: {icon:IconStorage},
+                component: () => import('@/views/store/index.vue'),
             },
             {
                 path: '/logs',

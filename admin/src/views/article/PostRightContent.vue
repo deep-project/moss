@@ -25,15 +25,7 @@
     </a-form-item>
 
     <a-form-item field="category_id" :label="$t('category')">
-      <a-input-group class="w-full overflow-hidden">
-        <a-input-number class="input" v-model="record.category_id" hide-button allow-clear :style="{width:'80px'}" placeholder="id" />
-        <a-cascader :options="treeData"
-                    v-model="record.category_id"
-                    :loading="loadingTreeData"
-                    :field-names="{value: 'id', label: 'name'}"
-                    check-strictly expand-child :placeholder="$t('select')"
-                    :style="{width:'calc(100% - 80px)',backgroundColor:'var(--color-bg-5)'}"></a-cascader>
-        </a-input-group>
+      <SelectCategory v-model="record.category_id" :cascader-style="{backgroundColor:'var(--color-bg-5)'}" />
     </a-form-item>
 
     <a-form-item :label="$t('tag')">
@@ -51,11 +43,7 @@
     <a-form-item field="views" :label="$t('views')">
       <a-input-number class="input" v-model="record.views" :min="0" />
     </a-form-item>
-
-    <a-form-item field="source" :label="$t('source')">
-      <a-input class="input" v-model="record.source" :max-length="250" allow-clear show-word-limit />
-    </a-form-item>
-
+  
     <a-form-item field="create_time" :label="$t('createTime')">
       <a-date-picker class="w-full input" style="background-color: var(--color-bg-5);"  v-model="createTime" value-format="timestamp" show-time @change="(val)=>record.create_time =parseInt(val / 1000)" />
     </a-form-item>
@@ -84,11 +72,12 @@
 <script setup>
   import {computed, inject} from "vue";
   import UploadImgInput from '@/components/utils/UploadImgInput.vue'
-  import {useRequest} from "vue-request";
-  import {categoryTree} from "@/api/index.js";
   import Tag from "./com/Tag.vue"
   import {useStore} from "@/store/index.js";
   import {useOpenLink} from '@/hooks/utils.js'
+  import {useAppendSiteURL} from "@/hooks/app/index.js";
+  import SelectCategory from "@/components/data/SelectCategory.vue"
+
 
   const record = inject('record')
   const createTime = computed(()=>record.value.create_time*1000)
@@ -99,13 +88,7 @@
     record.value.extends.push({key:'',value:''})
   }
 
-  const {data:treeData,loading:loadingTreeData} = useRequest(categoryTree);
-
-  const slugURL = computed(()=>{
-    let path =  store.config.router.article_rule.replace('{slug}', record.value.slug)
-    if(path.indexOf('/')!==0) path = "/" + path
-    return store.config.site.url + path
-  })
+  const slugURL = computed(()=> useAppendSiteURL(store, store.config.router.article_rule.replace('{slug}', record.value.slug)))
 
   function formatLabel(val){
     console.log(val)
@@ -121,8 +104,5 @@
   }
   .input_extends{
     border-color: var(--color-border-3);
-  }
-  :deep(.arco-select-view-value){
-    font-size:12px !important;;
   }
 </style>

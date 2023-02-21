@@ -17,7 +17,6 @@ export const article = computed(()=>[
     { title: 'Delete', method: 'POST', url: '/article/delete/:id'},
     { title: 'Exists Slug', method: 'POST', url: '/article/existsSlug'},
     { title: 'Exists Title', method: 'POST', url: '/article/existsTitle'},
-    { title: 'Exists Source', method: 'POST', url: '/article/existsSource'},
 ])
 
 function articlePayload(t){
@@ -31,10 +30,9 @@ function articlePayload(t){
         {field:'thumbnail',type:'string',description:$t('thumbnail')},
         {field:'keywords',type:'string',description:$t('keywords')},
         {field:'description',type:'string',description:$t('description')},
-        {field:'tags',type: '[]string',description: $t('tags')},
-        {field:'category_name',type: 'string',description: $t('category')},
-        {field:'unique_title',type: 'bool',description: 'title must be unique'},
-        {field:'unique_source',type: 'bool',description: 'source must be unique'},
+        {field:'tags',type: '[]string',description: $t('tags'), example:"['tag1','tag2','tag3']"},
+        {field:'category_name',type: 'string',description: $t('category') + ' (If the category id is undefined)'},
+        {field:'extends',type:'json',description:$t('extends'), example:"{'source':'google.com','author':'Lucy'}"},
     ]
     if(t==='update') res.unshift({field:'id',type:'int',required:true,description:$t('id')})
     return res
@@ -110,6 +108,36 @@ function linkPayload(t){
         {field:'expire_time',type:'timestamp',description:$t('expireTime')},
         {field:'detect',type:'bool',description:$t('detect')},
         {field:'detect_delay',type:'int',description:$t('detect') + ' ' + $t('delay') + '('+$t('minutes')+')'},
+    ]
+    if(t==='update') res.unshift({field:'id',type:'int',required:true,description:$t('id')})
+    return res
+}
+
+
+// store
+export const store = computed(()=>[
+    {title: 'Create', method: 'POST', url: '/store/create', payload:storePayload()},
+    {title: 'Update', method: 'POST', url: '/store/update', payload:storePayload('update')},
+    {title: 'Get', method: 'GET', url: '/store/get/:id'},
+    {title: 'List', method: 'POST', url: '/store/list', payload:getListPayLoad},
+    {title: 'Delete', method: 'POST', url: '/store/delete/:id'},
+    {title: $t('publish'), method: 'POST', url: '/store/post/:id'},
+])
+
+function storePayload(t){
+    let res = [
+        {field:'title',type:'string', required:true, description:$t('title')},
+        {field:'content',type:'string', required:true, description:$t('content')},
+        {field:'category_id',type:'int',description:'category id'},
+        {field:'category_name',type: 'string',description: $t('category') + ' (If the category id is undefined)'},
+        {field:'tags',type: '[]string',description: $t('tags'), example:"['tag1','tag2','tag3']"},
+        {field:'slug',type:'string',description:$t('slug')},
+        {field:'thumbnail',type:'string',description:$t('thumbnail')},
+        {field:'views',type:'int',description:$t('views')},
+        {field:'create_time',type:'timestamp',description:$t('createTime')},
+        {field:'description',type:'string',description:$t('description')},
+        {field:'keywords',type:'string',description:$t('keywords')},
+        {field:'extends',type:'json',description:$t('extends'), example:"{'source':'google.com','author':'Lucy'}"},
     ]
     if(t==='update') res.unshift({field:'id',type:'int',required:true,description:$t('id')})
     return res

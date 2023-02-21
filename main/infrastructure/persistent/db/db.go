@@ -97,3 +97,15 @@ func getPostgresDbSize() int64 {
 	DB.Raw(`select pg_database_size(?) as size`, DB.Migrator().CurrentDatabase()).Scan(&r)
 	return r.Size
 }
+
+func RandomOrder() string {
+	switch conf.DB {
+	case conf.DbDriverMysql:
+		return "rand()"
+	case conf.DbDriverPostgresql:
+		return "random()"
+	case conf.DbDriverSqlite:
+		return "random()"
+	}
+	return ""
+}

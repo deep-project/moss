@@ -87,8 +87,20 @@ export function updateOption(visiblePost, data, rowIndex, postRecord,successCall
     }
 }
 
+export function storePostOption(refreshList){
+    return {
+        manual:true,
+        onSuccess:(resp)=>{
+            if(resp.success) {
+                Message.success(t('message.success',[t('publish')]))
+                refreshList()
+            }
+        }
+    }
+}
+
 function postFail(resp){
     if(resp.message.toLowerCase().indexOf("unique") > -1 && resp.message.toLowerCase().indexOf("slug") > -1){
-        Message.error(t('message.exists',[$t('slug')]))
+        Message.error(t('message.exists',[t('slug')]))
     }
 }

@@ -12,11 +12,14 @@
     <a-tab-pane key="link" :title="$t('link')">
       <Item :data="link" />
     </a-tab-pane>
+    <a-tab-pane key="storehouse" :title="$t('storehouse')">
+      <Item :data="store" />
+    </a-tab-pane>
   </a-tabs>
 
 </template>
 
 <script setup>
   import Item from "./Item.vue";
-  import {article,category,tag,link} from "./data"
+  import {article,category,tag,link, store} from "./data"
 </script>

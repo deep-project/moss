@@ -1,28 +1,26 @@
 <template>
   <a-card class="w-full h-full" :title="$t('system')" :bordered="false">
+      <a-grid :cols="{ xs: 3, sm: 4, md: 5, lg:6, xl:7, xxl:8 }" :colGap="12" :rowGap="18" class="text-center">
+  <!--      <a-grid-item v-if="loadDec > -1">-->
+  <!--        <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="dec(load)" status='warning' :color="color" />-->
+  <!--        <div class="title">{{$t('load')}}</div>-->
+  <!--      </a-grid-item>-->
+        <a-grid-item>
+            <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="dec(cpu)" status='warning' :color="color" />
+            <div class="title">cpu</div>
+        </a-grid-item>
+        <a-grid-item>
+            <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="dec(memory)" status='warning' :color="color" />
+            <div class="title">{{$t('memory')}}</div>
+        </a-grid-item>
 
-    <a-grid :cols="{ xs: 3, sm: 3, md: 3, lg:3, xl:5 }" :rowGap="20" class="text-center">
-<!--      <a-grid-item v-if="loadDec > -1">-->
-<!--        <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="dec(load)" status='warning' :color="color" />-->
-<!--        <div class="title">{{$t('load')}}</div>-->
-<!--      </a-grid-item>-->
-      <a-grid-item>
-          <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="dec(cpu)" status='warning' :color="color" />
-          <div class="title">cpu</div>
-      </a-grid-item>
-      <a-grid-item>
-          <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="dec(memory)" status='warning' :color="color" />
-          <div class="title">{{$t('memory')}}</div>
-      </a-grid-item>
+        <a-grid-item v-for="(item,index) in disks">
+            <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="dec(item)" status='warning' :color="color" />
+            <div class="title">{{$t('disk') + (disks.length > 1 ? (index+1):'')}}</div>
+        </a-grid-item>
 
-      <a-grid-item v-for="(item,index) in disks">
-          <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="dec(item)" status='warning' :color="color" />
-          <div class="title">{{$t('disk') + (disks.length > 1 ? (index+1):'')}}</div>
-      </a-grid-item>
-
-    </a-grid>
-
-  </a-card>
+      </a-grid>
+    </a-card>
 </template>
 
 

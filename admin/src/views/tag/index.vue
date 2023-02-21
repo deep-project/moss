@@ -1,5 +1,5 @@
 <template>
-  <Table modelName="tag" :columns="columns" order="id desc" postWidth="470px" formStyle="padding-right: 10px" formLayout="horizontal" :postComponent="postComponent" />
+  <Table modelName="tag" :columns="columns" order="id desc" postWidth="560px" formStyle="padding-right: 10px" formLayout="horizontal" :postComponent="postComponent" />
 </template>
 
 <script setup>
@@ -30,7 +30,7 @@ const columns = [
     title:  t('slug'),
     dataIndex: 'slug',
     filterable: searchFilter,
-    width: 200,
+    width: 140,
     ellipsis:true,
     tooltip:true,
   },
@@ -39,6 +39,7 @@ const columns = [
     dataIndex: 'create_time',
     slotName:'time',
     width: 140,
+    align:'right',
   },
 ];
 </script>

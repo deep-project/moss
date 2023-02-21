@@ -14,10 +14,7 @@
   </a-form-item>
 
   <a-form-item field="parent_id" :label="$t('parentCategory')">
-    <a-input-group class="w-full">
-      <a-input-number v-model="record.parent_id" hide-button allow-clear style="width: 130px;" placeholder="id" />
-      <a-cascader :options="treeData" v-model="record.parent_id" :loading="loadingTreeData" :field-names="{value: 'id', label: 'name'}" check-strictly :placeholder="$t('select')" />
-    </a-input-group>
+    <SelectCategory v-model="record.parent_id" :disabled-id="record.id" />
   </a-form-item>
 
   <a-form-item field="title" :label="$t('title')">
@@ -41,45 +38,21 @@
 
 <script setup>
   import {computed, inject} from "vue";
-  import {useRequest} from "vue-request";
-  import {categoryTree} from "@/api/index.js";
   import {useStore} from "@/store/index.js";
   import {useOpenLink} from '@/hooks/utils.js'
+  import {useAppendSiteURL} from "@/hooks/app/index.js";
+  import SelectCategory from "@/components/data/SelectCategory.vue"
 
   const record = inject('record')
   const createTime = computed(()=>record.value.create_time*1000)
-  const {data:treeData,loading:loadingTreeData} = useRequest(categoryTree,{onSuccess:()=>{treeDataDisabled(treeData.value)}});
+
   const store = useStore()
 
   const slugURL = computed(()=>{
-    let path =  store.config.router.category_rule.replace('{slug}', record.value.slug)
-    if(path.indexOf('/')!==0) path = "/" + path
-    return store.config.site.url + path
+    return useAppendSiteURL(store, store.config.router.category_rule.replace('{slug}', record.value.slug))
   })
 
 
-  // treeData禁用自身类目和其子类目
-  function treeDataDisabled(list){
-    for(let i in list){
-      if(list[i].id === record.value.id){
-        list[i].disabled = true
-        //treeDataDisabledChildren(list[i].children)
-      }else{
-        treeDataDisabled(list[i].children)
-      }
-    }
-  }
-
-  // 禁用全部子分类
-  // 在属性选择器情况下，子分类依然会显示，使用此方法禁用子分类
-  // function treeDataDisabledChildren(list){
-  //   if(list){
-  //     for(let i in list){
-  //       list[i].disabled = true
-  //       treeDataDisabledChildren(list[i].children)
-  //     }
-  //   }
-  // }
 
 </script>
 

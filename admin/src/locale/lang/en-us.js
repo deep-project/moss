@@ -42,7 +42,6 @@ export default {
     views:'Views',
     createTime:'Create Time',
     content:'Content',
-    source:'Source',
     extends:'Extends',
     add:'Add',
     app:'App',
@@ -148,6 +147,12 @@ export default {
     disk:'Disk',
     onCreate:'On Create',
     onUpdate:'On Update',
+    storehouse:'Storehouse',
+    publish:'Publish',
+    example:'Example',
+    new:'New',
+    old:'Old',
+    random:'Random',
 
 
 
@@ -158,4 +163,5 @@ export default {
     PreBuildArticleCache:'Pre Build Article Cache',
     PushToBaidu:'Push To Baidu',
     MakeCarousel:'Make Carousel',
+    PostStore:'Publish Articles',
 }

@@ -44,7 +44,6 @@ func (r *Router) api(route fiber.Router) {
 	route.Post("/article/batchDelete", controller.ArticleBatchDelete)
 	route.Post("/article/existsSlug", controller.ArticleExistsSlug)
 	route.Post("/article/existsTitle", controller.ArticleExistsTitle)
-	route.Post("/article/existsSource", controller.ArticleExistsSource)
 	route.Get("/article/getTags/:id", controller.ArticleGetTags)
 	route.Post("/article/createTag/:id", controller.ArticleCreateTag)
 	route.Post("/article/createTagByNameList/:id", controller.ArticleCreateTagByNameList)
@@ -87,6 +86,16 @@ func (r *Router) api(route fiber.Router) {
 	route.Post("/link/existsURL", controller.LinkExistsURL)
 	route.Post("/link/likeURL", controller.LinkLikeURL)
 	route.Post("/link/status/:id", controller.LinkStatus)
+
+	// store
+	route.Post("/store/list", controller.StoreList)
+	route.Post("/store/count", controller.StoreCount)
+	route.Get("/store/get/:id", controller.StoreGet)
+	route.Post("/store/create", controller.StoreCreate)
+	route.Post("/store/update", controller.StoreUpdate)
+	route.Post("/store/delete/:id", controller.StoreDelete)
+	route.Post("/store/batchDelete", controller.StoreBatchDelete)
+	route.Post("/store/post/:id", controller.StorePost)
 
 	// log
 	route.Post("/log/init", controller.LogInit)

@@ -1,13 +1,12 @@
 package service
 
 import (
-	"moss/application/dto"
-	"moss/domain/core/repository/context"
+	"moss/domain/core/aggregate"
 	"moss/domain/core/service"
 )
 
-// CreatePost 提交文章
-func CreatePost(action string, item *dto.ArticlePost) (err error) {
+// ArticlePost 提交文章
+func ArticlePost(action string, item *aggregate.ArticlePost) (err error) {
 	if item.Article.CategoryID == 0 && item.CategoryName != "" {
 		cate, err := CategoryGetOrCreate(item.CategoryName)
 		if err != nil {
@@ -15,11 +14,10 @@ func CreatePost(action string, item *dto.ArticlePost) (err error) {
 		}
 		item.Article.CategoryID = cate.ID
 	}
-	var ctx = context.NewArticlePost(item.UniqueTitle, item.UniqueSource)
 	if action == "create" {
-		err = service.Article.Create(ctx, &item.Article)
+		err = service.Article.Create(&item.Article)
 	} else {
-		err = service.Article.Update(ctx, &item.Article)
+		err = service.Article.Update(&item.Article)
 	}
 	if err != nil {
 		return err

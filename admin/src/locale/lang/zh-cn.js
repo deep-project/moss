@@ -41,7 +41,6 @@ export default {
     views:'浏览量',
     createTime:'创建时间',
     content:'内容',
-    source:'来源',
     extends:'扩展',
     add:'添加',
     app:'应用',
@@ -148,6 +147,13 @@ export default {
     disk:'磁盘',
     onCreate:'创建时',
     onUpdate:'更新时',
+    storehouse:'仓库',
+    publish:'发布',
+    example:'示例',
+    new:'新的',
+    old:'老的',
+    random:'随机',
+
 
     GenerateSlug:'自动生成别名',
     SaveArticleImages:'保存文章图片',
@@ -156,6 +162,7 @@ export default {
     PreBuildArticleCache:'预生成文章缓存',
     PushToBaidu:'推送到百度',
     MakeCarousel:'制作模板轮播',
+    PostStore:'发布文章',
 }
 
 

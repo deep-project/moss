@@ -32,7 +32,7 @@
       title:  t('slug'),
       dataIndex: 'slug',
       filterable: searchFilter,
-      width: 200,
+      width: 140,
       ellipsis:true,
       tooltip:true,
     },
@@ -43,19 +43,22 @@
       width: 100,
       ellipsis:true,
       filterable: searchFilter,
+      align:'right',
     },
     {
       title: t('views'),
       dataIndex: 'views',
       width: 100,
       ellipsis:true,
-      sortable: { sortDirections: ['ascend', 'descend'] }
+      sortable: { sortDirections: ['ascend', 'descend'] },
+      align:'right',
     },
     {
       title: t('createTime'),
       dataIndex: 'create_time',
       slotName:'time',
       width: 140,
+      align:'right',
     },
   ];
 </script>

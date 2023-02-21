@@ -69,8 +69,15 @@
       <span @click="useOpenLink" class="inline-block cursor-pointer hover:underline underline-offset-4 decoration-2 hover:text-blue-500">{{ record[column.dataIndex] }}</span>
     </template>
 
+    <template #storePost="{ record,rowIndex,column }">
+      <a-button type="outline" size="mini" @click="runStorePost(record.id)">{{$t('publish')}}</a-button>
+    </template>
 
-
+    <template #tag="{ record,rowIndex,column }">
+      <a-space>
+        <a-tag size="mini" v-for="item in record[column.dataIndex]">{{ item }}</a-tag>
+      </a-space>
+    </template>
 
 
   </a-table>
@@ -117,7 +124,7 @@
     tableBatchDelete,
     tableGet,
     tableCreate,
-    tableUpdate, linkStatus,
+    tableUpdate, linkStatus, storePost,
   } from "@/api/index.js";
   import {
     batchDeleteOption,
@@ -125,9 +132,10 @@
     deleteOption,
     getOption,
     listOption,
-    paginationOption,
+    paginationOption, storePostOption,
     updateOption,
   } from './index.js'
+  import {useAppendSiteURL} from "@/hooks/app/index.js";
 
   const {columns, order,modelName, postWidth, postHeight, postComponent} = defineProps({
     columns: Object,
@@ -171,6 +179,8 @@
   const { run:runGet, loading:loadingGet } = useRequest(tableGet, getOption(postRecord,postRecordGetSuccessCallback))
   const { run:runCreate, loading:loadingCreate } = useRequest(tableCreate, createOption(visiblePost, refresh, createBeforeCallback))
   const { run:runUpdate, loading:loadingUpdate } = useRequest(tableUpdate, updateOption(visiblePost, data, rowIndex, postRecord, updateSuccessCallback))
+  const { run:runStorePost } = useRequest(storePost, storePostOption(refreshList))
+
 
   provide('record', postRecord)
   provide('selectedKeys', selectedKeys)
@@ -257,11 +267,7 @@
     if(modelName === 'article') rule = store.config.router.article_rule
     else if(modelName === 'category')rule = store.config.router.category_rule
     else if(modelName === 'tag')rule = store.config.router.tag_rule
-    let path = rule.replace('{slug}',slug)
-    if(path.indexOf('/')!==0) path = "/" + path
-    let siteURL = store.config.site.url
-    if (siteURL.endsWith('/'))  siteURL = siteURL.slice(0, -1);
-    return siteURL + path
+    return useAppendSiteURL(store, rule.replace('{slug}',slug))
   }
 
   const { run:runLinkStatus } = useRequest(linkStatus, {manual:true})

@@ -3,8 +3,8 @@ package controller
 import (
 	"github.com/gofiber/fiber/v2"
 	"moss/api/web/mapper"
-	appDTO "moss/application/dto"
 	appService "moss/application/service"
+	"moss/domain/core/aggregate"
 	"moss/domain/core/service"
 )
 
@@ -33,19 +33,19 @@ func ArticleGet(ctx *fiber.Ctx) error {
 }
 
 func ArticleCreate(ctx *fiber.Ctx) error {
-	obj, err := mapper.BodyToCurdModel[appDTO.ArticlePost](ctx.Body())
+	obj, err := mapper.BodyToCurdModel[aggregate.ArticlePost](ctx.Body())
 	if err != nil {
 		return ctx.JSON(mapper.MessageResult(err))
 	}
-	return ctx.JSON(mapper.MessageResultData(obj, appService.CreatePost("create", obj)))
+	return ctx.JSON(mapper.MessageResultData(obj, appService.ArticlePost("create", obj)))
 }
 
 func ArticleUpdate(ctx *fiber.Ctx) error {
-	obj, err := mapper.BodyToCurdModel[appDTO.ArticlePost](ctx.Body())
+	obj, err := mapper.BodyToCurdModel[aggregate.ArticlePost](ctx.Body())
 	if err != nil {
 		return ctx.JSON(mapper.MessageResult(err))
 	}
-	return ctx.JSON(mapper.MessageResultData(obj, appService.CreatePost("update", obj)))
+	return ctx.JSON(mapper.MessageResultData(obj, appService.ArticlePost("update", obj)))
 }
 
 func ArticleDelete(ctx *fiber.Ctx) error {
@@ -70,10 +70,6 @@ func ArticleExistsSlug(ctx *fiber.Ctx) error {
 
 func ArticleExistsTitle(ctx *fiber.Ctx) error {
 	return ctx.JSON(mapper.MessageResultData(service.Article.ExistsTitle(string(ctx.Body()))))
-}
-
-func ArticleExistsSource(ctx *fiber.Ctx) error {
-	return ctx.JSON(mapper.MessageResultData(service.Article.ExistsSource(string(ctx.Body()))))
 }
 
 func ArticleGetTags(ctx *fiber.Ctx) error {

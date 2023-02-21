@@ -31,7 +31,7 @@ func NewLog() *Log {
 			"AspiegelBot", "YisouSpider", "DuckDuckGo", "JikeSpider", "YoudaoBot", "JianKongBao",
 			// 国外
 			"AhrefsBot", "MJ12bot", "SemrushBot", "lycos", "Twitterbot", "DotBot", "MauiBot", "Rogerbot",
-			"exabot", "Teoma", "DOCOMO", "Speedy Spider", "LinkpadBot",
+			"exabot", "Teoma", "DOCOMO", "Speedy Spider", "LinkpadBot", "DataForSeoBot",
 			// 通用特征
 			"slurp", "robozilla", "bot", "spider", "crawl",
 		},

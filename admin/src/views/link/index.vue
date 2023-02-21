@@ -1,5 +1,5 @@
 <template>
-  <Table modelName="link" :columns="columns" order="id desc" postWidth="470px" formStyle="padding-right: 10px" formLayout="horizontal" :postComponent="postComponent" />
+  <Table modelName="link" :columns="columns" order="id desc" postWidth="560px" formStyle="padding-right: 10px" formLayout="horizontal" :postComponent="postComponent" />
 </template>
 
 <script setup>
@@ -46,12 +46,14 @@ const columns = [
     dataIndex: 'expire_time',
     slotName:'expire_time',
     width: 160,
+    align:'right',
   },
   {
     title: t('createTime'),
     dataIndex: 'create_time',
     slotName:'time',
     width: 160,
+    align:'right',
   },
   {
     title: t('detect'),

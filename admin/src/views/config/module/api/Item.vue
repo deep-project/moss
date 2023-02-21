@@ -23,19 +23,18 @@
   import {useStore} from "@/store";
   import {computed, h} from "vue";
   import {t} from "@/locale/index.js";
+  import {useAppendSiteURL} from "@/hooks/app/index.js";
 
   defineProps({data:Object})
   const store = useStore()
-  let adminPath = store.config["router"].admin_path
-  if(!adminPath.startsWith("/")) adminPath= "/" + adminPath
-  let apiURL = window.location.origin + adminPath + "/api"
-
+  let apiURL = useAppendSiteURL(store, store.config["router"].admin_path + "/api")
 
   const columns = computed(()=> [
     { title: t('fields'), dataIndex: 'field', width:150 },
     { title: t('type'), dataIndex: 'type', width:150 },
     { title: t('required'), dataIndex: 'required', width:150,slotName:'required'},
-    { title: t('description'), dataIndex: 'description' },
+    { title: t('description'), dataIndex: 'description',width:300},
+    { title: t('example'), dataIndex: 'example',width:300},
   ])
 
 </script>

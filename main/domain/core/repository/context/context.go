@@ -3,7 +3,7 @@ package context
 type Context struct {
 	Select     string `json:"select"`
 	Limit      int    `json:"limit"`
-	Order      string `json:"order"`
+	Order      any    `json:"order"`
 	Page       int    `json:"page"`
 	FastOffset bool   `json:"fast_offset"` // 是否快速分页（根据id集合再回表）
 	Where      *Where `json:"where"`       // 查询条件where

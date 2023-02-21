@@ -46,6 +46,7 @@ func initPlugins() {
 		plugins.NewPreBuildArticleCache(),
 		plugins.NewPushToBaidu(),
 		plugins.NewMakeCarousel(),
+		plugins.NewPostStore(),
 
 		//inner.NewAddWater(),
 		//inner.NewTransferData(),

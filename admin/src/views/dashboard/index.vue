@@ -1,14 +1,10 @@
 <template>
   <a-space direction="vertical" size="medium" fill>
-
-    <a-grid :cols="{ xs: 1, sm: 1, md: 1, lg:2 }" :colGap="12" :rowGap="12">
-      <a-grid-item><System /></a-grid-item>
-      <a-grid-item><App /></a-grid-item>
-    </a-grid>
-
-    <Article />
-    <Other />
-    <About />
+    <div class="w-full rounded-lg overflow-hidden"><System /></div>
+    <div class="w-full rounded-lg overflow-hidden"><App /></div>
+    <div class="w-full rounded-lg overflow-hidden"> <Article /></div>
+    <div class="w-full rounded-lg overflow-hidden"> <Other /></div>
+    <div class="w-full rounded-lg overflow-hidden"> <About /></div>
   </a-space>
 </template>
 

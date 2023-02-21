@@ -48,14 +48,17 @@
   </a-table>
 
   <a-modal v-model:visible="visibleOptions" :title="modalTitle" title-align="start" @ok="runSaveOptions(currentID,currentOptionsData)" :ok-loading="loadingSaveOptions">
-    <a-spin :loading="loadingGetOptions" class="w-full">
-      <a-form :model="currentOptionsData" auto-label-width :layout="store.isMobile ? 'vertical':'horizontal'">
-        <component v-bind:is="currentOptionsComponent"></component>
-      </a-form>
-    </a-spin>
+    <a-skeleton animation :widths="[80]" v-if="loadingGetOptions">
+      <a-space direction="vertical" :style="{width:'100%'}" size="large">
+        <a-skeleton-line :rows="5" />
+      </a-space>
+    </a-skeleton>
+    <a-form v-else :model="currentOptionsData" auto-label-width :layout="store.isMobile ? 'vertical':'horizontal'">
+      <component v-bind:is="currentOptionsComponent"></component>
+    </a-form>
   </a-modal>
 
-  <a-modal v-model:visible="visibleCronExpExample" title="Example" :width="600" simple :footer="false">
+  <a-modal v-model:visible="visibleCronExpExample" :title="$t('example')" :width="600" simple :footer="false">
     <CronExpExample />
   </a-modal>
 
@@ -106,12 +109,15 @@
   provide("visibleLog", visibleLog)
 
   const { loading:loadingList } = useRequest(pluginList,{onSuccess:(resp)=>{ list.value = resp}})
-  const { run:runGetOptions, loading:loadingGetOptions } = useRequest(pluginOptions,{manual:true, onSuccess:(resp,[id])=>{
+  const { run:runGetOptions, loading:loadingGetOptions } = useRequest(pluginOptions,{
+    manual:true,
+    loadingKeep: 400,
+    onBefore:()=>{visibleOptions.value=true},
+    onSuccess:(resp,[id])=>{
       currentOptionsData.value = resp
-      visibleOptions.value=true
       currentOptionsComponent.value = defineAsyncComponent(optionsComponents['./options/'+id+'.vue'])
   }})
-  const { run:runSaveOptions, loading:loadingSaveOptions } = useRequest(pluginSaveOptions,{manual:true, onSuccess:(resp)=>{ resp.success ? Message.success(t('message.success',[t('save')])):'' }})
+  const { run:runSaveOptions, loading:loadingSaveOptions } = useRequest(pluginSaveOptions,{manual:true,onSuccess:(resp)=>{ resp.success ? Message.success(t('message.success',[t('save')])):'' }})
   const loadingRunObj = ref({})
   const { run, loading:loadingRun } = useRequest(pluginRun,{
     manual:true,

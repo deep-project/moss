@@ -1,5 +1,5 @@
 <template>
-  <Table modelName="category" :columns="columns" order="id desc" postWidth="640px" formStyle="padding-right: 10px" formLayout="horizontal" :postComponent="postComponent" />
+  <Table modelName="store" :columns="columns" order="id desc"  postWidth="600px"  formStyle="padding-right: 10px" formLayout="horizontal" :postComponent="postComponent" />
 </template>
 
 <script setup>
@@ -20,34 +20,51 @@ const columns = [
     sortable: { sortDirections: ['ascend', 'descend'] }
   },
   {
-    title: t('name'),
-    dataIndex: 'name',
+    title: t('title'),
+    dataIndex: 'title',
     filterable: searchFilter,
     width: 300,
-    slotName:'title',
   },
   {
     title:  t('slug'),
     dataIndex: 'slug',
     filterable: searchFilter,
-    width: 140,
+    width: 200,
     ellipsis:true,
     tooltip:true,
   },
   {
-    title: t('parentCategory'),
-    dataIndex: 'parent_id',
+    title: t('category') + ' ID',
+    dataIndex: 'category_id',
     width: 100,
     ellipsis:true,
     filterable: searchFilter,
-    align:'right',
+  },
+  {
+    title: t('category'),
+    dataIndex: 'category_name',
+    width: 110,
+    ellipsis:true,
+  },
+  {
+    title: t('tags'),
+    dataIndex: 'tags',
+    width: 240,
+    ellipsis:true,
+    slotName:'tag',
   },
   {
     title: t('createTime'),
-    dataIndex: 'create_time',
+    dataIndex: 'store_create_time',
     slotName:'time',
-    width: 140,
+    width: 160,
     align:'right',
+  },
+  {
+    title: t('publish'),
+    slotName:'storePost',
+    width: 120,
+    align:'center',
   },
 ];
 </script>
