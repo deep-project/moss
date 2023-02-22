@@ -153,6 +153,10 @@ export default {
     new:'新的',
     old:'老的',
     random:'随机',
+    tls:'TLS',
+    needRestartApp:'需要重启应用后生效',
+
+
 
 
     GenerateSlug:'自动生成别名',
@@ -163,6 +167,7 @@ export default {
     PushToBaidu:'推送到百度',
     MakeCarousel:'制作模板轮播',
     PostStore:'发布文章',
+    DidiAuto:'滴滴友联自动任务',
 }
 
 

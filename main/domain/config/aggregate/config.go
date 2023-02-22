@@ -17,6 +17,7 @@ type Config struct {
 	Log      *entity.Log
 	API      *entity.API
 	Sitemap  *entity.Sitemap
+	TLS      *entity.TLS
 	More     *entity.More
 }
 
@@ -32,6 +33,7 @@ func NewConfig() *Config {
 		Log:      entity.NewLog(),
 		API:      entity.NewAPI(),
 		Sitemap:  entity.NewSitemap(),
+		TLS:      entity.NewTLS(),
 		More:     entity.NewMore(),
 	}
 }
@@ -48,6 +50,7 @@ func (c *Config) Items() []service.Config {
 		c.Log,
 		c.API,
 		c.Sitemap,
+		c.TLS,
 		c.More,
 	}
 }

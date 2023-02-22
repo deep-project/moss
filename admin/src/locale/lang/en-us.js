@@ -153,6 +153,8 @@ export default {
     new:'New',
     old:'Old',
     random:'Random',
+    tls:'TLS',
+    needRestartApp:'Requires application restart to take effect',
 
 
 
@@ -164,4 +166,5 @@ export default {
     PushToBaidu:'Push To Baidu',
     MakeCarousel:'Make Carousel',
     PostStore:'Publish Articles',
+    DidiAuto:'Didi Auto',
 }

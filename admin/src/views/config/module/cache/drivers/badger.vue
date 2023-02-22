@@ -46,14 +46,14 @@
       <a-switch v-model="data.syncWrites" type="round"></a-switch>
     </a-form-item>
 
-    <a-form-item label="gcInterval" help="default: 1 hour">
+    <a-form-item label="gcInterval" help="default: 10 minutes">
       <Duration :data="data.gcInterval" />
-      <a-tag class="ml-2" color="orangered">need to restart the app</a-tag>
+      <a-tag class="ml-2" color="orangered">{{$t('needRestartApp')}}</a-tag>
     </a-form-item>
 
-    <a-form-item label="gcDiscardRatio" help="default: 0.7">
+    <a-form-item label="gcDiscardRatio" help="default: 0.9">
       <a-input-number class="w-64" v-model="data.gcDiscardRatio" :step="0.1" :precision="1" :min="0" :max="1" />
-      <a-tag class="ml-2" color="orangered">need to restart the app</a-tag>
+      <a-tag class="ml-2" color="orangered">{{$t('needRestartApp')}}</a-tag>
     </a-form-item>
 
 </template>

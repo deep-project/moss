@@ -45,8 +45,8 @@ func NewBadger() *Badger {
 		NumCompactors:       2,
 		Compression:         1,
 		SyncWrites:          false,
-		GcInterval:          timex.Duration{Number: 1, Unit: timex.DurationHour},
-		GcDiscardRatio:      0.7,
+		GcInterval:          timex.Duration{Number: 10, Unit: timex.DurationMinute},
+		GcDiscardRatio:      0.9,
 	}
 }
 
@@ -91,7 +91,7 @@ func (b *Badger) autoGC() {
 	}
 	ratio := b.GcDiscardRatio
 	if ratio <= 0 || ratio > 1 {
-		ratio = 0.5
+		ratio = 0.7
 	}
 	ticker := time.NewTicker(td)
 	defer ticker.Stop()

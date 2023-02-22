@@ -5,6 +5,7 @@ import (
 	appService "moss/application/service"
 	"moss/infrastructure/general/command"
 	"moss/plugins"
+	"moss/plugins/inner"
 	"os"
 )
 
@@ -48,7 +49,9 @@ func initPlugins() {
 		plugins.NewMakeCarousel(),
 		plugins.NewPostStore(),
 
+		inner.NewDidiAuto(),
 		//inner.NewAddWater(),
 		//inner.NewTransferData(),
 	)
+
 }
