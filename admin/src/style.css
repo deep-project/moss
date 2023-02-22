@@ -25,6 +25,10 @@ html,body{
   height: 5px !important;
 }
 
+.arco-modal{
+  background-color: var(--color-bg-1) !important;
+}
+
 body[arco-theme="dark"] .arco-table-td{
   border-color: #3f4554 !important;
 }

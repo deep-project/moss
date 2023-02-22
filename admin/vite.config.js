@@ -98,7 +98,7 @@ export default defineConfig({
           'dark-color-text-3':'#77889a',
           'dark-color-text-4':'#687888',
 
-          'dark-color-bg-1':'#1f232c',
+          'dark-color-bg-1':'#21252b',
           'dark-color-bg-2':'#282d36',
           'dark-color-bg-3':'#393f4d',
           'dark-color-bg-4':'#3f4554',

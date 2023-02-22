@@ -2,7 +2,7 @@
 
 
   <a-form-item :label="$t('limit')">
-    <a-input-number v-model="data.limit" :style="{ width: '200px' }" :min="0" />
+    <a-input-number v-model="data.limit" :style="{ width: '250px' }" :min="0" />
   </a-form-item>
 
   <a-form-item :label="$t('order')">
@@ -14,7 +14,7 @@
   </a-form-item>
 
   <a-form-item :label="$t('category')">
-    <SelectCategory v-model="data.category_ids" multiple />
+    <SelectCategory v-model="data.category_ids" multiple  :style="{ width: '282px' }" />
   </a-form-item>
 
   <a-form-item :label="$t('delete')" help="delete on failure">

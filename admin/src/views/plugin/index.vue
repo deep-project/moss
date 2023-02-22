@@ -1,5 +1,5 @@
 <template>
-  <a-table :columns="columns" :data="list" :loading="loadingList" :pagination="false">
+  <a-table :columns="columns" :data="list" :loading="loadingList" :pagination="false" :bordered="false">
     <template #id="{ record,rowIndex,column }">
       <a-tooltip v-if="record.about">
         <icon-info-circle class="ml-2 opacity-60" />

@@ -7,7 +7,7 @@
         <a-button size="small" @click="loadMore" type="outline">{{$t('more')}}</a-button>
       </a-space>
     </template>
-    <a-table size="mini" ref="tableRef"
+    <a-table size="mini" ref="tableRef" :bordered="false"
              :columns="columns"
              :data="dataList"
              :pagination="false"
