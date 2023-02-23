@@ -49,6 +49,9 @@ func (r *Router) newFiber() *fiber.App {
 	// 压缩
 	app.Use(compress.New(compress.Config{Level: compress.Level(config.Config.Router.CompressLevel)}))
 
+	// TLS
+	app.Use(middleware.TLS)
+
 	// admin
 	app.Route(config.Config.Router.GetAdminPath(), r.RegisterAdmin)
 
@@ -101,11 +104,7 @@ func (r *Router) ln() (ln net.Listener, err error) {
 	if netWork == "" {
 		netWork = "tcp"
 	}
-	addr := config.Config.TLS.ListenAddr
-	if addr == "" {
-		addr = ":443"
-	}
-	ln, err = net.Listen(netWork, addr)
+	ln, err = net.Listen(netWork, config.Config.TLS.ListenAddr())
 	ln = tls.NewListener(ln, c)
 	r.app.SetTLSHandler(tlsHandler)
 	return

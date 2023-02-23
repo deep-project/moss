@@ -42,6 +42,8 @@
     </a-grid-item>
   </a-grid>
 
+  <a-divider />
+  
 </template>
 
 <script setup>

@@ -18,6 +18,8 @@
   <a-form-item :label="$t('description')" field="description" style="max-width: 600px" extra="description">
     <a-textarea v-model="data.description" class="w-full" :auto-size="{ minRows: 3, maxRows: 3 }"/>
   </a-form-item>
+
+  <a-divider />
 </template>
 
 <script setup>

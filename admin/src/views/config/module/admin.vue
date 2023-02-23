@@ -11,6 +11,9 @@
   <a-form-item :label="$t('expire')">
     <Duration :data="data.login_expire" />
   </a-form-item>
+
+  <a-divider />
+
 </template>
 
 <script setup>

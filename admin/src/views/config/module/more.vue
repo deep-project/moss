@@ -8,13 +8,15 @@
     <a-input-number class="w-64" v-model="data.fast_offset_min_page" />
   </a-form-item>
 
-  <a-form-item label="Categories limit" help="view all categories limit">
+  <a-form-item label="Categories Limit" help="view all categories limit">
     <a-input-number class="w-64" v-model="data.view_all_category_limit" />
   </a-form-item>
 
-  <a-form-item label="unique title" help="article title must be unique">
+  <a-form-item label="Unique Title" help="article title must be unique">
     <a-switch type="round" v-model="data.unique_title" />
   </a-form-item>
+
+  <a-divider />
 
 </template>
 

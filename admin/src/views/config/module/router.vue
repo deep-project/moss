@@ -12,6 +12,9 @@
     </a-tab-pane>
 
   </a-tabs>
+
+  <a-divider />
+  
 </template>
 
 <script setup>
