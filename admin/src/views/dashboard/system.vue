@@ -36,8 +36,8 @@
   const color = 'rgb(var(--primary-6))'
 
   //const { data:load } = useRequest(dashboardData, {defaultParams:['systemLoad'], pollingInterval: 1000, errorRetryCount: 1})
-  const { data:cpu } = useRequest(dashboardData, {defaultParams:['systemCPU'], pollingInterval: 1000, errorRetryCount: 1})
-  const { data:memory } = useRequest(dashboardData, {defaultParams:['systemMemory'], pollingInterval: 1000, errorRetryCount: 1})
+  const { data:cpu } = useRequest(dashboardData, {defaultParams:['systemCPU'], pollingInterval: 2000, errorRetryCount: 1})
+  const { data:memory } = useRequest(dashboardData, {defaultParams:['systemMemory'], pollingInterval: 2000, errorRetryCount: 1})
   const { data:disks } = useRequest(dashboardData, {defaultParams:['systemDisk']})
 
   function dec(val){

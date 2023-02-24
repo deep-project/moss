@@ -10,6 +10,7 @@ import (
 	"moss/domain/core/repository/context"
 	"moss/domain/core/service"
 	coreUtils "moss/domain/core/utils"
+	"moss/infrastructure/general/constant"
 	"moss/infrastructure/support/log"
 )
 
@@ -26,6 +27,13 @@ func (*Widget) Head() string {
 
 func (*Widget) Footer() string {
 	return config.Config.Template.Footer
+}
+
+func (*Widget) LogoURL() string {
+	if config.Config.Template.Logo == "" {
+		return ""
+	}
+	return constant.LogoFilePath
 }
 
 func (w *Widget) Carousel() (res []entity.TemplateCarousel) {

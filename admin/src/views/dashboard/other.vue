@@ -5,7 +5,7 @@
       <a-grid-item>
         <a-statistic :title="$t('storehouse')" :value="storeTotal" :value-from="0" show-group-separator animation>
           <template #suffix><span class="ml-1 text-gray-500"><icon-storage /></span></template>
-          <template #extra><a-spin v-if="loadingstoreTotal" /></template>
+          <template #extra><a-spin v-if="loadingStoreTotal" /></template>
         </a-statistic>
       </a-grid-item>
       <a-grid-item>

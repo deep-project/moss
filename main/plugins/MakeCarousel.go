@@ -101,7 +101,7 @@ func (p *MakeCarousel) Run(ctx *pluginEntity.Plugin) (err error) {
 		if img == "" {
 			continue
 		}
-		res = append(res, entity.TemplateCarousel{Image: img, Link: item.FullURL(), Title: item.Title})
+		res = append(res, entity.TemplateCarousel{Image: img, Link: item.URL(), Title: item.Title})
 		success++
 	}
 	if success == 0 {

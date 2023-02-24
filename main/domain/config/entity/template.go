@@ -5,6 +5,7 @@ type Template struct {
 	Footer           string             `json:"footer"`
 	RobotsTxt        string             `json:"robots_txt"`  // robots.txt
 	AdsTxt           string             `json:"ads_txt"`     // ads.txt
+	Logo             string             `json:"logo"`        // logo.png
 	FaviconIco       string             `json:"favicon_ico"` // favicon.ico
 	Carousel         []TemplateCarousel `json:"carousel"`
 	EnableCarousel   bool               `json:"enable_carousel"`

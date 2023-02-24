@@ -33,3 +33,16 @@ func FaviconIco(ctx *fiber.Ctx) error {
 	dec := base64.NewDecoder(base64.StdEncoding, strings.NewReader(bs64))
 	return ctx.Type("ico").SendStream(dec)
 }
+
+func Logo(ctx *fiber.Ctx) error {
+	if config.Config.Template.Logo == "" {
+		return ctx.Next()
+	}
+	var bs64 = config.Config.Template.Logo
+	i := strings.Index(config.Config.Template.Logo, ",")
+	if i > 0 {
+		bs64 = config.Config.Template.Logo[i+1:]
+	}
+	dec := base64.NewDecoder(base64.StdEncoding, strings.NewReader(bs64))
+	return ctx.Type("png").SendStream(dec)
+}

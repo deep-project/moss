@@ -1,0 +1,20 @@
+<div class="flex-none mr-5 page-title md:text-4xl" style="max-width: 50%;">
+    {{ logo := Widget.LogoURL() }}
+    {{ if Page.Name == "index" }}
+        <h1>
+            {{ if logo != "" }}
+                <img src="{{logo}}" alt="{{ Config.Site.Name }}" />
+            {{ else }}
+                {{ Config.Site.Name }}
+            {{ end }}
+        </h1>
+    {{ else }}
+        <a href="/" title="{{ Config.Site.Name }}">
+            {{ if logo != "" }}
+                <img src="{{logo}}" alt="{{ Config.Site.Name }}" />
+            {{ else }}
+                {{ Config.Site.Name }}
+            {{ end }}
+        </a>
+    {{ end }}
+</div>

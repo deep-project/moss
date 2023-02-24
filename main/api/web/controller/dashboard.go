@@ -3,15 +3,10 @@ package controller
 import (
 	"errors"
 	"github.com/gofiber/fiber/v2"
-	"github.com/shirou/gopsutil/v3/cpu"
-	"github.com/shirou/gopsutil/v3/disk"
-	"github.com/shirou/gopsutil/v3/load"
-	"github.com/shirou/gopsutil/v3/mem"
 	"moss/api/web/mapper"
 	appService "moss/application/service"
 	"moss/domain/core/service"
 	"moss/infrastructure/persistent/db"
-	"runtime"
 	"time"
 )
 
@@ -24,28 +19,17 @@ func (d *dashboard) Controller(ctx *fiber.Ctx) (err error) {
 	var data any
 	switch ctx.Params("id") {
 	case "systemLoad":
-		if runtime.GOOS == "linux" {
-			info, _ := load.Avg()
-			data = (info.Load1 + info.Load5 + info.Load15) / 3
-		} else {
-			data = -1
-		}
+		data = appService.SystemLoadPercent()
 	case "systemCPU":
-		v, _ := cpu.Percent(time.Second, false)
-		data = v[0]
+		data, err = appService.SystemCPUPercent(time.Second)
 	case "systemMemory":
-		v, _ := mem.VirtualMemory()
-		data = v.UsedPercent
+		data, err = appService.SystemMemoryPercent()
 	case "systemDisk":
-		var res []float64
-		parts, _ := disk.Partitions(false)
-		for _, part := range parts {
-			diskInfo, _ := disk.Usage(part.Mountpoint)
-			res = append(res, diskInfo.UsedPercent)
-		}
-		data = res
-		//diskInfo, _ := disk.Usage("./")
-		//data = diskInfo.UsedPercent
+		data, err = appService.SystemDiskPercents()
+	case "appCPU":
+		data, err = appService.AppCPUPercent()
+	case "appMemory":
+		data, err = appService.AppUsedMemory()
 	case "database":
 		data = db.GetSize()
 	case "log":

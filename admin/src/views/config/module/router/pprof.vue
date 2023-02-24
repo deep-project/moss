@@ -27,13 +27,15 @@
 
 <script setup>
 
-import {computed, inject} from "vue";
+  import {computed, inject} from "vue";
   import MakeRandString from "@/components/utils/MakeRandString.vue";
   import {useOpenLink,useCopy} from '@/hooks/utils.js'
+  import {useSiteURL} from '@/hooks/app/index.js'
+  import {useStore} from '@/store'
 
   const data = inject('data')
-
-  const domain = window.location.origin
+  const store = useStore()
+  const domain = useSiteURL(store)
 
   const path = computed(()=> data.value.prof_secret ? "/" + data.value.prof_secret :"")
 

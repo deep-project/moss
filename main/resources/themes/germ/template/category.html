@@ -1,0 +1,30 @@
+{{extends "./layout/layout.html"}}
+{{import "./component/article_list.html"}}
+{{import "./component/pagination.html" }}
+{{import "./component/breadcrumb.html" }}
+
+{{block main()}}
+    <div class="card">
+        {{yield breadcrumb(id=Data.ID)}}
+        <div class="mb-3">
+            <h1 class="page-title">
+                {{ if Page.PageNumber > 1}}
+                <a href="{{Data.URL()}}">{{Data.Name}}</a>
+                {{ else }}
+                {{Data.Name}}
+                {{ end }}
+            </h1>
+            <ul class="tags text-sm py-4">
+                {{ range i, v := Category().Children(Data.ID) }}
+                <li><a href="{{v.URL()}}">{{v.Name}}</a></li>
+                {{ end }}
+            </ul>
+        </div>
+
+        {{ res:= Widget.CategoryPageList(Data.ID, Page.PageNumber)}}
+        {{yield article_list(list=res.List)}}
+        {{yield pagination(pageTotal=res.PageTotal, existNextPage=res.ExistNextPage, disableCount=res.DisableCount, count=res.Count)}}
+
+    </div>
+
+{{end}}

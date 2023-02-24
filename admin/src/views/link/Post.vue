@@ -57,7 +57,7 @@
   if(!record.value.id){
     record.value.detect = true
     record.value.status = true
-    record.value.detect_delay = 2880
+    record.value.detect_delay = 60
   }
 
   let incrExpire = false

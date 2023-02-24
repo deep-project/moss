@@ -1,0 +1,37 @@
+
+{{ block article_list(list,titleTag="h2") }}
+    <div class="divide-y divide-gray-300 dark:divide-neutral-800 divide-opacity-70">
+        {{ range i, v := list }}
+        <div class="list-item"{{if i==0}} style="padding-top:5px;{{end}}">
+            {{ if v.Thumbnail !="" }}
+            <div class="thumbnail">
+                <a href="{{ v.URL() }}">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-echo="{{ v.Thumbnail }}" alt="{{ v.Title }}" />
+                </a>
+            </div>
+            {{ end }}
+            <div class="{{ if v.Thumbnail !=`` }}col-span-12 md:col-span-8 xl:col-span-9{{else}}col-span-12{{end}} flex items-center">
+                <div>
+                <{{titleTag}} class="title">
+                    <a href="{{ v.URL() }}">{{ v.Title }}</a>
+                </{{titleTag}}>
+                {{ if v.Description !=""}}
+                <div class="description">
+                    {{ v.Description }}
+                </div>
+                {{ end }}
+                {{ if v.CreateTime > 0 || v.Views > 0 }}
+                <div class="meta">
+                    {{ if v.CreateTime > 0 }}
+                    <div class="flex items-center mr-3">
+                        <i class="mr-1 icon icon-time"></i>{{ v.CreateTimeFormat("2006-01-02") }}
+                    </div>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+    {{ end }}
+    </div>
+{{ end }}

@@ -9,5 +9,5 @@ func (*Theme) ConfigID() string {
 }
 
 func NewTheme() *Theme {
-	return &Theme{Current: "seed"}
+	return &Theme{Current: "germ"}
 }

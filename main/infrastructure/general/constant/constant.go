@@ -12,6 +12,7 @@ const (
 	CacheDir         = "./runtime/cache"
 	UploadDir        = "./public/upload"
 	UploadDomain     = "/upload/"
+	LogoFilePath     = "/logo.png"
 )
 
 var (

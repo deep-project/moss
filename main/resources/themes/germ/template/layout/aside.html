@@ -1,0 +1,18 @@
+
+<div class="card">
+    <div class="card-title"><i></i>Hot</div>
+    {{ include "../widget/global_list.html" }}
+</div>
+
+<div class="card">
+    <div class="card-title"><i></i>Tags</div>
+    {{ include "../widget/tag_cloud.html" }}
+</div>
+
+{{ if Page.Name == "index"}}
+<div class="card hidden lg:block">
+    <div class="card-title"><i></i>Links</div>
+    {{ include "../widget/link.html" }}
+</div>
+{{ end }}
+

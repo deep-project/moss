@@ -15,6 +15,7 @@ func (r *Router) RegisterHome(route fiber.Router) {
 	route.Get("/robots.txt", controller.AssetsRobotsTxt)
 	route.Get("/ads.txt", controller.AssetsAdsTxt)
 	route.Get("/favicon.ico", controller.FaviconIco)
+	route.Get(constant.LogoFilePath, controller.Logo)
 
 	// sitemap
 	sitemap := route.Group(config.Config.Router.GetSitemapPath())
