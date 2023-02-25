@@ -8,10 +8,10 @@
     <a-descriptions-item label="ip">{{data.ip}}</a-descriptions-item>
     <a-descriptions-item v-if="data.feature" label="feature">{{data.feature}}</a-descriptions-item>
     <a-descriptions-item label="url">
-      <a class="hover:underline cursor-pointer hover:text-blue-400" @click="useOpenLink(data.url)">{{data.url}}</a>
+      <a class="hover:underline cursor-pointer hover:text-blue-400" @click="useOpenLink">{{data.url}}</a>
     </a-descriptions-item>
     <a-descriptions-item label="referer">
-      <a class="hover:underline cursor-pointer hover:text-blue-400" @click="useOpenLink(data.referer)">{{data.referer}}</a>
+      <a class="hover:underline cursor-pointer hover:text-blue-400" @click="useOpenLink">{{data.referer}}</a>
     </a-descriptions-item>
     <a-descriptions-item label="user-agent"><span class="whitespace-normal">{{data.userAgent}}</span></a-descriptions-item>
     <a-descriptions-item label="headers">

@@ -18,14 +18,14 @@
       </a-grid-item>
 
       <a-grid-item>
-        <a-statistic title="7 days" :value="days7" :value-from="0" show-group-separator animation>
+        <a-statistic :title="'7 '+$t('days')" :value="days7" :value-from="0" show-group-separator animation>
           <template #suffix><span class="ml-1 text-gray-500"><icon-file /></span></template>
           <template #extra><a-spin v-if="loadingDays7" /></template>
         </a-statistic>
       </a-grid-item>
 
       <a-grid-item>
-        <a-statistic title="30 days" :value="days30" :value-from="0" show-group-separator animation>
+        <a-statistic :title="'30 '+$t('days')" :value="days30" :value-from="0" show-group-separator animation>
           <template #suffix><span class="ml-1 text-gray-500"><icon-file /></span></template>
           <template #extra><a-spin v-if="loadingDays30" /></template>
         </a-statistic>

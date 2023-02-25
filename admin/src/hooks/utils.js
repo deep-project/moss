@@ -20,6 +20,7 @@ export function useRandString(len, chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprs
 // 无痕打开链接
 export function useOpenLink(link, title){
     if(typeof link === 'object') link = link.target.innerText
+    if(!link && link.path) link = link.path[0].innerText
     let win = window.open('about:blank');
     if(!win) return;
     if(!title) title = 'loading...'

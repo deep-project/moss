@@ -8,6 +8,7 @@
                     check-strictly
                     expand-child
                     allow-clear
+                    allow-search
                     :placeholder="$t('select')"
                     :style="cascaderStyle" :multiple="multiple" />
 

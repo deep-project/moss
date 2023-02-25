@@ -95,7 +95,7 @@ header a:hover{
 
 
 .list-item{
-    @apply mb-4 md:mb-6 pt-4 md:pt-6 grid grid-cols-12 gap-4 text-gray-500 dark:text-neutral-600;
+    @apply mb-4 md:mb-6 pt-4 md:pt-6 grid grid-cols-12 gap-4 text-gray-500 dark:text-neutral-600 overflow-hidden;
 }
 .list-item .thumbnail{
     @apply col-span-12 md:col-span-4 xl:col-span-3;
@@ -112,7 +112,7 @@ header a:hover{
     @apply mt-1 text-sm w-full line-clamp-3 leading-5 text-gray-400 dark:text-neutral-600;
 }
 .list-item .title{
-    @apply block w-full font-bold text-xl 2xl:text-2xl text-gray-900 dark:text-neutral-200;
+    @apply block w-full truncate font-bold text-xl 2xl:text-2xl text-gray-900 dark:text-neutral-200;
 }
 
 .list-item .title>a:hover{
@@ -121,7 +121,9 @@ header a:hover{
 .list-item .meta{
     @apply mt-1 flex text-sm text-gray-400 dark:text-neutral-500;
 }
-
+.list-item .meta>div{
+    @apply flex items-center mr-3;
+}
 
 .icon{
     display: inline-block;

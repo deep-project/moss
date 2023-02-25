@@ -45,7 +45,7 @@ func NewBadger() *Badger {
 		NumCompactors:       2,
 		Compression:         1,
 		SyncWrites:          false,
-		GcInterval:          timex.Duration{Number: 10, Unit: timex.DurationMinute},
+		GcInterval:          timex.Duration{Number: 5, Unit: timex.DurationMinute},
 		GcDiscardRatio:      0.9,
 	}
 }
@@ -87,26 +87,28 @@ func (b *Badger) Init() (err error) {
 func (b *Badger) autoGC() {
 	td := b.GcInterval.Duration()
 	if td == 0 {
-		return
-	}
-	ratio := b.GcDiscardRatio
-	if ratio <= 0 || ratio > 1 {
-		ratio = 0.7
+		b.GcInterval.Number = 5
+		b.GcInterval.Unit = "minute"
+		td = 5 * time.Minute
 	}
 	ticker := time.NewTicker(td)
 	defer ticker.Stop()
 	for range ticker.C {
 	again:
-		if b.Handle == nil || b.Handle.IsClosed() {
-			return
-		}
-		err := b.Handle.RunValueLogGC(ratio)
-		if err == nil {
+		if err := b.RunValueLogGC(); err == nil {
 			goto again
-		} else {
-			return
 		}
 	}
+}
+
+func (b *Badger) RunValueLogGC() error {
+	if err := b.undefined(); err != nil {
+		return err
+	}
+	if b.GcDiscardRatio <= 0 || b.GcDiscardRatio > 1 {
+		b.GcDiscardRatio = 0.9
+	}
+	return b.Handle.RunValueLogGC(b.GcDiscardRatio)
 }
 
 func (b *Badger) Close() error {
