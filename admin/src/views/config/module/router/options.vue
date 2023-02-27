@@ -213,6 +213,8 @@
       </a-tooltip>
     </a-form-item>
 
+  <a-alert type="warning">{{$t('needRestartApp')}}</a-alert>
+
 </template>
 
 

@@ -87,6 +87,8 @@ func (l *log) HTTP(entry HttpData) {
 	if feature != "" {
 		client = Spider
 		spLog = zap.String("feature", feature)
+	} else if len([]rune(entry.UserAgent)) < 30 {
+		client = Spider
 	}
 
 	if client.IsClosed() {

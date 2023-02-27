@@ -6,8 +6,8 @@ import (
 	"github.com/dgraph-io/badger/v2/options"
 	"moss/infrastructure/general/constant"
 	"moss/infrastructure/utils"
+	"moss/infrastructure/utils/osx"
 	"moss/infrastructure/utils/timex"
-	"path/filepath"
 	"sync"
 	"time"
 )
@@ -35,8 +35,9 @@ type Badger struct {
 }
 
 func NewBadger() *Badger {
+
 	return &Badger{
-		Path:                filepath.Join(constant.CacheDir, "badger"),
+		Path:                constant.CacheDir + "/badger",
 		ValueLogLoadingMode: options.MemoryMap,
 		TableLoadingMode:    options.MemoryMap,
 		NumMemtables:        2,
@@ -59,7 +60,7 @@ func (b *Badger) Init() (err error) {
 	if b.NumCompactors <= 1 {
 		return errors.New("numCompactors must be > 1")
 	}
-
+	_ = osx.CreateDirIsNotExist(b.Path, 0755)
 	var opt = badger.DefaultOptions(b.Path).
 		WithTruncate(true).
 		WithLogger(nil).

@@ -43,12 +43,14 @@ func NewRouter() *Router {
 		CategoryPageRule: RouterDefaultCategoryPageRule,
 		TagRule:          RouterDefaultTagRule,
 		TagPageRule:      RouterDefaultTagPageRule,
-		Options:          fiber.Config{},
-		CompressLevel:    0,
-		MinifyCode:       true,
-		ETag:             true,
-		ProxyHeader:      []string{},
-		PprofSecret:      random.RandString(10),
+		Options: fiber.Config{
+			ReadBufferSize: 10240,
+		},
+		CompressLevel: 0,
+		MinifyCode:    true,
+		ETag:          true,
+		ProxyHeader:   []string{},
+		PprofSecret:   random.RandString(10),
 	}
 }
 

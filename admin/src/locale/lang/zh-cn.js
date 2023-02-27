@@ -155,8 +155,8 @@ export default {
     random:'随机',
     tls:'TLS',
     needRestartApp:'需要重启应用后生效',
-
-
+    mossAbout:'Moss 苔藓、青苔之意，希望moss可以如青苔一样，顽强的活着，遍地生根。',
+    mossInstructions:'本程序基于MIT协议开源，完全免费，请放心使用。不明白的地方可以与作者沟通。切勿用于非法用途。',
 
 
     GenerateSlug:'自动生成别名',

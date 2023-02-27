@@ -34,7 +34,7 @@ type Options struct {
 
 func DefaultOptions() Options {
 	return Options{
-		Expire:     1 * time.Minute,
+		Expire:     3 * time.Minute,
 		Width:      198,
 		Height:     63,
 		NoiseLevel: captcha.MEDIUM,

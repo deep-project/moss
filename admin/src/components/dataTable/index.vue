@@ -92,7 +92,7 @@
            :footer="false"
   >
       <template #title>{{ postRecord.id > 0 ? $t('edit') : $t('create') }}</template>
-      <a-form ref="formRef" :layout="formLayout" class="w-full h-full" :model="postRecord" :style="formStyle">
+      <a-form ref="formRef" :layout="formLayout" auto-label-width class="w-full h-full" :model="postRecord" :style="formStyle">
           <a-spin :loading="loadingGet" class="w-full h-full overflow-auto" :class="{'overflow-hidden':loadingGet}" :size="28">
             <component v-bind:is="postComponent"></component>
           </a-spin>

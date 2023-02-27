@@ -1,5 +1,5 @@
 <template>
-  <a-dropdown @select="useSetLocale" position="br">
+  <a-dropdown class="locale" @select="useSetLocale" position="br" :scrollbar="false" style="height:100%">
     <a-button :type="type">
       <template #icon>
         <icon-language :size="18" />
@@ -16,3 +16,10 @@
 
   defineProps({type:String})
 </script>
+
+
+<style>
+.locale .arco-dropdown-list-wrapper{
+  max-height:500px !important;
+}
+</style>

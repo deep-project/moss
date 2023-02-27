@@ -1,16 +1,49 @@
 import { createI18n } from 'vue-i18n'
 
-import enUS from '@arco-design/web-vue/es/locale/lang/en-us';
-import zhCN from '@arco-design/web-vue/es/locale/lang/zh-cn';
-
 import en_US from "./lang/en-us";
+import de_DE from "./lang/de-de";
+import es_ES from "./lang/es-es";
+import fr_FR from "./lang/fr-fr";
+import id_ID from "./lang/id-id";
+import it_IT from "./lang/it-it";
+import ja_JP from "./lang/ja-jp";
+import ko_KR from "./lang/ko-kr";
+import pt_BR from "./lang/pt-br";
+import th_TH from "./lang/th-th";
 import zh_CN from "./lang/zh-cn";
+import zh_TW from "./lang/zh-tw";
+
+
+
+import enUS from '@arco-design/web-vue/es/locale/lang/en-us';
+import deDE from '@arco-design/web-vue/es/locale/lang/de-de';
+import esES from '@arco-design/web-vue/es/locale/lang/es-es';
+import frFR from '@arco-design/web-vue/es/locale/lang/fr-fr';
+import idID from '@arco-design/web-vue/es/locale/lang/id-id';
+import itIT from '@arco-design/web-vue/es/locale/lang/it-it';
+import jaJP from '@arco-design/web-vue/es/locale/lang/ja-jp';
+import koOR from '@arco-design/web-vue/es/locale/lang/ko-kr';
+import ptBR from '@arco-design/web-vue/es/locale/lang/pt-pt';
+import thTH from '@arco-design/web-vue/es/locale/lang/th-th';
+import zhCN from '@arco-design/web-vue/es/locale/lang/zh-cn';
+import zhTW from '@arco-design/web-vue/es/locale/lang/zh-tw';
+
+
 
 import {
-    enUS as naiveEnUS,
-    zhCN as naiveZhUS,
-    dateZhCN,
     dateEnUS,
+    dateDeDE,
+    dateEsAR,
+    dateFrFR,
+    dateIdID,
+    dateItIT,
+    dateJaJP,
+    dateKoKR,
+    datePtBR,
+    dateThTH,
+    dateZhCN,
+    dateZhTW,
+
 } from 'naive-ui'
 
 import {useStore} from "@/store/index.js";
@@ -19,8 +52,18 @@ import {useNavigatorLanguage} from "@vueuse/core";
 export const defaultLocale = "en-us"
 
 export const localeList = {
-    'en-us': {name:"English",lang:en_US, arcoLang:enUS, naiveLang: naiveEnUS, naiveDateLang: dateEnUS},
-    'zh-cn': {name:"简体中文",lang:zh_CN, arcoLang:zhCN, naiveLang: naiveZhUS, naiveDateLang: dateZhCN},
+    'zh-cn': {name:"简体中文",lang:zh_CN, arcoLang:zhCN, naiveDateLang: dateZhCN},
+    'zh-tw': {name:"繁體中文",lang:zh_TW, arcoLang:zhTW, naiveDateLang: dateZhTW},
+    'en-us': {name:"English",lang:en_US, arcoLang:enUS, naiveDateLang: dateEnUS},
+    'de-de': {name:"Deutsch",lang:de_DE, arcoLang:deDE, naiveDateLang: dateDeDE},
+    'es-es': {name:"Español",lang:es_ES, arcoLang:esES, naiveDateLang: dateEsAR},
+    'fr-fr': {name:"Français",lang:fr_FR, arcoLang:frFR, naiveDateLang: dateFrFR},
+    'id-id': {name:"Indonesian",lang:id_ID, arcoLang:idID, naiveDateLang: dateIdID},
+    'it-it': {name:"Italiano",lang:it_IT, arcoLang:itIT, naiveDateLang: dateItIT},
+    'ja-jp': {name:"日本語",lang:ja_JP, arcoLang:jaJP, naiveDateLang: dateJaJP},
+    'ko-kr': {name:"한국어",lang:ko_KR, arcoLang:koOR, naiveDateLang: dateKoKR},
+    'pt-br': {name:"Português",lang:pt_BR, arcoLang:ptBR, naiveDateLang: datePtBR},
+    'th-th': {name:"ภาษาไทย",lang:th_TH, arcoLang:thTH, naiveDateLang: dateThTH},
 }
 
 // vue-i18n package

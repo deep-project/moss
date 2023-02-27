@@ -18,7 +18,7 @@
     <div class="flex-none container py-1 md:py-2 lg:py-4 flex justify-between items-center overflow-hidden" :class="{'lg:py-2':headFixed}">
 
         {{ include "../widget/logo.html" }}
-        {{ include "../widget/menu.html" }}
+        {{ include "../widget/nav.html" }}
 
         <div class="lg:hidden flex">
             <div class="cursor-pointer flex items-center" x-on:click="dark = !dark; localStorage.setItem('dark',dark ?'dark':'')" x-cloak>

@@ -28,7 +28,7 @@ func NewLog() *Log {
 			"Googlebot", "bingBot", "Baiduspider", "msnbot", "YandexBot", "Yahoo! Slurp",
 			// 国内
 			"360Spider", "SogouSpider", "Sogou web spider", "Sogou Pic Spider", "DNSPod", "Bytespider",
-			"AspiegelBot", "YisouSpider", "DuckDuckGo", "JikeSpider", "YoudaoBot", "JianKongBao",
+			"AspiegelBot", "YisouSpider", "DuckDuckGo", "JikeSpider", "YoudaoBot", "JianKongBao", "PetalBot",
 			// 国外
 			"AhrefsBot", "MJ12bot", "SemrushBot", "lycos", "Twitterbot", "DotBot", "MauiBot", "Rogerbot",
 			"exabot", "Teoma", "DOCOMO", "Speedy Spider", "LinkpadBot", "DataForSeoBot", "BLEXBot",

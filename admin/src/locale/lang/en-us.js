@@ -155,7 +155,8 @@ export default {
     random:'Random',
     tls:'TLS',
     needRestartApp:'Requires application restart to take effect',
-
+    mossAbout:'Moss means moss or green moss. I hope that Moss can be as tenacious as moss, taking root and thriving everywhere.',
+    mossInstructions:'This program is open-source under the MIT License and completely free to use. Please feel free to use it with confidence. If you have any questions, you can communicate with the author. Do not use it for illegal purposes.',
 
 
     GenerateSlug:'Auto Generate Slug',

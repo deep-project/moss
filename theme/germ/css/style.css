@@ -56,30 +56,35 @@ header a:hover{
     @apply no-underline;
 }
 
-.menu .menu-item.current h2>a,
-.menu .menu-item:hover h2>a,
-.menu a:hover{
+nav{
+    @apply flex-grow hidden lg:grid grid-flow-col auto-cols-max gap-5 overflow-hidden overflow-x-auto;
+}
+nav::-webkit-scrollbar {
+    height:0;width:0;
+}
+nav a{
+    @apply px-3 block py-1;
+}
+nav .nav-item.current h2>a,
+nav .nav-item:hover h2>a,
+nav a:hover{
     @apply text-current bg-gray-100 dark:bg-neutral-600 dark:text-white rounded-sm;
 }
 
-.menu h2 a{
-    @apply px-3 py-1;
-}
-
-.menu-sub{
+.nav-sub{
     @apply static lg:absolute pt-2 z-30;
 }
-.menu-sub ul{
+.nav-sub ul{
     @apply p-2 rounded lg:shadow-md bg-white dark:bg-neutral-800 ;
 }
 .drawer ul{
     @apply dark:bg-transparent;
 }
-.menu-sub li{
+.nav-sub li{
     @apply mb-1;
 }
-.menu-sub li a{
-    @apply block py-1 px-5;
+.nav-sub li a{
+    @apply px-5;
 }
 
 .tags li{

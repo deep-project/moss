@@ -5,11 +5,11 @@
     </a-form-item>
 
     <a-form-item label="valueLogLoadingMode" help="default: MemoryMap" >
-      <a-radio-group  type="button" v-model="data.valueLogLoadingMode" :options="loadingModeOptions" />
+      <a-radio-group v-model="data.valueLogLoadingMode" :options="loadingModeOptions" />
     </a-form-item>
 
     <a-form-item label="tableLoadingMode" help="default: MemoryMap" >
-      <a-radio-group  type="button" v-model="data.tableLoadingMode" :options="loadingModeOptions"/>
+      <a-radio-group v-model="data.tableLoadingMode" :options="loadingModeOptions"/>
     </a-form-item>
 
     <a-form-item label="numMemtables" help="default: 2">
@@ -35,7 +35,7 @@
     </a-form-item>
 
   <a-form-item label="compression" help="default: snappy">
-      <a-radio-group  type="button" v-model="data.compression" >
+      <a-radio-group v-model="data.compression" >
         <a-radio :value="0">none</a-radio>
         <a-radio :value="1">snappy</a-radio>
         <a-radio :value="2">zstd</a-radio>

@@ -16,7 +16,7 @@
 
         <a-grid-item v-for="(item,index) in disks">
             <a-progress type="circle" :size="store.isMobile ? 'medium':'large'" :percent="dec(item)" status='warning' :color="color" />
-            <div class="title">{{$t('disk') + (disks.length > 1 ? (index+1):'')}}</div>
+            <div class="title">{{$t('disk') + (disks.length > 1 ? ' '+(index+1):'')}}</div>
         </a-grid-item>
 
       </a-grid>
