@@ -167,4 +167,136 @@ export default {
     MakeCarousel : 'Créer un carrousel',
     PostStore : 'Publier des articles',
     DidiAuto : 'Didi Auto',
+
+
+    wangEditor:{
+        editor: {
+            more: 'Plus',
+            justify: 'Justifier',
+            indent: 'Indenter',
+            image: 'Image',
+            video: 'Vidéo',
+        },
+        common: {
+            ok: "OK",
+            delete: "Supprimer",
+            enter: "Entrer"
+        },
+        blockQuote: {
+            title: "Citation"
+        },
+        codeBlock: {
+            title: "Bloc de code"
+        },
+        color: {
+            color: "Couleur de police",
+            bgColor: "Couleur de fond",
+            default: "Couleur par défaut",
+            clear: "Effacer la couleur de fond"
+        },
+        divider: {
+            title: "Séparateur"
+        },
+        emotion: {
+            title: "Émotion"
+        },
+        fontSize: {
+            title: "Taille de police",
+            default: "Taille par défaut"
+        },
+        fontFamily: {
+            title: "Famille de police",
+            default: "Police par défaut"
+        },
+        fullScreen: {
+            title: "Plein écran"
+        },
+        header: {
+            title: "En-tête",
+            text: "Texte"
+        },
+        image: {
+            netImage: "Image Internet",
+            delete: "Supprimer l'image",
+            edit: "Modifier l'image",
+            viewLink: "Voir le lien",
+            src: "Source de l'image",
+            desc: "Description",
+            link: "Lien de l'image"
+        },
+        indent: {
+            decrease: "Diminuer",
+            increase: "Augmenter"
+        },
+        justify: {
+            left: "Gauche",
+            right: "Droite",
+            center: "Centrer",
+            justify: "Justifier"
+        },
+        lineHeight: {
+            title: "Hauteur de ligne",
+            default: "Hauteur par défaut"
+        },
+        link: {
+            insert: "Insérer le lien",
+            text: "Texte du lien",
+            url: "Source du lien",
+            unLink: "Supprimer le lien",
+            edit: "Modifier le lien",
+            view: "Voir le lien"
+        },
+        textStyle: {
+            bold: "Gras",
+            clear: "Effacer les styles",
+            code: "Code en ligne",
+            italic: "Italique",
+            sub: "Sub",
+            sup: "Sup",
+            through: "Barré",
+            underline: "Souligné"
+        },
+        undo: {
+            undo: "Annuler",
+            redo: "Rétablir"
+        },
+        todo: {
+            todo: "Tâche à faire"
+        },
+        listModule:{
+            unOrderedList:"Liste non ordonnée",
+            orderedList:"Liste ordonnée"
+        },
+        tableModule:{
+            deleteCol:"Supprimer la colonne",
+            deleteRow:"Supprimer la ligne",
+            deleteTable:"Supprimer le tableau",
+            widthAuto:"Largeur automatique",
+            insertCol:"Insérer une colonne",
+            insertRow:"Insérer une ligne",
+            insertTable:"Insérer un tableau",
+            header:"En-tête",
+        },
+        videoModule:{
+            delete:"Supprimer",
+            uploadVideo:"Télécharger vidéo",
+            insertVideo:"Insérer vidéo",
+            videoSrc:"Source de la vidéo",
+            videoSrcPlaceHolder:"URL de fichier vidéo ou <iframe> tiers",
+            videoPoster:"Afficheur vidéo",
+            videoPosterPlaceHolder:"URL d'image d'afficheur",
+            ok:"OK",
+            editSize:"Modifier la taille",
+            width:"Largeur",
+            height:"Hauteur",
+        },
+        uploadImgModule:{
+            uploadImage:"Télécharger l'image",
+            uploadError:"Erreur de téléchargement de {{fileName}}",
+        },
+        highLightModule:{
+            selectLang:"Langue",
+        }
+    }
+
 }

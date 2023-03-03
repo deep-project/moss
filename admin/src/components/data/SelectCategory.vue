@@ -10,7 +10,9 @@
                     allow-clear
                     allow-search
                     :placeholder="$t('select')"
-                    :style="cascaderStyle" :multiple="multiple" />
+                    :style="cascaderStyle" :multiple="multiple"
+                @clear="onClear"
+        />
 
       <a-trigger class="flex-grow" trigger="click" position="br" auto-fit-position :unmount-on-close="false" :popup-offset="10">
         <a-button type="primary"><template #icon><icon-edit /></template></a-button>
@@ -45,6 +47,10 @@
 
   function onInput(val){
     emit('update:modelValue', val)
+  }
+
+  function onClear(){
+    data.value = 0
   }
 
   const {data:treeData,loading:loadingTreeData} = useRequest(categoryTree,{

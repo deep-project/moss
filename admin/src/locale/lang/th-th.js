@@ -172,4 +172,138 @@ export default {
     MakeCarousel: 'สร้าง Carousel',
     PostStore: 'เผยแพร่บทความ',
     DidiAuto: 'Didi Auto',
+
+
+
+
+    wangEditor:{
+        editor: {
+            more: 'เพิ่มเติม',
+            justify: 'จัดแนว',
+            indent: 'เพิ่มการเยื้อง',
+            image: 'รูปภาพ',
+            video: 'วิดีโอ',
+        },
+        common: {
+            ok: "ตกลง",
+            delete: "ลบ",
+            enter: "เข้า"
+        },
+        blockQuote: {
+            title: "อ้างอิง"
+        },
+        codeBlock: {
+            title: "บล็อกโค้ด"
+        },
+        color: {
+            color: "สีตัวอักษร",
+            bgColor: "สีพื้นหลัง",
+            default: "สีเริ่มต้น",
+            clear: "ล้างสีพื้นหลัง"
+        },
+        divider: {
+            title: "แบ่งกลาง"
+        },
+        emotion: {
+            title: "อารมณ์"
+        },
+        fontSize: {
+            title: "ขนาดตัวอักษร",
+            default: "ค่าเริ่มต้น"
+        },
+        fontFamily: {
+            title: "แบบอักษร",
+            default: "ค่าเริ่มต้น"
+        },
+        fullScreen: {
+            title: "เต็มหน้าจอ"
+        },
+        header: {
+            title: "ส่วนหัว",
+            text: "ข้อความ"
+        },
+        image: {
+            netImage: "รูปภาพบนเครือข่าย",
+            delete: "ลบรูปภาพ",
+            edit: "แก้ไขรูปภาพ",
+            viewLink: "ดูลิงก์",
+            src: "ที่มาของรูปภาพ",
+            desc: "คำอธิบาย",
+            link: "ลิงค์รูปภาพ"
+        },
+        indent: {
+            decrease: "ลดการเยื้อง",
+            increase: "เพิ่มการเยื้อง"
+        },
+        justify: {
+            left: "ชิดซ้าย",
+            right: "ชิดขวา",
+            center: "กึ่งกลาง",
+            justify: "จัดชิดขอบ"
+        },
+        lineHeight: {
+            title: "ความสูงของบรรทัด",
+            default: "ค่าเริ่มต้น"
+        },
+        link: {
+            insert: "แทรกลิงค์",
+            text: "ข้อความลิงค์",
+            url: "แหล่งที่มาของลิงค์",
+            unLink: "ยกเลิกการเชื่อมโยง",
+            edit: "แก้ไขลิงค์",
+            view: "ดูลิงค์"
+        },
+        textStyle: {
+            bold: "Negrito",
+            clear: "Limpar estilos",
+            code: "Código em linha",
+            italic: "Itálico",
+            sub: "Subscrito",
+            sup: "Sobrescrito",
+            through: "Riscado",
+            underline: "Sublinhado"
+        },
+        undo: {
+            undo: "Desfazer",
+            redo: "Refazer"
+        },
+        todo: {
+            todo: "Tarefas"
+        },
+        listModule:{
+            unOrderedList:"Lista não ordenada",
+            orderedList:"Lista ordenada"
+        },
+        tableModule:{
+            deleteCol:"Excluir coluna",
+            deleteRow:"Excluir linha",
+            deleteTable:"Excluir tabela",
+            widthAuto:"Largura automática",
+            insertCol:"Inserir coluna",
+            insertRow:"Inserir linha",
+            insertTable:"Inserir tabela",
+            header:"Cabeçalho",
+        },
+        videoModule:{
+            delete:"Excluir",
+            uploadVideo:"Carregar vídeo",
+            insertVideo:"Inserir vídeo",
+            videoSrc:"Fonte de vídeo",
+            videoSrcPlaceHolder:"URL do arquivo de vídeo ou de terceiros <iframe>",
+            videoPoster:"Cartaz do vídeo",
+            videoPosterPlaceHolder:"URL da imagem do cartaz",
+            ok:"Ok",
+            editSize:"Editar tamanho",
+            width:"Largura",
+            height:"Altura",
+        },
+        uploadImgModule:{
+            uploadImage:"Carregar imagem",
+            uploadError:"Erro ao carregar {{fileName}}",
+        },
+        highLightModule:{
+            selectLang:"Língua",
+        }
+    }
+
 }

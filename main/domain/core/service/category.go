@@ -378,3 +378,8 @@ func (s *CategoryService) ListByCategoriesWithChildren(ctx *context.Context, lis
 	}
 	return
 }
+
+// BatchSetParentCategory 批量设置父分类
+func (s *CategoryService) BatchSetParentCategory(parentID int, ids []int) error {
+	return repository.Category.BatchSetParentCategory(parentID, ids)
+}

@@ -172,4 +172,137 @@ export default {
     PostStore: '게시물 게시',
     DidiAuto: '디디 자동화',
 
+
+
+    wangEditor:{
+        editor: {
+            more: '더보기',
+            justify: '정렬',
+            indent: '들여쓰기',
+            image: '이미지',
+            video: '동영상',
+        },
+        common: {
+            ok: "확인",
+            delete: "삭제",
+            enter: "입력"
+        },
+        blockQuote: {
+            title: "인용구"
+        },
+        codeBlock: {
+            title: "코드 블록"
+        },
+        color: {
+            color: "글자색",
+            bgColor: "배경색",
+            default: "기본 색상",
+            clear: "배경색 지우기"
+        },
+        divider: {
+            title: "구분선"
+        },
+        emotion: {
+            title: "이모티콘"
+        },
+        fontSize: {
+            title: "글자 크기",
+            default: "기본"
+        },
+        fontFamily: {
+            title: "글꼴",
+            default: "기본"
+        },
+        fullScreen: {
+            title: "전체 화면"
+        },
+        header: {
+            title: "제목",
+            text: "제목 텍스트"
+        },
+        image: {
+            netImage: "인터넷 이미지",
+            delete: "이미지 삭제",
+            edit: "이미지 편집",
+            viewLink: "링크 보기",
+            src: "이미지 소스",
+            desc: "이미지 설명",
+            link: "이미지 링크"
+        },
+        indent: {
+            decrease: "들여쓰기 감소",
+            increase: "들여쓰기 증가"
+        },
+        justify: {
+            left: "왼쪽 정렬",
+            right: "오른쪽 정렬",
+            center: "가운데 정렬",
+            justify: "양쪽 정렬"
+        },
+        lineHeight: {
+            title: "줄 간격",
+            default: "기본"
+        },
+        link: {
+            insert: "링크 삽입",
+            text: "링크 텍스트",
+            url: "링크 소스",
+            unLink: "링크 해제",
+            edit: "링크 편집",
+            view: "링크 보기"
+        },
+        textStyle: {
+            bold: "굵게",
+            clear: "스타일 지우기",
+            code: "인라인 코드",
+            italic: "기울임꼴",
+            sub: "아래 첨자",
+            sup: "위 첨자",
+            through: "취소선",
+            underline: "밑줄"
+        },
+        undo: {
+            undo: "실행 취소",
+            redo: "다시 실행"
+        },
+        todo: {
+            todo: "할 일"
+        },
+        listModule:{
+            unOrderedList:"글머리 기호 목록",
+            orderedList:"번호 매기기 목록"
+        },
+        tableModule:{
+            deleteCol:"열 삭제",
+            deleteRow:"행 삭제",
+            deleteTable:"표 삭제",
+            widthAuto:"자동 너비",
+            insertCol:"열 삽입",
+            insertRow:"행 삽입",
+            insertTable:"표 삽입",
+            header:"머리글",
+        },
+        videoModule:{
+            delete:"삭제",
+            uploadVideo:"동영상 업로드",
+            insertVideo:"동영상 삽입",
+            videoSrc:"동영상 소스",
+            videoSrcPlaceHolder:"동영상 파일 URL 또는 제3자 <iframe>",
+            videoPoster:"동영상 포스터",
+            videoPosterPlaceHolder:"포스터 이미지 URL",
+            ok:"확인",
+            editSize:"크기 편집",
+            width:"너비",
+            height:"높이",
+        },
+        uploadImgModule:{
+            uploadImage:"이미지 업로드",
+            uploadError:"{{fileName}} 업로드 오류",
+        },
+        highLightModule:{
+            selectLang:"언어",
+        }
+    }
+
+
 }

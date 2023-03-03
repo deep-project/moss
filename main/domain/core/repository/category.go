@@ -127,3 +127,8 @@ func (r *CategoryRepo) GetWithParent(id int) (res []entity.Category, err error) 
 	res = append(res, parent)
 	return
 }
+
+// BatchSetParentCategory 批量设置父分类
+func (r *CategoryRepo) BatchSetParentCategory(parentID int, ids []int) error {
+	return db.DB.Model(&entity.Category{}).Where("id in ?", ids).UpdateColumn("parent_id", parentID).Error
+}

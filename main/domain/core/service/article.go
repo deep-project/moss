@@ -351,3 +351,8 @@ func (s *ArticleService) FindDetailListByID(list []entity.ArticleDetail, id int)
 	}
 	return res, false
 }
+
+// BatchSetCategory 批量设置分类
+func (s *ArticleService) BatchSetCategory(categoryID int, ids []int) error {
+	return repository.Article.BatchSetCategory(categoryID, ids)
+}

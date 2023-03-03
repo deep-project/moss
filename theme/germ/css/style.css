@@ -44,10 +44,8 @@ a:hover{
 .page-title{
     @apply text-3xl font-bold text-black dark:text-neutral-200;
 }
-.page-title a:hover {
-    @apply no-underline;
-}
 
+article p,
 article img{
     margin: 10px auto;
 }
@@ -59,16 +57,18 @@ header a:hover{
 nav{
     @apply flex-grow hidden lg:grid grid-flow-col auto-cols-max gap-5 overflow-hidden overflow-x-auto;
 }
+
 nav::-webkit-scrollbar {
     height:0;width:0;
 }
+
 nav a{
     @apply px-3 block py-1;
 }
 nav .nav-item.current h2>a,
 nav .nav-item:hover h2>a,
 nav a:hover{
-    @apply text-current bg-gray-100 dark:bg-neutral-600 dark:text-white rounded-sm;
+    @apply bg-gray-100 dark:bg-neutral-600 rounded-sm;
 }
 
 .nav-sub{
@@ -114,21 +114,45 @@ nav a:hover{
     background-image:url('data:image/svg+xml,<svg fill="%23939393" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><ellipse cx="373.14" cy="219.33" rx="46.29" ry="46" fill="none"></ellipse><path d="M80 132v328a20 20 0 0 0 20 20h392a20 20 0 0 0 20-20V132a20 20 0 0 0-20-20H100a20 20 0 0 0-20 20zm293.14 41.33a46 46 0 1 1-46.28 46a46.19 46.19 0 0 1 46.28-46zm-261.41 276v-95.48l122.76-110.2L328.27 337l-113 112.33zm368.27 0H259l144.58-144L480 370.59z"></path><path d="M20 32A20 20 0 0 0 0 52v344a20 20 0 0 0 20 20h28V100a20 20 0 0 1 20-20h380V52a20 20 0 0 0-20-20z"></path></svg>');
 }
 .list-item .description {
-    @apply mt-1 text-sm w-full line-clamp-3 leading-5 text-gray-400 dark:text-neutral-600;
+    @apply text-sm w-full line-clamp-3 leading-5 text-gray-400 dark:text-neutral-600;
 }
 .list-item .title{
-    @apply block w-full truncate font-bold text-xl 2xl:text-2xl text-gray-900 dark:text-neutral-200;
+    @apply block pb-2 w-full lg:truncate font-bold text-xl 2xl:text-2xl text-gray-900 dark:text-neutral-200;
 }
 
-.list-item .title>a:hover{
+.list-item .title a:hover{
     @apply underline underline-offset-8;
 }
+
 .list-item .meta{
     @apply mt-1 flex text-sm text-gray-400 dark:text-neutral-500;
 }
 .list-item .meta>div{
     @apply flex items-center mr-3;
 }
+
+.drawer .nav-item{
+    @apply p-2;
+}
+.drawer .nav-item a{
+    @apply block p-0;
+}
+
+.drawer .nav-item .nav-sub{
+    @apply pt-0;
+}
+
+.drawer .nav-item .nav-sub ul{
+    @apply p-0;
+}
+.drawer .nav-item .nav-sub ul li{
+    @apply mt-1 text-sm pl-2;
+}
+
+.drawer ::-webkit-scrollbar {
+    width: 4px;
+}
+
 
 .icon{
     display: inline-block;

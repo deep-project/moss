@@ -171,4 +171,137 @@ export default {
     DidiAuto:'滴滴自動化',
 
 
+
+
+    wangEditor:{
+        editor: {
+            more: 'もっと',
+            justify: '整列',
+            indent: 'インデント',
+            image: '画像',
+            video: 'ビデオ',
+        },
+        common: {
+            ok: "OK",
+            delete: "削除",
+            enter: "入力"
+        },
+        blockQuote: {
+            title: "引用"
+        },
+        codeBlock: {
+            title: "コードブロック"
+        },
+        color: {
+            color: "フォントの色",
+            bgColor: "背景の色",
+            default: "デフォルトの色",
+            clear: "背景色をクリア"
+        },
+        divider: {
+            title: "区切り線"
+        },
+        emotion: {
+            title: "絵文字"
+        },
+        fontSize: {
+            title: "フォントサイズ",
+            default: "デフォルト"
+        },
+        fontFamily: {
+            title: "フォントファミリー",
+            default: "デフォルト"
+        },
+        fullScreen: {
+            title: "フルスクリーン"
+        },
+        header: {
+            title: "ヘッダー",
+            text: "テキスト"
+        },
+        image: {
+            netImage: "インターネット画像",
+            delete: "画像を削除",
+            edit: "画像を編集",
+            viewLink: "リンクを表示",
+            src: "画像ソース",
+            desc: "説明",
+            link: "画像リンク"
+        },
+        indent: {
+            decrease: "減らす",
+            increase: "増やす"
+        },
+        justify: {
+            left: "左揃え",
+            right: "右揃え",
+            center: "中央揃え",
+            justify: "均等揃え"
+        },
+        lineHeight: {
+            title: "行の高さ",
+            default: "デフォルト"
+        },
+        link: {
+            insert: "リンクを挿入",
+            text: "リンクのテキスト",
+            url: "リンクのソース",
+            unLink: "リンクを削除",
+            edit: "リンクを編集",
+            view: "リンクを表示"
+        },
+        textStyle: {
+            bold: "太字",
+            clear: "スタイルをクリア",
+            code: "インラインコード",
+            italic: "イタリック",
+            sub: "下付き",
+            sup: "上付き",
+            through: "取り消し線",
+            underline: "下線"
+        },
+        undo: {
+            undo: "元に戻す",
+            redo: "やり直す"
+        },
+        todo: {
+            todo: "やることリスト"
+        },
+        listModule:{
+            unOrderedList:"番号なしリスト",
+            orderedList:"番号付きリスト"
+        },
+        tableModule:{
+            deleteCol: "列の削除",
+            deleteRow: "行の削除",
+            deleteTable: "表の削除",
+            widthAuto: "自動幅",
+            insertCol: "列の挿入",
+            insertRow: "行の挿入",
+            insertTable: "表の挿入",
+            header: "ヘッダー",
+        },
+        videoModule:{
+            delete: "削除",
+            uploadVideo: "動画のアップロード",
+            insertVideo: "動画の挿入",
+            videoSrc: "動画ソース",
+            videoSrcPlaceHolder: "動画ファイルのURL、または第三者の<iframe>",
+            videoPoster: "ポスター画像",
+            videoPosterPlaceHolder: "ポスター画像のURL",
+            ok: "OK",
+            editSize: "サイズの編集",
+            width: "幅",
+            height: "高さ",
+        },
+        uploadImgModule:{
+            uploadImage: "画像のアップロード",
+            uploadError: "{{fileName}}のアップロードエラー",
+        },
+        highLightModule:{
+            selectLang: "言語を選択",
+        }
+    }
+
+
 }

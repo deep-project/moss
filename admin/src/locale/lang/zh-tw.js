@@ -169,6 +169,143 @@ export default {
     MakeCarousel:'製作模板輪播',
     PostStore:'發布文章',
     DidiAuto:'滴滴友聯自動任務',
+
+
+
+
+
+
+
+    wangEditor:{
+        editor: {
+            more: '更多',
+            justify: '對齊',
+            indent: '縮進',
+            image: '圖片',
+            video: '視頻',
+        },
+        common: {
+            ok: "確定",
+            delete: "刪除",
+            enter: "輸入"
+        },
+        blockQuote: {
+            title: "引用"
+        },
+        codeBlock: {
+            title: "代碼塊"
+        },
+        color: {
+            color: "字體顏色",
+            bgColor: "背景顏色",
+            default: "默認顏色",
+            clear: "清除背景色"
+        },
+        divider: {
+            title: "分割線"
+        },
+        emotion: {
+            title: "表情"
+        },
+        fontSize: {
+            title: "字體大小",
+            default: "預設"
+        },
+        fontFamily: {
+            title: "字體",
+            default: "預設"
+        },
+        fullScreen: {
+            title: "全螢幕"
+        },
+        header: {
+            title: "標題",
+            text: "文字"
+        },
+        image: {
+            netImage: "網路圖片",
+            delete: "刪除圖片",
+            edit: "編輯圖片",
+            viewLink: "檢視連結",
+            src: "圖片來源",
+            desc: "說明",
+            link: "圖片連結"
+        },
+        indent: {
+            decrease: "減少縮排",
+            increase: "增加縮排"
+        },
+        justify: {
+            left: "靠左對齊",
+            right: "靠右對齊",
+            center: "置中對齊",
+            justify: "左右對齊"
+        },
+        lineHeight: {
+            title: "行高",
+            default: "預設"
+        },
+        link: {
+            insert: "插入連結",
+            text: "連結文字",
+            url: "連結來源",
+            unLink: "移除連結",
+            edit: "編輯連結",
+            view: "檢視連結"
+        },
+        textStyle: {
+            bold: "粗體",
+            clear: "清除樣式",
+            code: "行內程式碼",
+            italic: "斜體",
+            sub: "下標",
+            sup: "上標",
+            through: "刪除線",
+            underline: "底線"
+        },
+        undo: {
+            undo: "復原",
+            redo: "重做"
+        },
+        todo: {
+            todo: "待辦事項"
+        },
+        listModule:{
+            unOrderedList:"項目清單",
+            orderedList:"編號清單"
+        },
+        tableModule:{
+            deleteCol:"刪除欄",
+            deleteRow:"刪除列",
+            deleteTable:"刪除表格",
+            widthAuto:"自動寬度",
+            insertCol:"插入欄",
+            insertRow:"插入列",
+            insertTable:"插入表格",
+            header:"表頭",
+        },
+        videoModule:{
+            delete:"刪除",
+            uploadVideo:"上傳影片",
+            insertVideo:"插入影片",
+            videoSrc:"影片來源",
+            videoSrcPlaceHolder:"影片檔案網址或第三方 <iframe>",
+            videoPoster:"影片封面",
+            videoPosterPlaceHolder:"封面圖片網址",
+            ok:"確定",
+            editSize:"編輯尺寸",
+            width:"寬度",
+            height:"高度",
+        },
+        uploadImgModule:{
+            uploadImage:"上傳圖片",
+            uploadError:"{{fileName}} 上傳失敗",
+        },
+        highLightModule:{
+            selectLang:"選擇語言",
+        }
+    }
+
 }
 
 

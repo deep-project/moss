@@ -66,12 +66,12 @@ func (r *ArticleRepo) Update(item *entity.Article) error {
 }
 
 func (r *ArticleRepo) checkPost(tx *gorm.DB, item *entity.Article) error {
-	var id int
+	var existID int
 	if config.Config.More.UniqueTitle {
-		if err := tx.Model(&entity.ArticleBase{}).Where("title = ?", item.Title).Limit(1).Pluck("id", &id).Error; err != nil {
+		if err := tx.Model(&entity.ArticleBase{}).Where("title = ? and id != ?", item.Title, item.ID).Limit(1).Pluck("id", &existID).Error; err != nil {
 			return err
 		}
-		if id > 0 {
+		if existID > 0 {
 			return message.ErrTitleAlreadyExists
 		}
 	}
@@ -216,4 +216,9 @@ func (r *ArticleRepo) ListDetailByIds(ctx *context.Context, ids []int) (res []en
 func (r *ArticleRepo) CountByCategoryID(id int) (res int64, err error) {
 	err = db.DB.Model(entity.ArticleBase{}).Scopes(gormx.WhereCategoryID(id)).Count(&res).Error
 	return
+}
+
+// BatchSetCategory 批量设置分类
+func (r *ArticleRepo) BatchSetCategory(categoryID int, ids []int) error {
+	return db.DB.Model(&entity.ArticleBase{}).Where("id in ?", ids).UpdateColumn("category_id", categoryID).Error
 }

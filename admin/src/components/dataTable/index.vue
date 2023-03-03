@@ -218,6 +218,7 @@
     refreshList()
     refreshCount()
   }
+  provide('refresh', refresh)
 
   function refreshList(){
     run(modelName, params)

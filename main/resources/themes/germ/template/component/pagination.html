@@ -1,6 +1,6 @@
 {{ block pagination(pageTotal, existNextPage=false, disableCount=false, count=0) }}
     {{ if pageTotal != 0 || disableCount }}
-    <div class="flex flex-wrap gap-4 items-center justify-center m-10">
+    <div class="flex flex-wrap gap-4 items-center justify-center my-10">
 
         {{ if Page.PageNumber > 1}}
             <a class="px-2" href="{{ Data.PageURL(Page.PageNumber - 1) }}">« Prev</a>

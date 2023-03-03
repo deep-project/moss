@@ -3,31 +3,63 @@
 {{import "./component/pagination.html" }}
 {{import "./component/breadcrumb.html" }}
 
+
+
 {{block main()}}
+
+    {{ sub := Category().Children(Data.ID)}}
+    {{ res:= Widget.CategoryPageList(Data.ID, Page.PageNumber)}}
+
     <div class="card">
         {{yield breadcrumb(id=Data.ID)}}
-        <div class="mb-3">
-            <h1 class="page-title">
-                {{ if Page.PageNumber > 1}}
-                <a href="{{Data.URL()}}">{{Data.Name}}</a>
-                {{ else }}
-                {{Data.Name}}
-                {{ end }}
-            </h1>
-            {{ sub:= Category().Children(Data.ID)}}
-            {{ if len(sub) > 0}}
-                <ul class="tags text-sm py-4">
-                    {{ range i, v := sub}}
-                    <li><a href="{{v.URL()}}">{{v.Name}}</a></li>
-                    {{ end }}
-                </ul>
-            {{ end }}
-        </div>
 
-        {{ res:= Widget.CategoryPageList(Data.ID, Page.PageNumber)}}
-        {{yield article_list(list=res.List)}}
+        <h1 class="page-title">
+            {{ if Page.PageNumber > 1}}
+            <a href="{{Data.URL()}}">{{Data.Name}}</a>
+            {{ else }}
+            {{Data.Name}}
+            {{ end }}
+        </h1>
+
+
+        {{ if len(sub) > 0}}
+            <ul class="tags text-sm pt-4">
+                {{ range i, v := sub}}
+                <li><a href="{{v.URL()}}">{{v.Name}}</a></li>
+                {{ end }}
+            </ul>
+        {{ end }}
+
+
+        {{ if res.Count > 0}}
+        <div class="pt-4">
+            {{yield article_list(list=res.List)}}
+        </div>
         {{yield pagination(pageTotal=res.PageTotal, existNextPage=res.ExistNextPage, disableCount=res.DisableCount, count=res.Count)}}
+        {{ end }}
 
     </div>
 
+    {{ if res.Count ==0 }}
+        {{yield categoryChildrenList()}}
+    {{ end }}
+
 {{end}}
+
+
+{{block categoryChildrenList()}}
+
+    {{ range i, s := sub }}
+        {{ if i < 20}}
+            <div class="card">
+                <h2 class="card-title"><a href="{{s.URL()}}">{{ s.Name }}</a></h2>
+                <ul class="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+                    {{ range _, v := Article().Limit(16).ListByCategoryID(s.ID) }}
+                    <li class="h-6 leading-6 overflow-hidden"><a href="{{ v.URL() }}">{{v.Title}}</a></li>
+                    {{ end }}
+                </ul>
+            </div>
+        {{ end }}
+    {{ end }}
+
+{{end }}

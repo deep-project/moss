@@ -49,6 +49,7 @@ func (r *Router) api(route fiber.Router) {
 	route.Post("/article/createTagByNameList/:id", controller.ArticleCreateTagByNameList)
 	route.Post("/article/deleteTagByName/:id", controller.ArticleDeleteTagByName)
 	route.Post("/article/deleteTagByIds/:id", controller.ArticleDeleteTagByIds)
+	route.Post("/article/batchSetCategory/:category_id", controller.ArticleBatchSetCategory)
 
 	// category
 	route.Post("/category/list", controller.CategoryList)
@@ -61,6 +62,7 @@ func (r *Router) api(route fiber.Router) {
 	route.Post("/category/existsSlug", controller.CategoryExistsSlug)
 	route.Post("/category/existsName", controller.CategoryExistsName)
 	route.Get("/category/tree", controller.CategoryTree)
+	route.Post("/category/batchSetParentCategory/:parent_id", controller.CategoryBatchSetParentCategory)
 
 	// tag
 	route.Post("/tag/list", controller.TagList)

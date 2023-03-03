@@ -60,12 +60,12 @@ export default [
             {
                 path: '/logs',
                 name: 'logs',
-                redirect: { name: 'logs-item', params:{id:'app'} },
+                redirect: { name: 'logs-item', params:{id:''} },
                 meta: {icon:IconComputer},
                 component: () => import('@/views/log/layout.vue'),
                 children: [
                     {
-                        path: '/log/:id',
+                        path: '/log/:id?',
                         name: 'logs-item',
                         meta:{ lang:'log'},
                         component: () => import('@/views/log/index.vue'),

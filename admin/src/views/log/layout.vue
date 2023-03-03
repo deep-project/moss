@@ -1,7 +1,7 @@
 <template>
   <SubMenuLayout :width="120">
     <template #sider>
-      <a-menu class="menu" v-model:selected-keys="current">
+      <a-menu class="menu" v-model:selected-keys="current" @menu-item-click="menuItemClick">
         <router-link v-for="item in ['app','sql','slow_sql','visitor','spider']" :to="{name:'logs-item',params:{id:item}}">
           <a-menu-item :key="item">{{$t(item)}}</a-menu-item>
         </router-link>
@@ -13,19 +13,32 @@
 
 <script setup>
   import SubMenuLayout from '@/layout/subMenu.vue'
-  import {ref, watch} from "vue";
-  import {useRoute} from "vue-router";
+  import {watch,ref} from "vue";
+  import {useRoute,useRouter} from "vue-router";
+  import {useStorage} from "@vueuse/core";
 
   const route = useRoute()
+  const router = useRouter()
   const current = ref()
+  const defLogItem = useStorage("log_page_current",'app')
 
   function initCurrent(){
-    current.value = [route.params.id]
+   current.value = [route.params.id]
   }
+
   initCurrent()
   watch(()=>route.name,(val)=>{
     initCurrent()
   })
+
+  if(!route.params.id){
+    router.push({ name: 'logs-item', params:{id: defLogItem.value } })
+    current.value = [defLogItem.value]
+  }
+
+  function menuItemClick(val){
+    defLogItem.value = val
+  }
 
 </script>
 

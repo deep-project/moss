@@ -5,13 +5,13 @@ import (
 	"github.com/glebarez/sqlite"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
-	"os"
-	"strings"
 	//"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 	"moss/infrastructure/general/conf"
+	"os"
+	"strings"
 )
 
 var DB *gorm.DB

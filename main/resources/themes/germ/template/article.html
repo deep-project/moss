@@ -10,7 +10,7 @@
     <article class="card leading-8">
         {{yield breadcrumb(id=Data.CategoryID)}}
         <h1 class="text-xl md:text-3xl font-bold text-black dark:text-neutral-200">{{ Data.Title }}</h1>
-        <p class="py-3 mb-3 flex items-center border-b text-sm text-gray-400 dark:text-neutral-400 dark:border-neutral-600">
+        <p class="pb-3 pt-1 mb-3 flex items-center border-b text-sm text-gray-400 dark:text-neutral-400 dark:border-neutral-600">
             <span><i class="mr-1 icon icon-time"></i>{{ Data.CreateTimeFormat() }}</span>
             {{ if Data.Views > 0}}
             <span class="ml-3"><i class="mr-1 icon icon-view"></i>{{ Data.Views }}</span>

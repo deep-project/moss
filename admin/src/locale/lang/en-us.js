@@ -168,4 +168,137 @@ export default {
     MakeCarousel:'Make Carousel',
     PostStore:'Publish Articles',
     DidiAuto:'Didi Auto',
+
+
+    wangEditor:{
+        editor: {
+            more: 'More',
+            justify: 'Justify',
+            indent: 'Indent',
+            image: 'Image',
+            video: 'Video',
+        },
+        common: {
+            ok: "OK",
+            delete: "Delete",
+            enter: "Enter"
+        },
+        blockQuote: {
+            title: "Quote"
+        },
+        codeBlock: {
+            title: "Code block"
+        },
+        color: {
+            color: "Font color",
+            bgColor: "Back color",
+            default: "Default color",
+            clear: "Clear back color"
+        },
+        divider: {
+            title: "Divider"
+        },
+        emotion: {
+            title: "Emotion"
+        },
+        fontSize: {
+            title: "Font size",
+            default: "Default"
+        },
+        fontFamily: {
+            title: "Font family",
+            default: "Default"
+        },
+        fullScreen: {
+            title: "Full screen"
+        },
+        header: {
+            title: "Header",
+            text: "Text"
+        },
+        image: {
+            netImage: "Net image",
+            delete: "Delete image",
+            edit: "Edit image",
+            viewLink: "View link",
+            src: "Image src",
+            desc: "Description",
+            link: "Image link"
+        },
+        indent: {
+            decrease: "Decrease",
+            increase: "Increase"
+        },
+        justify: {
+            left: "Left",
+            right: "Right",
+            center: "Center",
+            justify: "Justify"
+        },
+        lineHeight: {
+            title: "Line height",
+            default: "Default"
+        },
+        link: {
+            insert: "Insert link",
+            text: "Link text",
+            url: "Link source",
+            unLink: "Unlink",
+            edit: "Edit link",
+            view: "View link"
+        },
+        textStyle: {
+            bold: "Bold",
+            clear: "Clear styles",
+            code: "Inline code",
+            italic: "Italic",
+            sub: "Sub",
+            sup: "Sup",
+            through: "Through",
+            underline: "Underline"
+        },
+        undo: {
+            undo: "undo",
+            redo: "Redo"
+        },
+        todo: {
+            todo: "Todo"
+        },
+        listModule:{
+            unOrderedList:"Unordered list",
+            orderedList:"Ordered list"
+        },
+        tableModule:{
+            deleteCol:"Delete column",
+            deleteRow:"Delete row",
+            deleteTable:"Delete table",
+            widthAuto:"Width auto",
+            insertCol:"Insert column",
+            insertRow:"Insert row",
+            insertTable:"Insert table",
+            header:"Header",
+        },
+        videoModule:{
+            delete:"Delete",
+            uploadVideo:"Upload video",
+            insertVideo:"Insert video",
+            videoSrc:"Video source",
+            videoSrcPlaceHolder:"Video file url, or third-party <iframe>",
+            videoPoster:"Video poster",
+            videoPosterPlaceHolder:"Poster image url",
+            ok:"Ok",
+            editSize:"Edit size",
+            width:"Width",
+            height:"Height",
+        },
+        uploadImgModule:{
+            uploadImage:"Upload Image",
+            uploadError:"{{fileName}} upload error",
+        },
+        highLightModule:{
+            selectLang:"Language",
+        }
+    }
+
+
 }

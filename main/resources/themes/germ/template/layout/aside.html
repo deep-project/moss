@@ -1,13 +1,31 @@
 
 <div class="card">
     <div class="card-title"><i></i>Hot</div>
-    {{ include "../widget/global_list.html" }}
+    <ul>
+        {{ range i, v := Widget.GlobalList() }}
+        <li class="leading-7 truncate"><a href="{{v.URL()}}">{{v.Title}}</a></li>
+        {{ end }}
+    </ul>
 </div>
 
 <div class="card">
     <div class="card-title"><i></i>Tags</div>
-    {{ include "../widget/tag_cloud.html" }}
+    <ul class="tags text-sm pt-2">
+        {{ range i, v := Widget.TagCloud() }}
+        <li><a href="{{v.URL()}}">{{v.Name}}</a></li>
+        {{ end }}
+    </ul>
 </div>
+
+<div class="card">
+    <div class="card-title"><i></i>Random</div>
+    <ul>
+        {{ range i, v := Article().Comment("aside random").Limit(10).PseudorandomList() }}
+        <li class="leading-7 truncate"><a href="{{v.URL()}}">{{v.Title}}</a></li>
+        {{ end }}
+    </ul>
+</div>
+
 
 {{ if Page.Name == "index"}}
 <div class="card hidden lg:block">

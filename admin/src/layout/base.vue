@@ -17,12 +17,16 @@
   import {useRouter} from 'vue-router'
   import {useInitLocale,localeList} from "@/locale";
   import {useStore} from "@/store";
-  import {watch} from "vue";
+  import {computed, watch} from "vue";
   import BgColorPicker from "@/components/app/BgColorPicker.vue";
   import { NConfigProvider } from 'naive-ui'
 
   const router = useRouter()
   const store = useStore()
+  const locale = computed(()=>{
+    let arcoLang = localeList[store.locale].arcoLang
+    return arcoLang ? arcoLang:localeList['en-us'].arcoLang
+  })
 
   // 初始化 dark
   if(store.dark) document.body.setAttribute('arco-theme', 'dark');

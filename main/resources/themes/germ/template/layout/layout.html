@@ -34,7 +34,9 @@
       </aside>
     </div>
 
-    {{ include "./footer.html" }}
+    <footer class="container py-3 text-center">
+      {{ Config.Template.Footer |raw }} Theme by Germ
+    </footer>
 
     <script defer src="/alpinejs.3.11.1.min.js"></script>
     <script src="/blazy.min.js"></script>

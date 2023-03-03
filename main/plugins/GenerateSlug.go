@@ -2,6 +2,7 @@ package plugins
 
 import (
 	"github.com/duke-git/lancet/v2/random"
+	"github.com/jaevor/go-nanoid"
 	"github.com/rs/xid"
 	"github.com/sony/sonyflake"
 	"github.com/speps/go-hashids/v2"
@@ -17,6 +18,10 @@ type GenerateSlug struct {
 	Article  *GenerateSlugOption `json:"article"`
 	Category *GenerateSlugOption `json:"category"`
 	Tag      *GenerateSlugOption `json:"tag"`
+}
+
+func init() {
+	idgen.SetIdGenerator(idgen.NewIdGeneratorOptions(1))
 }
 
 type GenerateSlugOption struct {
@@ -60,6 +65,7 @@ func (e *GenerateSlugEvent) ArticleCreateBefore(item *entity.Article) (err error
 	}
 	return
 }
+
 func (e *GenerateSlugEvent) CategoryCreateBefore(item *entity.Category) (err error) {
 	if item.Slug == "" {
 		item.Slug, err = e.makeSlug()
@@ -86,6 +92,10 @@ func (e *GenerateSlugEvent) makeSlug() (res string, err error) {
 		res, err = e.idgeneratorStr()
 	case "hashIdgenerator":
 		res, err = e.hashIdgenerator()
+	case "nanoid":
+		res, err = e.nanoid()
+	case "nanoid8":
+		res, err = e.nanoid8()
 	default: // snowflake
 		res, err = e.snowflakeStr()
 	}
@@ -121,14 +131,26 @@ func (e *GenerateSlugEvent) hashSnowflake() (string, error) {
 	return e.hashids(int64(id))
 }
 
-func init() {
-	idgen.SetIdGenerator(idgen.NewIdGeneratorOptions(1))
-}
-
 func (e *GenerateSlugEvent) idgeneratorStr() (string, error) {
 	return strconv.FormatInt(idgen.NextId(), 10), nil
 }
 
 func (e *GenerateSlugEvent) hashIdgenerator() (string, error) {
 	return e.hashids(idgen.NextId())
+}
+
+func (e *GenerateSlugEvent) nanoid() (string, error) {
+	genFunc, err := nanoid.Standard(21)
+	if err != nil {
+		return "", err
+	}
+	return genFunc(), nil
+}
+
+func (e *GenerateSlugEvent) nanoid8() (string, error) {
+	genFunc, err := nanoid.Standard(8)
+	if err != nil {
+		return "", err
+	}
+	return genFunc(), nil
 }

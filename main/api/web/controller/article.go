@@ -123,3 +123,16 @@ func ArticleDeleteTagByIds(ctx *fiber.Ctx) error {
 	}
 	return ctx.JSON(mapper.MessageResult(appService.DeleteArticleTagByIds(id, tagIds)))
 }
+
+// ArticleBatchSetCategory 文章批量设置分类
+func ArticleBatchSetCategory(ctx *fiber.Ctx) error {
+	ids, err := mapper.BodyToIntSet(ctx.Body())
+	if err != nil {
+		return ctx.JSON(mapper.MessageResult(err))
+	}
+	categoryID, err := ctx.ParamsInt("category_id")
+	if err != nil {
+		return ctx.JSON(mapper.MessageResult(err))
+	}
+	return ctx.JSON(mapper.MessageResult(service.Article.BatchSetCategory(categoryID, ids)))
+}

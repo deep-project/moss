@@ -75,3 +75,15 @@ func CategoryExistsName(ctx *fiber.Ctx) error {
 func CategoryTree(ctx *fiber.Ctx) error {
 	return ctx.JSON(mapper.MessageResultData(appService.CategoryTree()))
 }
+
+func CategoryBatchSetParentCategory(ctx *fiber.Ctx) error {
+	ids, err := mapper.BodyToIntSet(ctx.Body())
+	if err != nil {
+		return ctx.JSON(mapper.MessageResult(err))
+	}
+	parentID, err := ctx.ParamsInt("parent_id")
+	if err != nil {
+		return ctx.JSON(mapper.MessageResult(err))
+	}
+	return ctx.JSON(mapper.MessageResult(service.Category.BatchSetParentCategory(parentID, ids)))
+}

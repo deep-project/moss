@@ -25,11 +25,15 @@
     import '@wangeditor/editor/dist/css/style.css'
     import {onBeforeUnmount, ref, shallowRef, inject, computed, watch, onMounted} from 'vue'
     import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
-    import { i18nChangeLanguage } from '@wangeditor/editor'
+    import { i18nChangeLanguage,i18nAddResources } from '@wangeditor/editor'
     import {useElementSize} from '@vueuse/core'
     import {t} from "@/locale";
     import {useStore} from "@/store";
     import {upload} from "@/api";
+    import { localeList } from "@/locale"
+
+
+
 
     const store = useStore()
     const record = inject('record')
@@ -73,15 +77,21 @@
       valueHtml.value = record.value.content
     }
 
+    // 添加新语言，如日语 ja
+    for(let key in localeList){
+      i18nAddResources(key.replace('-','_'), localeList[key].lang.wangEditor)
+    }
+
     setLang()
     function setLang(){
-      switch (store.locale){
-        case 'zh-cn':
-          i18nChangeLanguage('zh-CN')
-          break;
-        default:
-          i18nChangeLanguage('en')
-      }
+      i18nChangeLanguage(store.locale.replace('-','_')) // 语言key不能使用中横向分割，否则不识别
+      // switch (store.locale){
+      //   case 'zh-cn':
+      //     i18nChangeLanguage('zh-CN')
+      //     break;
+      //   default:
+      //     i18nChangeLanguage('en')
+      // }
     }
 
 </script>

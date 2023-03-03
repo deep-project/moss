@@ -25,6 +25,8 @@ _axios.interceptors.request.use(
     }
 );
 
+var count_401 = 0
+
 // 响应拦截
 _axios.interceptors.response.use(
     function(response) {
@@ -37,10 +39,12 @@ _axios.interceptors.response.use(
     },
     function(error) {
         if(error.response.status===401) {
+            count_401++
             const store = useStore()
             store.token = ""
         }
-        if(error.message) Message.error({content:error.message,resetOnHover:true})
+        if(count_401 >= 2) setTimeout(() =>{ count_401 = 0},4000) // 4秒后清零
+        if(error.message && count_401 <= 2) Message.error({content:error.message,resetOnHover:true})
         return Promise.reject(error);
     }
 );

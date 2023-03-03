@@ -170,4 +170,137 @@ export default {
     PostStore:'Terbitkan Artikel',
     DidiAuto:'Didi Otomatis',
 
+
+
+    wangEditor:{
+        editor: {
+            more: 'Lebih lanjut',
+            justify: 'Rata kanan-kiri',
+            indent: 'Inden',
+            image: 'Gambar',
+            video: 'Video',
+        },
+        common: {
+            ok: "OK",
+            delete: "Hapus",
+            enter: "Masukkan"
+        },
+        blockQuote: {
+            title: "Kutipan"
+        },
+        codeBlock: {
+            title: "Blok kode"
+        },
+        color: {
+            color: "Warna font",
+            bgColor: "Warna latar belakang",
+            default: "Warna default",
+            clear: "Hapus warna latar belakang"
+        },
+        divider: {
+            title: "Pembatas"
+        },
+        emotion: {
+            title: "Emosi"
+        },
+        fontSize: {
+            title: "Ukuran font",
+            default: "Default"
+        },
+        fontFamily: {
+            title: "Jenis huruf",
+            default: "Default"
+        },
+        fullScreen: {
+            title: "Layar penuh"
+        },
+        header: {
+            title: "Header",
+            text: "Teks"
+        },
+        image: {
+            netImage: "Gambar internet",
+            delete: "Hapus gambar",
+            edit: "Edit gambar",
+            viewLink: "Lihat tautan",
+            src: "Sumber gambar",
+            desc: "Deskripsi",
+            link: "Tautan gambar"
+        },
+        indent: {
+            decrease: "Kurangi",
+            increase: "Tambahkan"
+        },
+        justify: {
+            left: "Kiri",
+            right: "Kanan",
+            center: "Tengah",
+            justify: "Rata kanan-kiri"
+        },
+        lineHeight: {
+            title: "Tinggi baris",
+            default: "Default"
+        },
+        link: {
+            insert: "Sisipkan tautan",
+            text: "Teks tautan",
+            url: "Sumber tautan",
+            unLink: "Hapus tautan",
+            edit: "Edit tautan",
+            view: "Lihat tautan"
+        },
+        textStyle: {
+            bold: "Tebal",
+            clear: "Hapus gaya",
+            code: "Kode inline",
+            italic: "Miring",
+            sub: "Sub",
+            sup: "Sup",
+            through: "Coret",
+            underline: "Garis bawah"
+        },
+        undo: {
+            undo: "Membatalkan",
+            redo: "Mengulangi"
+        },
+        todo: {
+            todo: "Tugas"
+        },
+        listModule:{
+            unOrderedList:"Daftar tidak terurut",
+            orderedList:"Daftar terurut"
+        },
+        tableModule:{
+            deleteCol:"Hapus kolom",
+            deleteRow:"Hapus baris",
+            deleteTable:"Hapus tabel",
+            widthAuto:"Lebar otomatis",
+            insertCol:"Sisipkan kolom",
+            insertRow:"Sisipkan baris",
+            insertTable:"Sisipkan tabel",
+            header:"Header",
+        },
+        videoModule:{
+            delete:"Hapus",
+            uploadVideo:"Unggah video",
+            insertVideo:"Sisipkan video",
+            videoSrc:"Sumber video",
+            videoSrcPlaceHolder:"URL file video, atau <iframe> pihak ketiga",
+            videoPoster:"Poster video",
+            videoPosterPlaceHolder:"URL gambar poster",
+            ok:"Ok",
+            editSize:"Edit ukuran",
+            width:"Lebar",
+            height:"Tinggi",
+        },
+        uploadImgModule:{
+            uploadImage:"Unggah Gambar",
+            uploadError:"Kesalahan unggah {{fileName}}",
+        },
+        highLightModule:{
+            selectLang:"Bahasa",
+        }
+    }
+
+
 }

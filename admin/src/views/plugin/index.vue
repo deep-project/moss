@@ -47,7 +47,7 @@
 
   </a-table>
 
-  <a-modal v-model:visible="visibleOptions" :title="modalTitle" title-align="start" @ok="runSaveOptions(currentID,currentOptionsData)" :ok-loading="loadingSaveOptions">
+  <a-modal v-model:visible="visibleOptions" :title="modalTitle" :width="600" title-align="start" @ok="runSaveOptions(currentID,currentOptionsData)" :ok-loading="loadingSaveOptions">
     <a-skeleton animation :widths="[80]" v-if="loadingGetOptions">
       <a-space direction="vertical" :style="{width:'100%'}" size="large">
         <a-skeleton-line :rows="5" />
