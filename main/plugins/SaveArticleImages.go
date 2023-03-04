@@ -16,6 +16,7 @@ import (
 	"moss/infrastructure/support/upload"
 	"moss/infrastructure/utils/imagex"
 	"moss/infrastructure/utils/request"
+	"net/url"
 	"strconv"
 	"strings"
 )
@@ -107,6 +108,21 @@ func (s *SaveArticleImages) Save(item *entity.Article) error {
 	return nil
 }
 
+// 判断图片地址是否是当前定义的上传域
+func (s *SaveArticleImages) isCurrentUploadDomain(imgURL string) bool {
+	// upload域开头直接跳过
+	if strings.HasPrefix(imgURL, config.Config.Upload.Domain) {
+		return true
+	}
+	// 检测图片URL是否包含上传域名
+	if uri, err := url.Parse(config.Config.Upload.Domain); err == nil {
+		if uri.Host != "" && strings.Contains(imgURL, uri.Host) {
+			return true
+		}
+	}
+	return false
+}
+
 func (s *SaveArticleImages) eachSave(item *entity.Article) func(i int, sn *goquery.Selection) {
 	return func(i int, sn *goquery.Selection) {
 		src, ok := sn.Attr("src")
@@ -114,7 +130,7 @@ func (s *SaveArticleImages) eachSave(item *entity.Article) func(i int, sn *goque
 			sn.Remove()
 			return
 		}
-		if strings.HasPrefix(src, config.Config.Upload.Domain) { // upload域开头直接跳过
+		if s.isCurrentUploadDomain(src) {
 			return
 		}
 		if !strings.HasPrefix(src, "http") && !strings.HasPrefix(src, "//") { // 非远程图片
@@ -153,7 +169,9 @@ func (s *SaveArticleImages) eachSave(item *entity.Article) func(i int, sn *goque
 		}
 		// 上传图片
 		hashSrc := cryptor.Md5String(src)
-		uploadResult, err := upload.Upload(hashSrc, imageType.Extension, storage.NewSetValueBytes(file))
+		val := storage.NewSetValueBytes(file)
+		val.ContentType = imageType.MIME.Value
+		uploadResult, err := upload.Upload(hashSrc, imageType.Extension, val)
 		if err != nil {
 			s.ctx.Log.Warn("upload image error", s.logInfo(item, src, err)...)
 			return
@@ -167,7 +185,7 @@ func (s *SaveArticleImages) eachSave(item *entity.Article) func(i int, sn *goque
 		// 上传缩略图
 		if item.Thumbnail == "" && size.Width >= s.ThumbMinWidth && size.Height >= s.ThumbMinHeight {
 			// 直接把内容中的图片保存成缩略图
-			if err = s.uploadThumbnail(item, file, hashSrc+"_thumbnail", imageType.Extension); err != nil {
+			if err = s.uploadThumbnail(item, file, hashSrc+"_thumbnail", imageType.Extension, imageType.MIME.Value); err != nil {
 				s.ctx.Log.Warn("upload thumbnail error", s.logInfo(item, src, err)...)
 				return
 			}
@@ -180,7 +198,7 @@ func (s *SaveArticleImages) logInfo(item *entity.Article, src string, err error)
 }
 
 // 上传缩略图
-func (s *SaveArticleImages) uploadThumbnail(item *entity.Article, file []byte, name, ext string) (err error) {
+func (s *SaveArticleImages) uploadThumbnail(item *entity.Article, file []byte, name, ext, imgType string) (err error) {
 	if s.ThumbWidth > 0 || s.ThumbHeight > 0 {
 		var imgLib = imagex.New().SetWidth(s.ThumbWidth).SetHeight(s.ThumbHeight)
 		if s.ThumbExtractFocus {
@@ -192,7 +210,9 @@ func (s *SaveArticleImages) uploadThumbnail(item *entity.Article, file []byte, n
 			return
 		}
 	}
-	thumbUploadResult, err := upload.Upload(name, ext, storage.NewSetValueBytes(file))
+	val := storage.NewSetValueBytes(file)
+	val.ContentType = imgType
+	thumbUploadResult, err := upload.Upload(name, ext, val)
 	if err != nil {
 		return
 	}
@@ -213,7 +233,8 @@ func (s *SaveArticleImages) saveThumbnail(item *entity.Article) {
 	if item.Thumbnail == "" {
 		return
 	}
-	if strings.HasPrefix(item.Thumbnail, config.Config.Upload.Domain) { // upload域开头直接跳过
+	// 判断是否是当前的上传域
+	if s.isCurrentUploadDomain(item.Thumbnail) {
 		return
 	}
 	// 下载图片
@@ -229,7 +250,7 @@ func (s *SaveArticleImages) saveThumbnail(item *entity.Article) {
 		item.Thumbnail = ""
 		return
 	}
-	if err = s.uploadThumbnail(item, file, cryptor.Md5String(item.Thumbnail)+"_thumbnail", imageType.Extension); err != nil {
+	if err = s.uploadThumbnail(item, file, cryptor.Md5String(item.Thumbnail)+"_thumbnail", imageType.Extension, imageType.MIME.Value); err != nil {
 		s.ctx.Log.Warn("upload thumbnail error", s.logInfo(item, item.Thumbnail, err)...)
 	}
 }

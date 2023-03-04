@@ -111,8 +111,12 @@ func (e *GenerateSlugEvent) hashids(id int64) (string, error) {
 	return generateIdEventHashIdsHandle.EncodeInt64([]int64{id})
 }
 
+var snowflakeHandle = sonyflake.NewSonyflake(sonyflake.Settings{MachineID: func() (uint16, error) {
+	return 1, nil
+}})
+
 func (e *GenerateSlugEvent) snowflake() (uint64, error) {
-	return sonyflake.NewSonyflake(sonyflake.Settings{}).NextID()
+	return snowflakeHandle.NextID()
 }
 
 func (e *GenerateSlugEvent) snowflakeStr() (string, error) {

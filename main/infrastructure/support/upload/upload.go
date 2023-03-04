@@ -108,7 +108,11 @@ func (r *Result) uuid() string {
 	return uuid
 }
 
+var snowflakeHandle = sonyflake.NewSonyflake(sonyflake.Settings{MachineID: func() (uint16, error) {
+	return 1, nil
+}})
+
 func (r *Result) snowflake() string {
-	id, _ := sonyflake.NewSonyflake(sonyflake.Settings{}).NextID()
+	id, _ := snowflakeHandle.NextID()
 	return strconv.FormatInt(int64(id), 10)
 }
