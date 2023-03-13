@@ -8,7 +8,7 @@
       <a-descriptions-item v-if="key!=='buf'" :label="key">{{val}}</a-descriptions-item>
     </template>
     <a-descriptions-item v-if="data.buf" label="buf">
-      <code class="font-mono text-gray-500 whitespace-pre">{{data.buf}}</code>
+      <code class="font-mono text-gray-500 whitespace-pre-line">{{data.buf}}</code>
     </a-descriptions-item>
 
   </a-descriptions>

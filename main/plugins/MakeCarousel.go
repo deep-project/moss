@@ -139,7 +139,7 @@ func (p *MakeCarousel) findImg(content string) (res string) {
 			return true
 		}
 		if strings.HasPrefix(src, "//") {
-			src = "http:" + src
+			src = "https:" + src
 		}
 		if strings.HasPrefix(src, "/") {
 			src = config.Config.Site.GetURL() + src

@@ -61,7 +61,7 @@
       <a-descriptions-item label="file">{{detailData.file}}</a-descriptions-item>
       <a-descriptions-item label="msg">{{detailData.msg}}</a-descriptions-item>
       <template v-for="(val,key) in detailData.more">
-        <a-descriptions-item :label="key"><code class="font-mono text-gray-500 whitespace-pre">{{val}}</code></a-descriptions-item>
+        <a-descriptions-item :label="key"><code class="font-mono text-gray-500 whitespace-pre-line">{{val}}</code></a-descriptions-item>
       </template>
     </a-descriptions>
   </a-modal>
