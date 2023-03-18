@@ -10,10 +10,14 @@ import (
 
 func PluginItemsToPluginInfoList(items []*pluginEntity.Plugin) (res []dto.PluginList) {
 	for _, item := range items {
+		var runErr string
+		if item.RunError != nil {
+			runErr = item.RunError.Error()
+		}
 		res = append(res, dto.PluginList{
 			PluginInfo:  *item.Info,
 			RunTime:     item.RunTime.Unix(),
-			RunError:    item.RunError,
+			RunError:    runErr,
 			RunCount:    item.RunCount,
 			RunDuration: item.RunDuration.Milliseconds(),
 			NextRunTime: service.Plugin.NextRunTime(item.CronID).Unix(),

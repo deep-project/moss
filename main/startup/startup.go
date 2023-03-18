@@ -41,6 +41,7 @@ func executeCommand() {
 func initPlugins() {
 	appService.PluginInit(
 		plugins.NewGenerateSlug(),
+		plugins.NewArticleSanitizer(),
 		plugins.NewSaveArticleImages(),
 		plugins.NewDetectLinks(),
 		plugins.NewGenerateDescription(),

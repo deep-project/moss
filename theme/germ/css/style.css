@@ -49,6 +49,9 @@ article p,
 article img{
     margin: 10px auto;
 }
+article h2,article h3,article h4{
+    @apply py-1 pl-2 my-5 font-bold rounded text-black dark:text-white bg-gray-100 dark:bg-neutral-700 border-l-4 border-blue-500 dark:border-amber-300;
+}
 
 header a:hover{
     @apply no-underline;
@@ -73,10 +76,14 @@ nav a:hover{
 
 .nav-sub{
     @apply static lg:absolute pt-2 z-30;
+
 }
+
 .nav-sub ul{
-    @apply p-2 rounded lg:shadow-md bg-white dark:bg-neutral-800 ;
+    @apply p-2 rounded lg:shadow-md bg-white dark:bg-neutral-800  overflow-auto;
+    max-height: calc(60vh);
 }
+.nav-sub ul::-webkit-scrollbar { width: 3px }
 .drawer ul{
     @apply dark:bg-transparent;
 }

@@ -26,6 +26,10 @@
     <a-input v-model="data.clear_cache_url" class="input" />
   </a-form-item>
 
+  <a-form-item label="清除缓存后等待" v-if="data.clear_cache_url">
+    <a-input-number v-model="data.clear_cache_sleep" class="input" :min="0" /> <span class="text-sm text-gray-400 ml-3">{{$t('seconds')}}</span>
+  </a-form-item>
+
 </template>
 
 
