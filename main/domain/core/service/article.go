@@ -172,6 +172,9 @@ func (s *ArticleService) postCheck(item *entity.Article) error {
 	if item.Title == "" {
 		return message.ErrTitleRequired
 	}
+	if item.Content == "" {
+		return message.ErrContentRequired
+	}
 	if strings.HasPrefix(item.Slug, " ") {
 		return message.ErrSlugStartSpaceRequired
 	}

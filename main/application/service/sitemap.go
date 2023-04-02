@@ -44,7 +44,7 @@ func (s *sitemap) listOption(opt *configEntity.SitemapOption) (ctx *context.Cont
 	if opt.InHours > 0 {
 		t = time.Now().Unix() - int64(opt.InHours)*60*60
 	}
-	return context.NewContext(opt.Limit, ""), t
+	return context.NewContext(opt.Limit, "id desc"), t
 }
 
 func (s *sitemap) ArticleText() (res string, err error) {

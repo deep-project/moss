@@ -9,12 +9,17 @@ import (
 type StringArray []string
 
 func (val *StringArray) Scan(value interface{}) error {
-	s, _ := value.(string)
-	if s == "" {
+	// mysql下，从数据库返回的是[]byte,而sqlite返回的是string
+	b, ok := value.([]byte)
+	if !ok {
+		s, _ := value.(string)
+		b = []byte(s)
+	}
+	if len(b) == 0 {
 		*val = []string{}
 		return nil
 	}
-	_ = json.Unmarshal([]byte(s), val)
+	_ = json.Unmarshal(b, val)
 	return nil
 }
 

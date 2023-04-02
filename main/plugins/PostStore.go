@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"go.uber.org/zap"
 	appService "moss/application/service"
-	"moss/domain/core/aggregate"
 	"moss/domain/core/entity"
 	"moss/domain/core/repository/context"
 	"moss/domain/core/service"
 	pluginEntity "moss/domain/support/entity"
 	"moss/infrastructure/persistent/db"
+	"sync"
 )
 
 type PostStore struct {
@@ -22,9 +22,10 @@ type PostStore struct {
 
 func NewPostStore() *PostStore {
 	return &PostStore{
-		Limit:       1,
-		Order:       0,
-		CategoryIds: []int{},
+		Limit:           1,
+		Order:           1,
+		DeleteOnFailure: true,
+		CategoryIds:     []int{},
 	}
 }
 
@@ -66,25 +67,30 @@ func (p *PostStore) Run(ctx *pluginEntity.Plugin) (err error) {
 		return
 	}
 	var success int
+	var wg = &sync.WaitGroup{}
 	for _, id := range ids {
-		if item, err := p.post(id); err == nil {
-			p.ctx.Log.Info(fmt.Sprintf("Post success, ID: %d Title: %s", item.ID, item.Title))
-			success++
-		}
+		wg.Add(1)
+		go p.post(id, wg, &success)
 	}
+	wg.Wait()
 	p.ctx.Log.Info(fmt.Sprintf("End. success total: %d failures: %d", success, len(ids)-success))
 	return nil
 }
 
-func (p *PostStore) post(id int) (item *aggregate.ArticlePost, err error) {
-	if item, err = appService.StorePost(id); err != nil {
+func (p *PostStore) post(id int, wg *sync.WaitGroup, success *int) {
+	defer wg.Done()
+	item, err := appService.StorePost(id)
+	if err != nil {
 		p.ctx.Log.Error("post error", zap.Error(err), zap.Int("id", id))
 		if p.DeleteOnFailure {
 			if e := service.Store.Delete(id); e != nil {
 				p.ctx.Log.Error("delete error", zap.Error(err), zap.Int("id", id))
 			}
 		}
+		return
 	}
+	*success++
+	p.ctx.Log.Info(fmt.Sprintf("Post success, ID: %d Title: %s", item.ID, item.Title))
 	return
 }
 

@@ -38,6 +38,9 @@ func (s *StoreService) postCheck(item *entity.Store) error {
 	if item.Title == "" {
 		return message.ErrTitleRequired
 	}
+	if item.Content == "" {
+		return message.ErrContentRequired
+	}
 	if strings.HasPrefix(item.Slug, " ") {
 		return message.ErrSlugStartSpaceRequired
 	}

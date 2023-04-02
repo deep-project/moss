@@ -22,6 +22,14 @@
     <a-switch v-model="data.require_no_follow_on_links" type="round" />
   </a-form-item>
 
+  <a-form-item label="remove links" help="remove <a></a> tag">
+    <a-switch v-model="data.remove_links" type="round" />
+  </a-form-item>
+
+  <a-form-item v-if="data.remove_links" label="hold max length" help="remove links hold value max length">
+    <a-input-number style="width: 100px" v-model="data.remove_links_hold_length" :min="0" />
+  </a-form-item>
+
 
 </template>
 
