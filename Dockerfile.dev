@@ -1,0 +1,24 @@
+FROM golang:latest
+
+# 设定时区
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# 替换为国内的镜像源
+RUN sed -i s@/deb.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list
+RUN sed -i s@/security.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list
+RUN apt update
+
+RUN apt-get install -y sudo curl gnupg
+
+# #安装node官方源
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+
+# 安装 Node.js
+RUN apt-get install -y nodejs
+
+# 设置淘宝镜像源
+RUN npm config set registry https://registry.npm.taobao.org
+
+# 更新npm
+RUN npm install -g npm
