@@ -2,15 +2,9 @@
 
 version: '3'
 
-
 dotenv: ['.env']
 
-
 tasks:
-  default:
-    cmds:
-      - echo "$APP_NAME"
-    silent: true
   
   run:
     cmds:
