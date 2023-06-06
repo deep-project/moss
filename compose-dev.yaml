@@ -7,12 +7,3 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    depends_on:
-      - db
-  db:
-    image: mysql
-    restart: always
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-    expose:
-      - 3306
