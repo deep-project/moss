@@ -1,2 +1,4 @@
-/tmp/
-/plugins/inner/
+tmp/
+
+resources/admin/*
+!resources/admin/.empty

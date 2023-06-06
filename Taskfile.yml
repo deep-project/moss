@@ -17,6 +17,25 @@ tasks:
 
 
   #############
+  ### init ###
+  #############
+
+  init-admin:
+    cmds:
+      - cd ./admin && npm install
+
+  init-themes:
+    cmds:
+      - cd ./theme/germ && npm install
+
+  
+  init-resources-themes:
+    cmds:
+      - rm -r -f ./main/resources/themes
+      - cp -r ./main/tmp/themes ./main/resources/themes
+
+
+  #############
   ### build ###
   #############
 
@@ -24,21 +43,16 @@ tasks:
     cmds:
       - cd ./theme/germ && npx tailwindcss -i ./css/style.css -o ../../main/tmp/themes/germ/public/style.css --minify
 
-  init-themes:
-    cmds:
-      - rm -r -f ./main/resources/themes
-      - cp -r ./main/tmp/themes ./main/resources/themes
-
 
   build:
     - task: build-themes-style
-    - task: init-themes
+    - task: init-resources-themes
     - task: build-admin
     - task: build-linux-amd64
 
   build-all:
     - task: build-themes-style
-    - task: init-themes
+    - task: init-resources-themes
     - task: build-admin
     - task: build-main
 
