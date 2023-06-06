@@ -1,0 +1,121 @@
+# https://taskfile.dev
+
+version: '3'
+
+
+dotenv: ['.env']
+
+
+tasks:
+  default:
+    cmds:
+      - echo "$APP_NAME"
+    silent: true
+  
+  run:
+    cmds:
+      - cd ./main/tmp && go run ../cmd/web/main.go
+    silent: true
+
+  admin:
+    cmds:
+      - cd ./admin && npm run dev
+
+
+  #############
+  ### build ###
+  #############
+
+  build-themes-style:
+    cmds:
+      - cd ./theme/germ && npx tailwindcss -i ./css/style.css -o ../../main/tmp/themes/germ/public/style.css --minify
+
+  init-themes:
+    cmds:
+      - rm -r -f ./main/resources/themes
+      - cp -r ./main/tmp/themes ./main/resources/themes
+
+
+  build:
+    - task: build-themes-style
+    - task: init-themes
+    - task: build-admin
+    - task: build-linux-amd64
+
+  build-all:
+    - task: build-themes-style
+    - task: init-themes
+    - task: build-admin
+    - task: build-main
+
+  build-admin:
+    cmds:
+      - cd ./admin && npm run build
+
+  build-main:
+    deps: [
+      build-linux-386,
+      build-linux-amd64,
+      build-windows-386,
+      build-windows-amd64,
+      build-darwin-amd64,
+      build-darwin-arm64,
+    ]
+
+  build-linux-386:
+    - task: _build
+      vars:
+        GOOS: linux
+        GOARCH: 386
+
+  build-linux-amd64:
+    - task: _build
+      vars:
+        GOOS: linux
+        GOARCH: amd64
+
+  build-windows-386:
+    - task: _build
+      vars:
+        GOOS: windows
+        GOARCH: 386
+        FILE_EXT: .exe
+
+
+  build-windows-amd64:
+    - task: _build
+      vars:
+        GOOS: windows
+        GOARCH: amd64
+        FILE_EXT: .exe
+
+
+  build-darwin-amd64:
+    - task: _build
+      vars:
+        GOOS: darwin
+        GOARCH: amd64
+
+  build-darwin-arm64:
+    - task: _build
+      vars:
+        GOOS: darwin
+        GOARCH: arm64
+
+  ######
+  ######
+  _build:
+    vars:
+      FILE_NAME: '{{.APP_NAME}}_{{.APP_VERSION}}_{{.GOOS}}_{{.GOARCH}}{{.FILE_EXT}}'
+      BUILD_FILE_PATH: '{{.ROOT_DIR}}/dist/{{.FILE_NAME}}'
+      BACKUP_FILE_PATH: '{{.ROOT_DIR}}/dist/backup/{{.FILE_NAME}}_{{now | date "2006.01.02.15.04.05"}}'
+    env:
+      CGO_ENABLED: 0
+      GOOS: '{{.GOOS}}'
+      GOARCH: '{{.GOARCH}}'
+    cmds:
+      - mkdir -p './dist/backup' && mv "{{.BUILD_FILE_PATH}}" "{{.BACKUP_FILE_PATH}}"
+      - cd ./main && go build -ldflags="-s -w" -trimpath -o "{{.BUILD_FILE_PATH}}" ./cmd/web/main.go
+      - upx -4 "{{.BUILD_FILE_PATH}}"
+    ignore_error: true
+      

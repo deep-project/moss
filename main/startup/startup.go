@@ -1,12 +1,12 @@
 package startup
 
 import (
-	"github.com/gookit/color"
 	appService "moss/application/service"
 	"moss/infrastructure/general/command"
 	"moss/plugins"
-	"moss/plugins/inner"
 	"os"
+
+	"github.com/gookit/color"
 )
 
 func init() {
@@ -49,10 +49,7 @@ func initPlugins() {
 		plugins.NewPushToBaidu(),
 		plugins.NewMakeCarousel(),
 		plugins.NewPostStore(),
-
-		inner.NewDidiAuto(),
-		//inner.NewAddWater(),
-		//inner.NewTransferData(),
+		plugins.NewDidiAuto(),
 	)
 
 }

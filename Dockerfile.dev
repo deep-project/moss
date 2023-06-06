@@ -22,3 +22,9 @@ RUN npm config set registry https://registry.npm.taobao.org
 
 # 更新npm
 RUN npm install -g npm
+
+# 安装upx
+RUN sudo apt install -y upx-ucl
+
+# 安装go-task
+RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/bin

@@ -1,1 +1,0 @@
-import{j as e,k as m,l as s,m as p,v as c}from"./@vue.0987707a.js";const d={__name:"local",props:{data:Object},setup(a){return(r,t)=>{const o=e("a-input"),l=e("a-form-item");return m(),s(l,{label:"path"},{default:p(()=>[c(o,{class:"w-64",modelValue:a.data.path,"onUpdate:modelValue":t[0]||(t[0]=n=>a.data.path=n)},null,8,["modelValue"])]),_:1})}}};export{d as default};
