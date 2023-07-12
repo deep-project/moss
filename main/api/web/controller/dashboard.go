@@ -2,12 +2,13 @@ package controller
 
 import (
 	"errors"
-	"github.com/gofiber/fiber/v2"
 	"moss/api/web/mapper"
 	appService "moss/application/service"
 	"moss/domain/core/service"
 	"moss/infrastructure/persistent/db"
 	"time"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 var Dashboard = new(dashboard)
@@ -30,6 +31,8 @@ func (d *dashboard) Controller(ctx *fiber.Ctx) (err error) {
 		data, err = appService.AppCPUPercent()
 	case "appMemory":
 		data, err = appService.AppUsedMemory()
+	case "appInfo":
+		data = appService.AppInfo()
 	case "database":
 		data = db.GetSize()
 	case "log":

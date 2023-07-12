@@ -2,8 +2,6 @@
 
 version: '3'
 
-dotenv: ['.env']
-
 tasks:
   
   run:
@@ -29,8 +27,10 @@ tasks:
       - cd ./theme/germ && npm install
 
   
+  ### 开发默认模板时，更新模板到资源文件
   init-resources-themes:
     cmds:
+      - cd ./theme/germ && npx tailwindcss -i ./css/style.css -o ../../main/tmp/themes/germ/public/style.css --minify
       - rm -r -f ./main/resources/themes
       - cp -r ./main/tmp/themes ./main/resources/themes
 
@@ -39,20 +39,11 @@ tasks:
   ### build ###
   #############
 
-  build-themes-style:
-    cmds:
-      - cd ./theme/germ && npx tailwindcss -i ./css/style.css -o ../../main/tmp/themes/germ/public/style.css --minify
-
-
   build:
-    - task: build-themes-style
-    - task: init-resources-themes
     - task: build-admin
     - task: build-linux-amd64
 
   build-all:
-    - task: build-themes-style
-    - task: init-resources-themes
     - task: build-admin
     - task: build-main
 
@@ -64,7 +55,7 @@ tasks:
     deps: [
       build-linux-386,
       build-linux-amd64,
-      build-windows-386,
+      #build-windows-386,
       build-windows-amd64,
       build-darwin-amd64,
       build-darwin-arm64,
@@ -114,7 +105,7 @@ tasks:
   ######
   _build:
     vars:
-      FILE_NAME: '{{.APP_NAME}}_{{.APP_VERSION}}_{{.GOOS}}_{{.GOARCH}}{{.FILE_EXT}}'
+      FILE_NAME: 'moss_{{.GOOS}}_{{.GOARCH}}{{.FILE_EXT}}'
       BUILD_FILE_PATH: '{{.ROOT_DIR}}/dist/{{.FILE_NAME}}'
       BACKUP_FILE_PATH: '{{.ROOT_DIR}}/dist/backup/{{.FILE_NAME}}_{{now | date "2006.01.02.15.04.05"}}'
     env:

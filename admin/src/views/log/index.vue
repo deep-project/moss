@@ -11,7 +11,7 @@
              :columns="columns"
              :data="dataList"
              :pagination="false"
-             :scroll="{y:tableHeight}"
+             :scroll="{y:tableHeight, x:'100%'}"
              :virtual-list-props="dataList.length > 1 ? {height:tableHeight,buffer:30} : undefined"
              :loading="loading || loadingMore"
              style="--border-radius-medium:0">

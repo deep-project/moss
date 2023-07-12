@@ -1,8 +1,6 @@
 <template>
   <a-card class="w-full h-full" :title="$t('app')" :bordered="false" :body-style="{height:'calc(100% - 46px)'}">
-
     <a-grid :cols="{ xs: 2, sm: 3, md: 4, lg:5 }" :colGap="12" :rowGap="12">
-
       <a-grid-item class="flex items-center" style="min-height: 104px">
         <a-statistic title="cpu" :value="cpu" :value-from="oldCPU" :precision="isInt(cpu) ? 0:2" show-group-separator animation>
           <template #suffix><b class="ml-1">%</b></template>

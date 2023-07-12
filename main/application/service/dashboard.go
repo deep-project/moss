@@ -3,15 +3,19 @@ package service
 import (
 	"bytes"
 	"errors"
+	"os"
+	"runtime/pprof"
+	"time"
+
+	"moss/application/dto"
+	"moss/infrastructure/general/constant"
+
 	"github.com/google/pprof/profile"
 	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/disk"
 	"github.com/shirou/gopsutil/v3/load"
 	"github.com/shirou/gopsutil/v3/mem"
 	"github.com/shirou/gopsutil/v3/process"
-	"os"
-	"runtime/pprof"
-	"time"
 )
 
 // SystemLoadPercent 系统平均负载
@@ -93,4 +97,11 @@ func AppUsedMemory() (res uint64, err error) {
 		}
 	}
 	return uint64(memInuseSpace), nil
+}
+
+func AppInfo() *dto.AppInfo {
+	return &dto.AppInfo{
+		Name:    constant.AppName,
+		Version: constant.AppVersion,
+	}
 }
