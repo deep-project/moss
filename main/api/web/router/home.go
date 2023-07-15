@@ -1,13 +1,14 @@
 package router
 
 import (
-	"github.com/gofiber/fiber/v2"
 	"moss/api/web/controller"
 	"moss/api/web/middleware"
 	"moss/domain/config"
 	"moss/infrastructure/general/constant"
 	"moss/infrastructure/support/template"
 	"path/filepath"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func (r *Router) RegisterHome(route fiber.Router) {
@@ -29,16 +30,17 @@ func (r *Router) RegisterHome(route fiber.Router) {
 	// home
 	route.Get("/", middleware.Cache, middleware.MinifyCode, controller.HomeIndex).Name("home")
 
-	// template page
-	route.Get("/*", middleware.Cache, middleware.MinifyCode, controller.TemplatePage).Name("page")
-
+	// static路由应当放到  template page路由前面
+	// 否则不能正确响应文件的content-Type
 	// template public
 	if currentThemePath, err := template.CurrentThemePath(); err == nil {
 		route.Static("/", filepath.Join(currentThemePath, "public"))
 	}
-
 	// public
 	route.Static("/", constant.PublicDir)
+
+	// template page
+	route.Get("/*", middleware.Cache, middleware.MinifyCode, controller.TemplatePage).Name("page")
 
 	// category
 	route.Get(config.Config.Router.GetCategoryPageRule(), middleware.Cache, middleware.MinifyCode, controller.HomeCategory).Name("category")

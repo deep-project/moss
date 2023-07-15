@@ -1,10 +1,11 @@
 package middleware
 
 import (
-	"github.com/gofiber/fiber/v2"
 	"moss/domain/config"
 	"moss/infrastructure/support/cache"
 	"moss/infrastructure/support/log"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func Cache(ctx *fiber.Ctx) error {

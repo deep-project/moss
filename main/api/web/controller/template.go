@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"github.com/gofiber/fiber/v2"
 	"moss/api/web/mapper"
 	"moss/application/service"
 	"moss/infrastructure/support/log"
@@ -9,6 +8,8 @@ import (
 	"path"
 	"path/filepath"
 	"strings"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func ThemeInit(ctx *fiber.Ctx) error {
