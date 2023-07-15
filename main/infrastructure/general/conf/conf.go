@@ -1,9 +1,10 @@
 package conf
 
 import (
-	"github.com/spf13/viper"
 	"moss/infrastructure/general/command"
 	"strings"
+
+	"github.com/spf13/viper"
 )
 
 type DbDriver string
@@ -31,7 +32,7 @@ func init() {
 	p.SetConfigFile(command.ConfFilePath)
 	p.SetDefault(fieldAddr, command.Addr)
 	p.SetDefault(fieldDB, "sqlite")
-	p.SetDefault(fieldDSN, "./moss.db")
+	p.SetDefault(fieldDSN, "./moss.db?_pragma=journal_mode(WAL)")
 
 	_ = p.ReadInConfig()
 	_ = p.WriteConfig()
