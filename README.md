@@ -19,6 +19,7 @@ TG交流群：https://t.me/+EMrWsf0K6yw3NDhl
 + [模板文档](https://github.com/deep-project/moss/blob/main/docs/template/README.md)
 
 + [使用宝塔进程守护管理器部署程序](https://github.com/deep-project/moss/blob/main/docs/other/宝塔进程守护管理器部署程序.md)
++ [docker和docker-compose部署程序](./docs/other/docker和docker-compose部署程序.md)
 
 ![中文](https://user-images.githubusercontent.com/24670171/218475482-75030079-c2e3-4eb9-9f17-1713b15ad360.jpg)
 ![english](https://user-images.githubusercontent.com/24670171/218475496-4b2523b2-6bb6-43ac-a620-24f5ea0a5e3e.jpg)
