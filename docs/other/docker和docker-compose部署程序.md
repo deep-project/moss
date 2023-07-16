@@ -1,20 +1,20 @@
 # 目录
 
 1. [安装dokcer和docker-compose](#1-安装dokcer和docker-compose)
-   1.1 [关于docker和docker-compose的安装](#11-关于docker和docker-compose的安装)
-   1.2 [docker安装](#12-docker安装)
-   1.3 [docker-compose安装](#13-docker-compose安装)
-   1.4 [docker更换镜像加速器](#14-docker更换镜像加速器)
+   - 1.1 [关于docker和docker-compose的安装](#11-关于docker和docker-compose的安装)
+   - 1.2 [docker安装](#12-docker安装)
+   - 1.3 [docker-compose安装](#13-docker-compose安装)
+   - 1.4 [docker更换镜像加速器](#14-docker更换镜像加速器)
 
 2. [创建运行镜像](#2-创建运行镜像)
-   2.1 [创建原始目录](#21-创建原始目录)
-   2.2 [创建Dockerfile](#22-创建Dockerfile)
-   2.3 [创建所需文件](#23-创建所需文件)
-   2.4 [创建镜像](#24-创建镜像)
+   - 2.1 [创建原始目录](#21-创建原始目录)
+   - 2.2 [创建Dockerfile](#22-创建dockerfile)
+   - 2.3 [创建所需文件](#23-创建所需文件)
+   - 2.4 [创建镜像](#24-创建镜像)
 
 3. [运行容器](#3-运行容器)
-   3.1 [docker运行](#31-docker运行)
-   3.2 [docker-compose运行](#32-docker-compose运行)
+   - 3.1 [docker运行](#31-docker运行)
+   - 3.2 [docker-compose运行](#32-docker-compose运行)
 
 ## 1. 安装dokcer和docker-compose
 ### 1.1 关于docker和docker-compose的安装
