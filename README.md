@@ -9,7 +9,7 @@ moss是一个简单轻量的内容管理系统
 
 QQ交流群：68396947
 
-TG交流群：https://t.me/+EMrWsf0K6yw3NDhl
+TG交流群：[https://t.me/mosscms](https://t.me/mosscms)
 
 
 ------
