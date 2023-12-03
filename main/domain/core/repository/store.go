@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"gorm.io/gorm"
 	"moss/domain/config"
 	"moss/domain/core/entity"
 	"moss/domain/core/repository/context"
@@ -9,6 +8,8 @@ import (
 	"moss/domain/core/utils"
 	"moss/infrastructure/general/message"
 	"moss/infrastructure/persistent/db"
+
+	"gorm.io/gorm"
 )
 
 var Store = new(StoreRepo)
@@ -119,6 +120,6 @@ func (r *StoreRepo) List(ctx *context.Context) (res []entity.Store, err error) {
 
 // ListByCategoryIds 根据分类ID调用文章列表
 func (r *StoreRepo) ListByCategoryIds(ctx *context.Context, categoryIds []int) (res []entity.Store, err error) {
-	err = db.DB.Model(&entity.Store{}).Scopes(gormx.WhereCategoryIds(categoryIds), gormx.Context(ctx)).Find(&res).Error
+	err = db.DB.Model(&entity.Store{}).Scopes(gormx.Context(ctx, gormx.WhereCategoryIds(categoryIds))).Find(&res).Error
 	return
 }

@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"gorm.io/gorm"
 	"moss/domain/config"
 	"moss/domain/core/entity"
 	"moss/domain/core/repository/context"
@@ -10,6 +9,8 @@ import (
 	"moss/infrastructure/general/message"
 	"moss/infrastructure/persistent/db"
 	"moss/infrastructure/utils/errorx"
+
+	"gorm.io/gorm"
 )
 
 var Article = new(ArticleRepo)
@@ -179,25 +180,25 @@ func (r *ArticleRepo) ListExistThumbnail(ctx *context.Context) (res []entity.Art
 
 // ListByIds 根据id调用文章列表
 func (r *ArticleRepo) ListByIds(ctx *context.Context, ids []int) (res []entity.ArticleBase, err error) {
-	err = db.DB.Model(&entity.ArticleBase{}).Scopes(gormx.WhereIds(ids), gormx.Context(ctx)).Find(&res).Error
+	err = db.DB.Model(&entity.ArticleBase{}).Scopes(gormx.Context(ctx, gormx.WhereIds(ids))).Find(&res).Error
 	return
 }
 
 // ListByCategoryIds 根据分类ID调用文章列表
 func (r *ArticleRepo) ListByCategoryIds(ctx *context.Context, categoryIds []int) (res []entity.ArticleBase, err error) {
-	err = db.DB.Model(&entity.ArticleBase{}).Scopes(gormx.WhereCategoryIds(categoryIds), gormx.Context(ctx)).Find(&res).Error
+	err = db.DB.Model(&entity.ArticleBase{}).Scopes(gormx.Context(ctx, gormx.WhereCategoryIds(categoryIds))).Find(&res).Error
 	return
 }
 
 // ListAfterCreateTime 根据创建时间调用列表
 func (r *ArticleRepo) ListAfterCreateTime(ctx *context.Context, t int64) (res []entity.ArticleBase, err error) {
-	err = db.DB.Model(&entity.ArticleBase{}).Scopes(gormx.WhereCreateTimeAfter(t), gormx.Context(ctx)).Find(&res).Error
+	err = db.DB.Model(&entity.ArticleBase{}).Scopes(gormx.Context(ctx, gormx.WhereCreateTimeAfter(t))).Find(&res).Error
 	return
 }
 
 // ListBeforeCreateTime 根据创建时间调用列表
 func (r *ArticleRepo) ListBeforeCreateTime(ctx *context.Context, t int64) (res []entity.ArticleBase, err error) {
-	err = db.DB.Model(&entity.ArticleBase{}).Scopes(gormx.WhereCreateTimeBefore(t), gormx.Context(ctx)).Find(&res).Error
+	err = db.DB.Model(&entity.ArticleBase{}).Scopes(gormx.Context(ctx), gormx.WhereCreateTimeBefore(t)).Find(&res).Error
 	return
 }
 

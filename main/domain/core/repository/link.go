@@ -70,7 +70,7 @@ func (r *LinkRepo) List(ctx *context.Context) (res []entity.Link, err error) {
 
 // ListByIds 根据id调用列表
 func (r *LinkRepo) ListByIds(ctx *context.Context, ids []int) (res []entity.Link, err error) {
-	err = db.DB.Model(&entity.Link{}).Scopes(gormx.WhereIds(ids), gormx.Context(ctx)).Find(&res).Error
+	err = db.DB.Model(&entity.Link{}).Scopes(gormx.Context(ctx, gormx.WhereIds(ids))).Find(&res).Error
 	return
 }
 

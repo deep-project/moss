@@ -88,25 +88,25 @@ func (r *CategoryRepo) List(ctx *context.Context) (res []entity.Category, err er
 
 // ListByIds 通过ids获取列表
 func (r *CategoryRepo) ListByIds(ctx *context.Context, ids []int) (res []entity.Category, err error) {
-	err = db.DB.Model(entity.Category{}).Scopes(gormx.WhereIds(ids), gormx.Context(ctx)).Find(&res).Error
+	err = db.DB.Model(entity.Category{}).Scopes(gormx.Context(ctx), gormx.WhereIds(ids)).Find(&res).Error
 	return
 }
 
 // ListByParentIds 通过parentID获取列表
 func (r *CategoryRepo) ListByParentIds(ctx *context.Context, ids []int) (res []entity.Category, err error) {
-	err = db.DB.Model(entity.Category{}).Scopes(gormx.WhereParentIds(ids), gormx.Context(ctx)).Find(&res).Error
+	err = db.DB.Model(entity.Category{}).Scopes(gormx.Context(ctx, gormx.WhereParentIds(ids))).Find(&res).Error
 	return
 }
 
 // ListAfterCreateTime 根据创建时间调用列表
 func (r *CategoryRepo) ListAfterCreateTime(ctx *context.Context, t int64) (res []entity.Category, err error) {
-	err = db.DB.Model(entity.Category{}).Scopes(gormx.WhereCreateTimeAfter(t), gormx.Context(ctx)).Find(&res).Error
+	err = db.DB.Model(entity.Category{}).Scopes(gormx.Context(ctx, gormx.WhereCreateTimeAfter(t))).Find(&res).Error
 	return
 }
 
 // ListBeforeCreateTime 根据创建时间调用列表
 func (r *CategoryRepo) ListBeforeCreateTime(ctx *context.Context, t int64) (res []entity.Category, err error) {
-	err = db.DB.Model(entity.Category{}).Scopes(gormx.WhereCreateTimeBefore(t), gormx.Context(ctx)).Find(&res).Error
+	err = db.DB.Model(entity.Category{}).Scopes(gormx.Context(ctx, gormx.WhereCreateTimeBefore(t))).Find(&res).Error
 	return
 }
 

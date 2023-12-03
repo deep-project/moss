@@ -1,5 +1,7 @@
 package context
 
+import "gorm.io/gorm"
+
 type Context struct {
 	Select     string `json:"select"`
 	Limit      int    `json:"limit"`
@@ -8,6 +10,7 @@ type Context struct {
 	FastOffset bool   `json:"fast_offset"` // 是否快速分页（根据id集合再回表）
 	Where      *Where `json:"where"`       // 查询条件where
 	Comment    string `json:"comment"`
+	Scope      []func(*gorm.DB) *gorm.DB
 }
 
 func NewContext(limit int, order string) *Context {

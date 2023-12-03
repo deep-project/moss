@@ -88,18 +88,21 @@ func (r *TagRepo) List(ctx *context.Context) (res []entity.Tag, err error) {
 
 // ListByIds 通过主键获取列表
 func (r *TagRepo) ListByIds(ctx *context.Context, ids []int) (res []entity.Tag, err error) {
-	err = db.DB.Model(entity.Tag{}).Scopes(gormx.WhereIds(ids), gormx.Context(ctx)).Find(&res).Error
+	if ctx == nil {
+		ctx = &context.Context{}
+	}
+	err = db.DB.Model(entity.Tag{}).Scopes(gormx.Context(ctx, gormx.WhereIds(ids))).Find(&res).Error
 	return
 }
 
 // ListAfterCreateTime 根据创建时间调用列表
 func (r *TagRepo) ListAfterCreateTime(ctx *context.Context, t int64) (res []entity.Tag, err error) {
-	err = db.DB.Model(entity.Tag{}).Scopes(gormx.WhereCreateTimeAfter(t), gormx.Context(ctx)).Find(&res).Error
+	err = db.DB.Model(entity.Tag{}).Scopes(gormx.Context(ctx, gormx.WhereCreateTimeAfter(t))).Find(&res).Error
 	return
 }
 
 // ListBeforeCreateTime 根据创建时间调用列表
 func (r *TagRepo) ListBeforeCreateTime(ctx *context.Context, t int64) (res []entity.Tag, err error) {
-	err = db.DB.Model(entity.Tag{}).Scopes(gormx.WhereCreateTimeBefore(t), gormx.Context(ctx)).Find(&res).Error
+	err = db.DB.Model(entity.Tag{}).Scopes(gormx.Context(ctx, gormx.WhereCreateTimeBefore(t))).Find(&res).Error
 	return
 }
