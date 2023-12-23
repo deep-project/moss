@@ -7,14 +7,12 @@
 </template>
 
 <script setup>
-  import {useOpenLink} from "@/hooks/utils.js";
-  import {useSiteURL} from "@/hooks/app/index.js"
-  import {useStore} from "@/store/index.js";
+import {useStore} from "@/store/index.js";
+import {useOpenLink} from "@/hooks/utils.js";
+import {useSiteURL} from "@/hooks/app/index.js"
 
 
-  const store = useStore()
-  function open(){
-    useOpenLink(useSiteURL(store),'')
-  }
+const store = useStore()
+const open = ()=>{ useOpenLink(useSiteURL(store),'') }
 
 </script>

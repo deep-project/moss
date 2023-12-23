@@ -33,11 +33,8 @@
         </a-input-number>
         <span class="text-gray-500" style="font-size: 12px">{{$t('minutes')}}</span>
       </template>
-
-
     </a-space>
   </a-form-item>
-
 
   <a-form-item field="status" :label="$t('status')">
     <a-switch type="round" v-model="record.status" />
@@ -49,7 +46,6 @@
 <script setup>
   import {computed, inject} from "vue";
   import UploadImgInput from '@/components/utils/UploadImgInput.vue'
-
 
   const record = inject('record')
   const expireTime = computed(()=>record.value.expire_time*1000)

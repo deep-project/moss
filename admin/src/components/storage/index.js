@@ -13,15 +13,11 @@ let all = [
 ]
 
 export function getOptions(allowed=[]){
-    if(allowed.length === 0){
-        return all
-    }
+    if(allowed.length === 0) return all
     let res = []
     for (let name of allowed){
         for (let a of all){
-            if(name === a.value){
-                res.push(a)
-            }
+            if(name === a.value) res.push(a)
         }
     }
     return res

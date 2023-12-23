@@ -6,7 +6,7 @@
 
     <a-form-item label="region">
       <a-input class="w-64" v-model="data.region" />
-      <span class="ml-2 text-gray-400">us-west-1</span>
+      <span class="ml-2 text-gray-400"> us-west-1 </span>
     </a-form-item>
 
     <a-form-item label="bucket">

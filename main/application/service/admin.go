@@ -18,7 +18,8 @@ func AdminCreate(username, password string) error {
 	if AdminExists() {
 		return errors.New("administrator already exists")
 	}
-	if err := config.Config.Admin.InitAdministrator(username, password); err != nil {
+	err := config.Config.Admin.InitAdministrator(username, password)
+	if err != nil {
 		return err
 	}
 	return service.Push(config.Config.Admin)
@@ -41,7 +42,7 @@ func AdminUpdate(username, password string, loginExpire timex.Duration) error {
 	if err := config.Config.Admin.Update(username, password, loginExpire); err != nil {
 		return err
 	}
-	config.Config.Admin.ResetJwtKey() // 重置 jwtKey 主动使所有已登录失效
+	config.Config.Admin.ResetJwtKey() // 重置 jwtKey主动使所有已登录失效
 	return service.Push(config.Config.Admin)
 }
 

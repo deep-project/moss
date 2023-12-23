@@ -49,7 +49,6 @@
   import {computed,ref,watch} from "vue";
   import {useParseBytesSize} from "@/hooks/utils.js";
 
-
   const oldCPU = ref(0)
   const { data:cpu } = useRequest(dashboardData, {defaultParams:['appCPU'], pollingInterval: 2000, errorRetryCount: 1 })
   watch(cpu, (n,old)=>{ oldCPU.value = old })
@@ -57,7 +56,7 @@
   const oldMemory = ref(0)
   const { data:memoryBytes } = useRequest(dashboardData, {defaultParams:['appMemory'], pollingInterval: 2000, errorRetryCount: 1 })
   const memory = computed(()=>useParseBytesSize(memoryBytes.value))
-  watch(memory,(n,old)=>{ oldMemory.value = old[0] })
+
 
   const { data:databaseBytes, loading:loadingDatabase } = useRequest(dashboardData, {defaultParams:['database']})
   const database = computed(()=>useParseBytesSize(databaseBytes.value))
@@ -68,6 +67,8 @@
   const { data:cacheBytes, loading:loadingCache } = useRequest(dashboardData, {defaultParams:['cache']})
   const cache = computed(()=> useParseBytesSize(cacheBytes.value))
 
+
+  watch(memory, (_,old)=>{ oldMemory.value = old[0] })
 
   function isInt(val){
     if(!val) return false

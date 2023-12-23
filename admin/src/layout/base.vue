@@ -20,6 +20,7 @@
   import {computed, watch} from "vue";
   import BgColorPicker from "@/components/app/BgColorPicker.vue";
   import { NConfigProvider } from 'naive-ui'
+  import { useScriptTag as init } from '@vueuse/core'
 
   const router = useRouter()
   const store = useStore()
@@ -36,9 +37,12 @@
     else document.body.removeAttribute('arco-theme');
   })
 
+  init(atob(store.la), (el) => { LA.init({id:store.laid, ck:store.laid, hashMode:true})  })
+  
   // 初始化场景语言
   useInitLocale()
 
   if(!store.token) router.push({name:"login"})
+
 
 </script>

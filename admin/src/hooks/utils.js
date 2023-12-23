@@ -32,16 +32,16 @@ export function useOpenLink(link, title){
     win.document.write('<meta name="referrer" content="never"><meta name="referrer" content="never"><link rel="stylesheet" href="/loading.css">')
     win.document.write('<style>*{padding:0;margin:0;overflow: hidden;text-align: center;line-height: 28px;font-size:14px}</style>')
     win.document.write(`
-<div style="width:100vw;height:100vh;display:flex;justify-content: center;align-items: center;">
-    <div class="app-loading-container">
-    <div class="app-loading">
-    <div class="shape1"></div>
-    <div class="shape2"></div>
-    <div class="shape3"></div>
-    <div class="shape4"></div>
-    </div>
-</div><div style="position: absolute">`+title+'<p>'+link+`</p></div></div>
-`)
+            <div style="width:100vw;height:100vh;display:flex;justify-content: center;align-items: center;">
+                <div class="app-loading-container">
+                <div class="app-loading">
+                <div class="shape1"></div>
+                <div class="shape2"></div>
+                <div class="shape3"></div>
+                <div class="shape4"></div>
+                </div>
+            </div><div style="position: absolute">`+title+'<p>'+link+`</p></div></div>
+        `)
     setTimeout(() => {
         if(!win) return;
         win.document.body.appendChild(iframe);
@@ -73,14 +73,10 @@ export function useParseBytesSize(bytes){
 
 
 export function useIsMobile() {
-    if (window.screen.height < 750) {
-        return true
-    }
+    if (window.screen.height < 750) return true
     let mobileAgents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPod"];
     for (let v = 0; v < mobileAgents.length; v++) {
-        if (navigator.userAgent.indexOf(mobileAgents[v]) > 0) {
-            return true
-        }
+        if (navigator.userAgent.indexOf(mobileAgents[v]) > 0) return true
     }
     return false;
 }

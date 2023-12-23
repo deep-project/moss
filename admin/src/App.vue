@@ -4,5 +4,6 @@
 </template>
 
 <script setup>
-  import BaseContainer from "@/layout/base.vue";
+  import BaseContainer 
+  from "@/layout/base.vue";
 </script>

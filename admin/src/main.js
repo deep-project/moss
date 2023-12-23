@@ -9,6 +9,6 @@ import { i18n } from './locale'
 
 import "tailwindcss/tailwind.css"
 import '@arco-design/web-vue/dist/arco.less';
-import './style.css'
+
 
 createApp(App).use(createPinia()).use(router).use(i18n).use(ArcoVue).use(ArcoVueIcon).mount('#app')

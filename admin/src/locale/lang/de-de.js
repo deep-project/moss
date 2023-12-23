@@ -248,6 +248,13 @@ export default {
             edit: "Link bearbeiten",
             view: "Link anzeigen"
         },
+        undo: {
+            undo: "Rückgängig",
+            redo: "Wiederholen"
+        },
+        todo: {
+            todo: "Aufgabenliste"
+        },
         textStyle: {
             bold: "Fett",
             clear: "Stile löschen",
@@ -257,13 +264,6 @@ export default {
             sup: "Hochgestellt",
             through: "Durchgestrichen",
             underline: "Unterstrichen"
-        },
-        undo: {
-            undo: "Rückgängig",
-            redo: "Wiederholen"
-        },
-        todo: {
-            todo: "Aufgabenliste"
         },
         listModule:{
             unOrderedList:"Ungeordnete Liste",

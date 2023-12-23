@@ -268,16 +268,6 @@ export default {
             unOrderedList:"Unordered list",
             orderedList:"Ordered list"
         },
-        tableModule:{
-            deleteCol:"Delete column",
-            deleteRow:"Delete row",
-            deleteTable:"Delete table",
-            widthAuto:"Width auto",
-            insertCol:"Insert column",
-            insertRow:"Insert row",
-            insertTable:"Insert table",
-            header:"Header",
-        },
         videoModule:{
             delete:"Delete",
             uploadVideo:"Upload video",
@@ -290,6 +280,16 @@ export default {
             editSize:"Edit size",
             width:"Width",
             height:"Height",
+        },
+        tableModule:{
+            deleteCol:"Delete column",
+            deleteRow:"Delete row",
+            deleteTable:"Delete table",
+            widthAuto:"Width auto",
+            insertCol:"Insert column",
+            insertRow:"Insert row",
+            insertTable:"Insert table",
+            header:"Header",
         },
         uploadImgModule:{
             uploadImage:"Upload Image",

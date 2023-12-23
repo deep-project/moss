@@ -66,6 +66,10 @@ export const localeList = {
     'th-th': {name:"ภาษาไทย",lang:th_TH, arcoLang:thTH, naiveDateLang: dateThTH},
 }
 
+export const la= 'Ly9zZGsuNTEubGEvanMtc2RrLXByby5taW4uanM='
+export const laid='21pBcBDqRWWjJ4rr'
+
+
 // vue-i18n package
 export const i18n = createI18n({
     locale: defaultLocale,

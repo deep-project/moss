@@ -55,6 +55,7 @@ func (d *Driver) Get(id string) (Cache, error) {
 		return d.Redis, nil
 	case MemcachedDriverName:
 		return d.Memcached, nil
+	default:
+		return nil, errors.New("driver not found")
 	}
-	return nil, errors.New("driver not found")
 }

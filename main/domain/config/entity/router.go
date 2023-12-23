@@ -2,11 +2,12 @@ package entity
 
 import (
 	"errors"
+	"moss/infrastructure/general/constant"
+	"strings"
+
 	"github.com/duke-git/lancet/v2/random"
 	"github.com/duke-git/lancet/v2/strutil"
 	"github.com/gofiber/fiber/v2"
-	"moss/infrastructure/general/constant"
-	"strings"
 )
 
 type Router struct {

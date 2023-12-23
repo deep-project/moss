@@ -1,5 +1,7 @@
 <template>
-  <Table modelName="link" :columns="columns" order="id desc" postWidth="560px" formStyle="padding-right: 10px" formLayout="horizontal" :postComponent="postComponent" />
+  <Table modelName="link" :columns="columns" order="id desc" 
+  postWidth="560px" formStyle="padding-right: 10px" formLayout="horizontal" 
+  :postComponent="postComponent" />
 </template>
 
 <script setup>

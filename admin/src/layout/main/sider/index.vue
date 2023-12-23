@@ -1,13 +1,13 @@
 <template>
   <a-layout-sider
-      hide-trigger
-      collapsible
       breakpoint="md"
       :width="store.siderWidth"
       :collapsed-width="store.siderCollapsedWidth"
       :collapsed="store.siderCollapsed"
       @breakpoint="breakpoint"
       class="h-full z-20 relative"
+      :hide-trigger="true"
+      :collapsible="true"
       :style="{position: store.isMobile ? 'fixed':''}"
   >
     <Logo />

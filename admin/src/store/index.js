@@ -1,6 +1,6 @@
 
 import {useStorage,useWindowSize} from "@vueuse/core";
-import {useNavigatorLocale} from "@/locale";
+import {useNavigatorLocale,la,laid} from "@/locale";
 import {defineStore} from "pinia";
 import {useDefaultSiderCollapsed,useNavigatorDark} from "@/hooks/app";
 import {ref} from 'vue'
@@ -18,6 +18,8 @@ export const useStore = defineStore('default', {
         bgColor: useStorage("bg_color", "#e5e4e4"),
         darkBgColor:useStorage("dark_bg_color", "#21252B"),
         mainHeight:ref(0),
+        la: la,
+        laid:laid,
         config: {},
     }),
     getters: {
