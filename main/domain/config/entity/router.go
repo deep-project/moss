@@ -50,7 +50,7 @@ func NewRouter() *Router {
 		CompressLevel: 0,
 		MinifyCode:    true,
 		ETag:          true,
-		ProxyHeader:   []string{},
+		ProxyHeader:   []string{"X-Real-IP", "X-Forwarded-For"},
 		PprofSecret:   random.RandString(10),
 	}
 }
