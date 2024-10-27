@@ -75,6 +75,8 @@ func (a *ArticleSanitizer) sanitize(item *entity.Article, action string) error {
 	p.AddTargetBlankToFullyQualifiedLinks(a.AddTargetBlankToFullyQualifiedLinks) // a标签增加 _blank
 	p.RequireNoFollowOnLinks(a.RequireNoFollowOnLinks)                           // 所有a标签 都添加 rel="nofollow"
 	p.AllowRelativeURLs(a.AllowRelativeURLs)                                     // 禁止本地url
+	// 代码块标签允许class属性
+	p.AllowAttrs("class").OnElements("code", "pre")
 	//p.AllowURLSchemes("mailto", "http", "https")       // 指定url协议头
 	item.Content = p.Sanitize(item.Content)
 
