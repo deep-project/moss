@@ -1,8 +1,6 @@
 package router
 
 import (
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"moss/api/web/controller"
 	"moss/api/web/dto"
 	"moss/api/web/middleware"
@@ -10,6 +8,9 @@ import (
 	"moss/resources"
 	"net/http"
 	"strings"
+
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/filesystem"
 )
 
 func (r *Router) RegisterAdmin(route fiber.Router) {
@@ -52,6 +53,7 @@ func (r *Router) api(route fiber.Router) {
 	route.Post("/article/batchSetCategory/:category_id", controller.ArticleBatchSetCategory)
 
 	// category
+	route.Get("/category/list", controller.CategoryList)
 	route.Post("/category/list", controller.CategoryList)
 	route.Post("/category/count", controller.CategoryCount)
 	route.Get("/category/get/:id", controller.CategoryGet)
