@@ -1,11 +1,12 @@
 package controller
 
 import (
-	"github.com/gofiber/fiber/v2"
 	"moss/api/web/mapper"
 	appService "moss/application/service"
 	"moss/domain/core/entity"
 	"moss/domain/core/service"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func TagList(ctx *fiber.Ctx) error {
@@ -33,19 +34,19 @@ func TagGet(ctx *fiber.Ctx) error {
 }
 
 func TagCreate(ctx *fiber.Ctx) error {
-	obj, err := mapper.BodyToCurdModel[entity.Tag](ctx.Body())
-	if err != nil {
+	var obj entity.Tag
+	if err := ctx.BodyParser(&obj); err != nil {
 		return ctx.JSON(mapper.MessageResult(err))
 	}
-	return ctx.JSON(mapper.MessageResultData(obj, service.Tag.Create(obj)))
+	return ctx.JSON(mapper.MessageResultData(obj, service.Tag.Create(&obj)))
 }
 
 func TagUpdate(ctx *fiber.Ctx) error {
-	obj, err := mapper.BodyToCurdModel[entity.Tag](ctx.Body())
-	if err != nil {
+	var obj entity.Tag
+	if err := ctx.BodyParser(&obj); err != nil {
 		return ctx.JSON(mapper.MessageResult(err))
 	}
-	return ctx.JSON(mapper.MessageResult(service.Tag.Update(obj)))
+	return ctx.JSON(mapper.MessageResult(service.Tag.Update(&obj)))
 }
 
 func TagDelete(ctx *fiber.Ctx) error {

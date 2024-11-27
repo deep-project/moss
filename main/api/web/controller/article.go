@@ -1,11 +1,12 @@
 package controller
 
 import (
-	"github.com/gofiber/fiber/v2"
 	"moss/api/web/mapper"
 	appService "moss/application/service"
 	"moss/domain/core/aggregate"
 	"moss/domain/core/service"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func ArticleList(ctx *fiber.Ctx) error {
@@ -33,19 +34,19 @@ func ArticleGet(ctx *fiber.Ctx) error {
 }
 
 func ArticleCreate(ctx *fiber.Ctx) error {
-	obj, err := mapper.BodyToCurdModel[aggregate.ArticlePost](ctx.Body())
-	if err != nil {
+	var obj aggregate.ArticlePost
+	if err := ctx.BodyParser(&obj); err != nil {
 		return ctx.JSON(mapper.MessageResult(err))
 	}
-	return ctx.JSON(mapper.MessageResultData(obj, appService.ArticlePost("create", obj)))
+	return ctx.JSON(mapper.MessageResultData(obj, appService.ArticlePost("create", &obj)))
 }
 
 func ArticleUpdate(ctx *fiber.Ctx) error {
-	obj, err := mapper.BodyToCurdModel[aggregate.ArticlePost](ctx.Body())
-	if err != nil {
+	var obj aggregate.ArticlePost
+	if err := ctx.BodyParser(&obj); err != nil {
 		return ctx.JSON(mapper.MessageResult(err))
 	}
-	return ctx.JSON(mapper.MessageResultData(obj, appService.ArticlePost("update", obj)))
+	return ctx.JSON(mapper.MessageResultData(obj, appService.ArticlePost("update", &obj)))
 }
 
 func ArticleDelete(ctx *fiber.Ctx) error {

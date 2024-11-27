@@ -59,12 +59,6 @@ type curdModel interface {
 	entity.Article | entity.Category | entity.Tag | entity.Link | aggregate.ArticlePost | entity.Store
 }
 
-func BodyToCurdModel[M curdModel](body []byte) (_ *M, err error) {
-	var obj M
-	err = BodyParser(body, &obj)
-	return &obj, err
-}
-
 func BodyToStrSet(body []byte) (res []string, err error) {
 	err = BodyParser(body, &res)
 	return

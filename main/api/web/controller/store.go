@@ -1,11 +1,12 @@
 package controller
 
 import (
-	"github.com/gofiber/fiber/v2"
 	"moss/api/web/mapper"
 	appService "moss/application/service"
 	"moss/domain/core/entity"
 	"moss/domain/core/service"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func StoreList(ctx *fiber.Ctx) error {
@@ -33,19 +34,19 @@ func StoreGet(ctx *fiber.Ctx) error {
 }
 
 func StoreCreate(ctx *fiber.Ctx) error {
-	obj, err := mapper.BodyToCurdModel[entity.Store](ctx.Body())
-	if err != nil {
+	var obj entity.Store
+	if err := ctx.BodyParser(&obj); err != nil {
 		return ctx.JSON(mapper.MessageResult(err))
 	}
-	return ctx.JSON(mapper.MessageResultData(obj, service.Store.Create(obj)))
+	return ctx.JSON(mapper.MessageResultData(obj, service.Store.Create(&obj)))
 }
 
 func StoreUpdate(ctx *fiber.Ctx) error {
-	obj, err := mapper.BodyToCurdModel[entity.Store](ctx.Body())
-	if err != nil {
+	var obj entity.Store
+	if err := ctx.BodyParser(&obj); err != nil {
 		return ctx.JSON(mapper.MessageResult(err))
 	}
-	return ctx.JSON(mapper.MessageResult(service.Store.Update(obj)))
+	return ctx.JSON(mapper.MessageResult(service.Store.Update(&obj)))
 }
 
 func StoreDelete(ctx *fiber.Ctx) error {

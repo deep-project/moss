@@ -1,11 +1,12 @@
 package controller
 
 import (
-	"github.com/gofiber/fiber/v2"
 	"moss/api/web/mapper"
 	appService "moss/application/service"
 	"moss/domain/core/entity"
 	"moss/domain/core/service"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func CategoryList(ctx *fiber.Ctx) error {
@@ -33,19 +34,19 @@ func CategoryGet(ctx *fiber.Ctx) error {
 }
 
 func CategoryCreate(ctx *fiber.Ctx) error {
-	obj, err := mapper.BodyToCurdModel[entity.Category](ctx.Body())
-	if err != nil {
+	var obj entity.Category
+	if err := ctx.BodyParser(&obj); err != nil {
 		return ctx.JSON(mapper.MessageResult(err))
 	}
-	return ctx.JSON(mapper.MessageResultData(obj, service.Category.Create(obj)))
+	return ctx.JSON(mapper.MessageResultData(obj, service.Category.Create(&obj)))
 }
 
 func CategoryUpdate(ctx *fiber.Ctx) error {
-	obj, err := mapper.BodyToCurdModel[entity.Category](ctx.Body())
-	if err != nil {
+	var obj entity.Category
+	if err := ctx.BodyParser(&obj); err != nil {
 		return ctx.JSON(mapper.MessageResult(err))
 	}
-	return ctx.JSON(mapper.MessageResult(service.Category.Update(obj)))
+	return ctx.JSON(mapper.MessageResult(service.Category.Update(&obj)))
 }
 
 func CategoryDelete(ctx *fiber.Ctx) error {
