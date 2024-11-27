@@ -4,7 +4,7 @@ import "time"
 
 const (
 	AppName          = "moss"
-	AppVersion       = "0.1.2"
+	AppVersion       = "0.1.3"
 	DefaultAdminPath = "/admin"
 	ThemesDir        = "./themes"
 	PublicDir        = "./public"
