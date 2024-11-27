@@ -2,8 +2,9 @@ package middleware
 
 import (
 	"errors"
-	"github.com/gofiber/fiber/v2"
 	"moss/api/web/dto"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func Auth(attrName string, predicate func(token string) (roleName string, ok bool)) func(*fiber.Ctx) error {
@@ -17,7 +18,9 @@ func Auth(attrName string, predicate func(token string) (roleName string, ok boo
 
 		if token == "" {
 			token = ctx.Get("Sec-WebSocket-Protocol") // 兼容 websocket
-		} else if token == "" {
+		}
+
+		if token == "" {
 			token = ctx.Query(attrName)
 		}
 
