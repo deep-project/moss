@@ -20,7 +20,7 @@ TG交流群：[https://t.me/mosscms](https://t.me/mosscms)
 
 + [使用宝塔进程守护管理器部署程序](https://github.com/deep-project/moss/blob/main/docs/other/宝塔进程守护管理器部署程序.md)
 + [docker和docker-compose部署程序](./docs/other/docker和docker-compose部署程序.md)
-+ [火车头发布模块](./extras/火车头发布模块/README.md)
++ [火车头发布模块](./extras/火车头发布模块/README.md)（v0.1.3版本及以上支持）
 
 
 ![中文](https://user-images.githubusercontent.com/24670171/218475482-75030079-c2e3-4eb9-9f17-1713b15ad360.jpg)
