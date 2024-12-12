@@ -1,6 +1,9 @@
 package middleware
 
 import (
+	"moss/domain/config"
+	"regexp"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/tdewolff/minify/v2"
 	"github.com/tdewolff/minify/v2/css"
@@ -9,8 +12,6 @@ import (
 	"github.com/tdewolff/minify/v2/json"
 	"github.com/tdewolff/minify/v2/svg"
 	"github.com/tdewolff/minify/v2/xml"
-	"moss/domain/config"
-	"regexp"
 )
 
 func init() {
@@ -41,11 +42,11 @@ func initMinifyCodeHandle() {
 	m := minify.New()
 	m.AddFunc("text/css", css.Minify)
 	m.Add("text/html", &html.Minifier{
-		KeepDefaultAttrVals:     true, // 保留标签的默认属性
-		KeepDocumentTags:        true, // 删除多余的标记，html、head和body标记除外
-		KeepQuotes:              true, // 保留引号
-		KeepEndTags:             true, // 保留 end tags
-		KeepConditionalComments: true, // 保留条件注释  <!--[if 。。。<![endif]-->
+		KeepDefaultAttrVals: true, // 保留标签的默认属性
+		KeepDocumentTags:    true, // 删除多余的标记，html、head和body标记除外
+		KeepQuotes:          true, // 保留引号
+		KeepEndTags:         true, // 保留 end tags
+		KeepSpecialComments: true, // 保留条件注释  <!--[if 。。。<![endif]-->
 	})
 	m.AddFuncRegexp(regexp.MustCompile("[/+]json$"), json.Minify)
 	m.AddFunc("image/svg+xml", svg.Minify)
