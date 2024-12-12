@@ -7,6 +7,7 @@ import (
 	"moss/domain/core/aggregate"
 	"moss/domain/core/entity"
 	"moss/domain/core/repository/context"
+	"moss/domain/core/utils"
 )
 
 func MessageResult(err error) *dto.MessageResult {
@@ -44,6 +45,7 @@ func BodyToContext(body []byte) (ctx context.Context, err error) {
 	if ctx.Limit == 0 {
 		ctx.Limit = 20 // 限制调取数量
 	}
+	ctx.Order = utils.ValidateOrderInput(ctx.Order)
 	return
 }
 

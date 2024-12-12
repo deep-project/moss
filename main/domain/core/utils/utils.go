@@ -3,6 +3,8 @@ package utils
 import (
 	"moss/domain/core/aggregate"
 	"reflect"
+	"regexp"
+	"strings"
 	"time"
 )
 
@@ -35,4 +37,22 @@ func SliceToMap[M aggregate.EntityInterface](s []M, field string) map[any]M {
 func TodayBeginTime() time.Time {
 	now := time.Now()
 	return time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
+}
+
+func ValidateOrderInput(val any) any {
+	str, ok := val.(string)
+	if !ok || str == "" {
+		return val
+	}
+	str = strings.ToLower(strings.TrimSpace(str))
+	if str == "rand()" || str == "random()" {
+		return str
+	}
+	if regexp.MustCompile(`^([a-z0-9_]+(?:\s+(asc|desc))?\s*,\s*)*[a-z0-9_]+(?:\s+(asc|desc))?$`).MatchString(str) {
+		return str
+	}
+	if regexp.MustCompile(`^(count|sum|max|min|avg|length|year)\((\w+)\)(?:\s+(asc|desc))?$`).MatchString(str) {
+		return str
+	}
+	return nil
 }
