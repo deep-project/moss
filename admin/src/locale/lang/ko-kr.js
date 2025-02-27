@@ -168,6 +168,7 @@ export default {
     GenerateDescription: '자동으로 설명 생성',
     PreBuildArticleCache: '게시물 캐시 사전 구축',
     PushToBaidu: '바이두에 게시',
+    PushToBing: 'Bing에 게시됨',
     MakeCarousel: '캐러셀 만들기',
     PostStore: '게시물 게시',
     DidiAuto: '디디 자동화',

@@ -166,6 +166,7 @@ export default {
     GenerateDescription: "Genera automaticamente la descrizione",
     PreBuildArticleCache: "Crea in anticipo la cache dell'articolo",
     PushToBaidu: "Invia a Baidu",
+    PushToBing: "Invia a Bing",
     MakeCarousel: "Crea un carosello",
     PostStore: "Pubblica gli articoli",
     DidiAuto: "Didi Auto",

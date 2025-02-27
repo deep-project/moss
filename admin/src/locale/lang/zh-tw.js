@@ -166,6 +166,7 @@ export default {
     GenerateDescription:'自動生成描述',
     PreBuildArticleCache:'預生成文章緩存',
     PushToBaidu:'推送到百度',
+    PushToBing:'推送到必應',
     MakeCarousel:'製作模板輪播',
     PostStore:'發布文章',
     DidiAuto:'滴滴友聯自動任務',

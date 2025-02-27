@@ -166,6 +166,7 @@ export default {
     GenerateDescription:'自動説明文生成',
     PreBuildArticleCache:'記事キャッシュを事前ビルド',
     PushToBaidu:'百度にプッシュ',
+    PushToBing:'Bingにプッシュ',
     MakeCarousel:'カルーセルを作成',
     PostStore:'記事を公開',
     DidiAuto:'滴滴自動化',
