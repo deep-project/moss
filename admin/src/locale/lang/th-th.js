@@ -169,6 +169,7 @@ export default {
     GenerateDescription: 'สร้างคำอธิบายอัตโนมัติ',
     PreBuildArticleCache: 'สร้างแคชบทความล่วงหน้า',
     PushToBaidu: 'ส่งเข้า Baidu',
+    PushToBing: 'ส่งเข้า Bing',
     MakeCarousel: 'สร้าง Carousel',
     PostStore: 'เผยแพร่บทความ',
     DidiAuto: 'Didi Auto',
