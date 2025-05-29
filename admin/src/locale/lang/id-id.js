@@ -166,6 +166,7 @@ export default {
     GenerateDescription:'Auto Generate Deskripsi',
     PreBuildArticleCache:'Cache Artikel Pra-Bangun',
     PushToBaidu:'Push ke Baidu',
+    PushToBing:'Push ke Bing',
     MakeCarousel:'Buat Karusel',
     PostStore:'Terbitkan Artikel',
     DidiAuto:'Didi Otomatis',
