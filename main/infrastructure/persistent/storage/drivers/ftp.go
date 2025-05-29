@@ -55,6 +55,9 @@ func (f *Ftp) Get(key string) (*storage.GetValue, error) {
 	if f.Handle == nil {
 		return nil, errors.New("handle uninitialized")
 	}
+	if !f.isAlive() {
+		_ = f.Init() // 重新连接
+	}
 	f.lock.Lock()
 	defer f.lock.Unlock()
 	key, _ = f.formatKey(key)
@@ -72,13 +75,22 @@ func (f *Ftp) Set(key string, val *storage.SetValue) error {
 	}
 	f.lock.Lock()
 	defer f.lock.Unlock()
+	if !f.isAlive() {
+		_ = f.Init() // 重新连接
+	}
 	key, dir := f.formatKey(key)
 	// 测试是否能切换到目标目录，否则则创建目录
-	if f.Handle.ChangeDir(dir) != nil {
-		f.createDirs(dir)
+	if !strings.HasPrefix(dir, "/") {
+		dir = "/" + dir
 	}
-	_ = f.Handle.ChangeDir("/") // 必须切换到根目录
-	return f.Handle.Stor(key, val.Reader)
+	if f.Handle.ChangeDir(dir) != nil {
+		if err := f.createDirs(dir); err != nil {
+			return err
+		}
+	}
+
+	_, filename := filepath.Split(key)
+	return f.Handle.Stor(filename, val.Reader)
 }
 
 func (f *Ftp) Delete(key string) error {
@@ -87,22 +99,32 @@ func (f *Ftp) Delete(key string) error {
 	}
 	f.lock.Lock()
 	defer f.lock.Unlock()
+	if !f.isAlive() {
+		_ = f.Init() // 重新连接
+	}
 	key, _ = f.formatKey(key)
 	_ = f.Handle.ChangeDir("/") // 必须切换到根目录
 	return f.Handle.Delete(key)
 }
 
 // 循环创建ftp的文件夹
-func (f *Ftp) createDirs(dir string) {
+func (f *Ftp) createDirs(dir string) error {
 	dirs := strings.Split(dir, string(filepath.Separator))
 	current := "/"
 	for _, v := range dirs {
 		current = current + v + "/"
 		if f.Handle.ChangeDir(current) != nil {
-			_ = f.Handle.MakeDir(current)   // 创建目录
-			_ = f.Handle.ChangeDir(current) // 再次切换进目录
+			err := f.Handle.MakeDir(current) // 创建目录
+			if err != nil {
+				return err
+			}
+			err = f.Handle.ChangeDir(current) // 再次切换进目录
+			if err != nil {
+				return err
+			}
 		}
 	}
+	return nil
 }
 
 func (f *Ftp) formatKey(key string) (string, string) {
@@ -110,4 +132,14 @@ func (f *Ftp) formatKey(key string) (string, string) {
 	key = filepath.ToSlash(key)
 	dir = filepath.ToSlash(dir)
 	return key, dir
+}
+
+func (f *Ftp) isAlive() bool {
+	if f.Handle == nil {
+		return false
+	}
+	if err := f.Handle.NoOp(); err != nil {
+		return false
+	}
+	return true
 }
