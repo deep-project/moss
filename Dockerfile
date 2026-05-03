@@ -7,6 +7,9 @@ WORKDIR /app
 # 拷贝整个项目
 COPY main/ .
 
+ENV GOPROXY=https://goproxy.cn,direct
+ENV GOSUMDB=off
+
 # 下载依赖
 RUN go mod tidy
 
