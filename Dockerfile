@@ -7,9 +7,6 @@ WORKDIR /app
 # 拷贝整个项目
 COPY main/ .
 
-ENV GOPROXY=https://goproxy.cn,direct
-ENV GOSUMDB=off
-
 # 下载依赖
 RUN go mod tidy
 
@@ -20,4 +17,4 @@ RUN go build -o app ./cmd/web
 EXPOSE 3000
 
 # 运行
-CMD ["./app", "-addr", ":3000"]
+CMD ["./app", "-a", ":3000"]
