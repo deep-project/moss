@@ -8,7 +8,7 @@ WORKDIR /app
 COPY main/ .
 
 # 下载依赖
-RUN go mod tidy
+RUN go mod download
 
 # 编译
 RUN go build -o app ./cmd/web
