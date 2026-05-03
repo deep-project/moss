@@ -39,6 +39,10 @@ func init() {
 
 	// get by env
 	p.SetEnvPrefix("moss")
+
+	// 自动读取环境变量
+	p.AutomaticEnv()
+
 	_ = p.BindEnv(fieldAddr)
 	_ = p.BindEnv(fieldDB)
 	_ = p.BindEnv(fieldDSN)
