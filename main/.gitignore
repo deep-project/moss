@@ -1,6 +1,4 @@
 
-resources/admin/*
-!resources/admin/.empty
 
 tmp/*
 !tmp/.empty
