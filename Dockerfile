@@ -1,7 +1,7 @@
 # 单镜像
 FROM golang:1.23-alpine
 
-RUN apk add --no-cache git
+#RUN apk add --no-cache git
 
 # ==========================
 # 编译目录（临时用）

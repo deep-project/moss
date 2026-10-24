@@ -1,9 +1,11 @@
 # 单镜像
 FROM golang:1.23-alpine
 
-# 切换 Alpine 国内镜像源并安装 Git
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
-    && apk add --no-cache git
+# Alpine 国内镜像源
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+
+# Go 国内模块代理
+ENV GOPROXY=https://goproxy.cn,direct
 
 # ==========================
 # 编译目录（临时用）
