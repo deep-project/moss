@@ -46,6 +46,7 @@ func BodyToContext(body []byte) (ctx context.Context, err error) {
 		ctx.Limit = 20 // 限制调取数量
 	}
 	ctx.Order = utils.ValidateOrderInput(ctx.Order)
+	ctx.Select = utils.ValidateSelectInput(ctx.Select)
 	return
 }
 
