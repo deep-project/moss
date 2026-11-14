@@ -56,3 +56,17 @@ func ValidateOrderInput(val any) any {
 	}
 	return nil
 }
+
+// ValidateSelectInput 校验 select 输入，仅允许逗号分隔的列名（可带表前缀或 *）。
+// 其他内容（空格分隔的关键字、括号、子查询、引号等）一律丢弃，
+// 返回空字符串表示使用默认全部字段，防止通过 select 子句进行 SQL 注入。
+func ValidateSelectInput(val string) string {
+	val = strings.TrimSpace(val)
+	if val == "" {
+		return ""
+	}
+	if regexp.MustCompile(`^(\*|[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)?)(\s*,\s*(\*|[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)?))*$`).MatchString(val) {
+		return val
+	}
+	return ""
+}
